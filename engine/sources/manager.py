@@ -12,6 +12,7 @@ from .sporttery import SportterySource
 from .sina import SinaSource
 from .wancai500 import Wancai500Source
 from .djyy import DJYYSource
+from .dongqiudi import DongqiudiSource
 from .espn import EspnSource
 from .team_match import match_pair
 
@@ -231,6 +232,19 @@ class SourceManager:
         )
         # DJYY 增强源（单独引用，用于enrichment）
         self._djyy = DJYYSource()
+        self._dongqiudi = DongqiudiSource()
+
+    def enrich_from_dongqiudi(self, fixtures: list[Fixture], target_date: date) -> dict[str, dict]:
+        """Attach Dongqiudi match analysis, injury news and current/previous XIs."""
+        try:
+            result = self._dongqiudi.enrich_fixtures(fixtures, target_date)
+        except Exception as exc:
+            print(f"    [懂球帝] 抓取失败: {type(exc).__name__}: {exc}")
+            return {}
+        matched = len(result)
+        with_lineups = sum(1 for row in result.values() if row.get("lineups"))
+        print(f"    [懂球帝] 分析与情报 {matched}/{len(fixtures)} 场，阵容 {with_lineups} 场")
+        return result
 
     def fetch_fixtures(self, target_date: date) -> tuple[list[Fixture], ImportManifest]:
         """按优先级尝试获取赛程，返回数据和导入清单"""
@@ -295,8 +309,13 @@ class SourceManager:
                     }
             print(f"    体彩 {len(st_by_num)} 场已索引")
         except Exception as e:
-            print(f"    体彩获取失败: {e}（尝试新浪降级）")
-            # 降级到新浪（海外IP可用，数据与体彩一致）
+            print(f"    体彩获取失败: {e}")
+
+        # SportterySource 将网络/WAF 错误记录后返回 []，不会抛异常；因此不能
+        # 只在 except 中切新浪。GitHub Actions 海外 runner 收到 567 时也走这里。
+        sina_fallback_used = False
+        if not st_fixtures:
+            print("    体彩无可用赛程/赔率，切换新浪竞彩数据")
             try:
                 from .sina import SinaSource
                 sina = SinaSource()
@@ -320,7 +339,8 @@ class SourceManager:
                         st_by_num[num]["bf"] = getattr(sf, "_raw_bf", "")
                         st_by_num[num]["bqc"] = getattr(sf, "_raw_bqc", "")
                         st_by_num[num]["jq"] = getattr(sf, "_raw_jq", "")
-                print(f"    新浪降级成功: {len(st_by_num)} 场已索引")
+                sina_fallback_used = bool(st_by_num)
+                print(f"    新浪降级结果: {len(st_by_num)} 场已索引")
             except Exception as e2:
                 print(f"    新浪也失败: {e2}（用Bet365兜底）")
 
@@ -480,8 +500,12 @@ class SourceManager:
                 # 附加全部原始数据
                 fixture._num = num
                 fixture._fid = fid
-                fixture._sporttery_had = st_had
-                fixture._sporttery_hhad = st_hhad
+                # Preserve source attribution: when the official endpoint was
+                # unavailable, these odds came from Sina's compatible feed.
+                fixture._sporttery_had = {} if sina_fallback_used else st_had
+                fixture._sporttery_hhad = {} if sina_fallback_used else st_hhad
+                fixture._sina_had = st_had if sina_fallback_used else {}
+                fixture._sina_hhad = st_hhad if sina_fallback_used else {}
                 fixture._sporttery_ttg = st_match.get("ttg", {})
                 fixture._sporttery_crs = st_match.get("crs", {})
                 fixture._sporttery_hafu = st_match.get("hafu", {})
@@ -511,7 +535,7 @@ class SourceManager:
                 _time.sleep(0.2)  # 限速防封
 
         manifest = self._create_manifest(target_date, wancai, fixtures)
-        manifest.source = "merged(sporttery+500wan)"
+        manifest.source = "merged(sina+500wan)" if sina_fallback_used else "merged(sporttery+500wan)"
         print(f"  ✓ 融合完成: {len(fixtures)} 场")
         return fixtures, manifest
 
@@ -738,14 +762,12 @@ class SourceManager:
                                         or "中场" in p.get("position_zh", "")
                                     ),
                                 }
+                                injuries["home_count"] = len(home_inj)
+                                injuries["away_count"] = len(away_inj)
                     except Exception:
                         pass
 
-                # 首发阵容（2026-08-30 新增, store-only）：阵型+首发攻击手数。
-                # 每场每日只抓一次（context_cache 以 djyy_id 为键, 由 main 持久化）,
-                # 失败也记 tried_at 防止每 30 分钟重试打爆接口。
-                # 2026-10-11: 阵容是 store-only，不参与任何概率/融合计算，却占掉每场
-                # 4 个接口里的 1 个（实测 ~5.4s）。改为默认关闭，DJYY_FETCH_LINEUPS=1 可开。
+                # 首发阵容（可选，DJYY来源）。
                 _lineups = None
                 if DJYY_FETCH_LINEUPS and time.monotonic() <= deadline:
                     _cc = context_cache if context_cache is not None else {}

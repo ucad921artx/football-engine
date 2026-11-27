@@ -2,20 +2,20 @@
   "prediction": {
     "base_goals": 1.35,
     "elo_goal_weight": 0.62,
-    "attack_weight": 1.0,
+    "attack_weight": 1,
     "defense_weight": 0.9,
     "form_weight": 0.65,
-    "injury_weight": 1.0,
+    "injury_weight": 1,
     "rest_weight": 0.035,
-    "home_adv_weight": 1.0,
-    "market_blend_weight": 0.0,
+    "home_adv_weight": 1,
+    "market_blend_weight": 0,
     "rho": -0.0906,
     "max_goals": 10,
     "simulations": 50000,
     "time_decay_anchors": [
       [
         0,
-        1.0
+        1
       ],
       [
         7,
@@ -51,9 +51,9 @@
     "monte_carlo_weight": 0.4
   },
   "fusion": {
-    "model_weight": 0.1,
-    "market_weight": 0.6,
-    "djyy_weight": 0.3,
+    "model_weight": 0.8,
+    "market_weight": 0.2,
+    "djyy_weight": 0,
     "lgbm_weight": 0.1,
     "same_odds_max_adjust": 0.05,
     "same_odds_min_confidence": 0.3,
@@ -84,7 +84,7 @@
     "subsample": 0.8,
     "colsample_bytree": 0.8,
     "reg_alpha": 0.1,
-    "reg_lambda": 1.0,
+    "reg_lambda": 1,
     "train_window_days": 730,
     "min_train_samples": 500,
     "use_odds_features": false,
@@ -112,7 +112,7 @@
     "val_matches": 100,
     "weight_bounds": {
       "model": [
-        0.0,
+        0,
         0.6
       ],
       "market": [
@@ -145,5 +145,14 @@
     "holdout_frac": 0.3,
     "min_improvement": 0.002,
     "min_z": 1.96
+  },
+  "factor_weights": {
+    "strength": 0.55,
+    "venue_environment": 0.12,
+    "personnel": 0.1,
+    "recent_form": 0.08,
+    "motivation": 0.08,
+    "schedule_fitness": 0.04,
+    "matchup_history": 0.03
   }
 }

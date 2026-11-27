@@ -21,8 +21,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from .logit_stacking import logit_pool
-
 # 后处理步骤开关（全部默认 True = 2026-08-29 重构前的生产行为）
 DEFAULT_POST_FUSION: dict[str, bool] = {
     "same_odds_bias": True,
@@ -170,14 +168,15 @@ def fuse_probabilities(inp: FusionInput) -> FusionResult:
     h, d, a = inp.model_probs
     trace.append({"step": "base_model", "after": [round(h, 4), round(d, 4), round(a, 4)]})
 
-    # --- 1. 源融合（三路条件 / 两路 / 仅DJYY / 裸模型；支持 linear / logit 模式） ---
+    # --- 1. 源融合（三路条件 / 两路 / 仅DJYY / 裸模型） ---
     mw = float(cfg.get("model_weight", 0.10))
     kw = float(cfg.get("market_weight", 0.60))
     dw = float(cfg.get("djyy_weight", 0.30))
-    fusion_mode = str(cfg.get("fusion_mode", "linear"))
     fused_step = "fuse_model_only"
     eff_w: dict[str, float] | None = None
-    if inp.market_probs and inp.djyy_probs and inp.djyy_probs.get("home"):
+    # Zero-weight DJYY is an internal model feature only, never a third fusion
+    # source. Keep the trace and displayed architecture strictly model + market.
+    if inp.market_probs and inp.djyy_probs and inp.djyy_probs.get("home") and dw > 0:
         _djyy_conf = _djyy_confidence(inp.djyy_probs)
         if _djyy_conf < float(cfg.get("djyy_min_confidence", 0.50)):
             dw = 0.0
@@ -193,31 +192,20 @@ def fuse_probabilities(inp: FusionInput) -> FusionResult:
                 dw *= float(cfg.get("djyy_disagree_penalty", 0.5))
         total_w = mw + kw + dw
         mw, kw, dw = mw / total_w, kw / total_w, dw / total_w
-        djyy_tup = (
-            _num(inp.djyy_probs.get("home")),
-            _num(inp.djyy_probs.get("draw")),
-            _num(inp.djyy_probs.get("away")),
-        )
-        if fusion_mode == "logit":
-            h, d, a = logit_pool([inp.model_probs, inp.market_probs, djyy_tup], [mw, kw, dw])
-        else:
-            h = mw * inp.model_probs[0] + kw * inp.market_probs[0] + dw * djyy_tup[0]
-            d = mw * inp.model_probs[1] + kw * inp.market_probs[1] + dw * djyy_tup[1]
-            a = mw * inp.model_probs[2] + kw * inp.market_probs[2] + dw * djyy_tup[2]
+        h = mw * inp.model_probs[0] + kw * inp.market_probs[0] + dw * _num(inp.djyy_probs.get("home"))
+        d = mw * inp.model_probs[1] + kw * inp.market_probs[1] + dw * _num(inp.djyy_probs.get("draw"))
+        a = mw * inp.model_probs[2] + kw * inp.market_probs[2] + dw * _num(inp.djyy_probs.get("away"))
         fused_step = "fuse_three_way"
         eff_w = _eff(mw, kw, dw)
     elif inp.market_probs:
         total_w = mw + kw
         mw, kw = mw / total_w, kw / total_w
-        if fusion_mode == "logit":
-            h, d, a = logit_pool([inp.model_probs, inp.market_probs], [mw, kw])
-        else:
-            h = mw * inp.model_probs[0] + kw * inp.market_probs[0]
-            d = mw * inp.model_probs[1] + kw * inp.market_probs[1]
-            a = mw * inp.model_probs[2] + kw * inp.market_probs[2]
+        h = mw * inp.model_probs[0] + kw * inp.market_probs[0]
+        d = mw * inp.model_probs[1] + kw * inp.market_probs[1]
+        a = mw * inp.model_probs[2] + kw * inp.market_probs[2]
         fused_step = "fuse_two_way"
         eff_w = _eff(mw, kw, 0.0)
-    elif inp.djyy_probs and inp.djyy_probs.get("home"):
+    elif inp.djyy_probs and inp.djyy_probs.get("home") and dw > 0:
         # 2026-10-23（评审 P1#7）：三路分支有 djyy_min_confidence 门槛，
         # djyy-only 分支漏了 —— 低置信 DJYY 可单独驱动出票。补同一门槛：
         # 低置信 → 退化为裸模型（与三路分支"置信不足则 dw=0"语义对齐）。
@@ -230,22 +218,12 @@ def fuse_probabilities(inp: FusionInput) -> FusionResult:
             eff_w = _eff(1.0, 0.0, 0.0)
         else:
             _mw = 1.0 - dw
-            djyy_tup = (
-                _num(inp.djyy_probs.get("home")),
-                _num(inp.djyy_probs.get("draw")),
-                _num(inp.djyy_probs.get("away")),
-            )
-            if fusion_mode == "logit":
-                h, d, a = logit_pool([inp.model_probs, djyy_tup], [_mw, dw])
-            else:
-                h = _mw * inp.model_probs[0] + dw * djyy_tup[0]
-                d = _mw * inp.model_probs[1] + dw * djyy_tup[1]
-                a = _mw * inp.model_probs[2] + dw * djyy_tup[2]
+            h = _mw * inp.model_probs[0] + dw * _num(inp.djyy_probs.get("home"))
+            d = _mw * inp.model_probs[1] + dw * _num(inp.djyy_probs.get("draw"))
+            a = _mw * inp.model_probs[2] + dw * _num(inp.djyy_probs.get("away"))
             fused_step = "fuse_djyy_only"
             eff_w = _eff(_mw, 0.0, dw)
     _trace(trace, fused_step, inp.model_probs, (h, d, a))
-    if fusion_mode == "logit" and trace and trace[-1].get("step") == fused_step:
-        trace[-1]["mode"] = "logit"
 
     # --- 2. 同赔偏差微调 ---
     if (

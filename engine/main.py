@@ -2,7 +2,7 @@ from __future__ import annotations
 """主入口 - 每日预测流水线（增强版）
 
 集成模块:
-  - Dixon-Coles + Monte Carlo + Ensemble 预测
+  - 用户因素权重 Dixon-Coles 预测 + 市场融合
   - 多市场KL校准 + Shin去水 + 对数意见池
   - 逆向赔率分析（压缩比 + 级联漏斗 + 冷门风险）
   - 同赔历史匹配
@@ -12,6 +12,7 @@ from __future__ import annotations
   - SHA-256不可变决策链
 """
 import argparse
+import copy
 import json
 import os
 import sys
@@ -27,9 +28,9 @@ from engine.beijing_time import BEIJING_TZ, beijing_now, beijing_today
 from engine.sources.manager import SourceManager
 from engine.sources.base import MatchResult
 from engine.sources.same_odds import SameOddsAnalyzer
-from engine.prediction.ensemble import EnsembleModel
 from engine.prediction.dixon_coles import DixonColesConfig
-from engine.prediction.monte_carlo import MonteCarloConfig
+from engine.prediction.factor_ensemble import predict_weighted_factors
+from engine.prediction.motivation import build_motivation_signal
 from engine.prediction.calibration import select_devig_method
 from engine.prediction.fusion import (
     FusionInput,
@@ -212,6 +213,15 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         djyy_enrichment = {}
         print(f"  - DJYY增强跳过: {e}")
 
+    # 懂球帝只作为赛事数据源：分析/伤停/首发用于原模型输入，
+    # 不读取或融合懂球帝页面上的胜平负预测概率。
+    print("\n[1.5b/8] 懂球帝分析、情报与阵容...")
+    try:
+        dongqiudi_enrichment = source_mgr.enrich_from_dongqiudi(fixtures, target_date)
+    except Exception as e:
+        dongqiudi_enrichment = {}
+        print(f"  - 懂球帝数据跳过: {e}")
+
     # 2.5b DJYY SSR 真实数据源 (赛前xG + Pinnacle赔率)
     from engine.sources.djyy_ssr import DJYYSSRSource, SNAPSHOT_MAX_AGE_H
     djyy_ssr = DJYYSSRSource(ROOT / "data" / "djyy_matches.json")
@@ -307,43 +317,13 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
     print("\n[4/8] 运行预测模型 + 增强分析...")
     dc_cfg = DixonColesConfig(**{k: v for k, v in pred_cfg.get("prediction", {}).items()
                                   if k in DixonColesConfig.__dataclass_fields__})
-    mc_cfg = MonteCarloConfig(**{k: v for k, v in pred_cfg.get("prediction", {}).items()
-                                  if k in MonteCarloConfig.__dataclass_fields__})
-    # 在线权重学习：2026-10-23 移除死调用。
-    # OnlineWeightLearner 只被 update("ensemble") 写入 performances，而权重计算
-    # 只认 dixon_coles/monte_carlo；state 文件里 weights 恒为 {}，ensemble.py
-    # 又从不读它 —— 纯死代码、假学习（2026-08-05 已停用，调用点却还在跑）。
-    # 真正的融合权重学习走 fusion_optimizer（fusion_weights.json，反事实验证+守卫栏）。
-    static_weights = pred_cfg.get("ensemble", {"dixon_coles_weight": 0.6, "monte_carlo_weight": 0.4})
-    dynamic_weights = {
-        "dixon_coles": static_weights.get("dixon_coles_weight", 0.6),
-        "monte_carlo": static_weights.get("monte_carlo_weight", 0.4),
-    }
-    print(f"  模型权重: DC={dynamic_weights.get('dixon_coles', 0.6):.3f}, "
-          f"MC={dynamic_weights.get('monte_carlo', 0.4):.3f} (静态)")
-
-    model = EnsembleModel(
-        dc_config=dc_cfg,
-        mc_config=mc_cfg,
-        weights=dynamic_weights,
-    )
-    _use_shrinkage_dc = bool(pred_cfg.get("prediction", {}).get("use_shrinkage_dc", False))
-    _shrinkage_dc = None
-    if _use_shrinkage_dc:
-        _sdc_path = ROOT / "data" / "models" / "shrinkage_dc.json"
-        if _sdc_path.exists():
-            try:
-                from engine.prediction.shrinkage_dc import load_model as _load_sdc
-                _shrinkage_dc = _load_sdc(_sdc_path)
-                print(f"  ✓ ShrinkageDC 已加载 ({len(_shrinkage_dc.teams)} 队)")
-            except Exception as _sdc_err:
-                print(f"  ⚠ ShrinkageDC 加载失败（回退经典 DC）: {_sdc_err}")
+    print(f"  因素权重: {pred_cfg.get('factor_weights', {})}")
 
     # 融合参数（可由 param_optimizer 自动调整，不写死）
     fusion_cfg = pred_cfg.get("fusion", {})
-    fusion_cfg.setdefault("model_weight", 0.10)   # 多源时模型权重（2026-08-12 回测: 0.26→0.10 全量Brier 0.6494→0.6459）
-    fusion_cfg.setdefault("market_weight", 0.60)  # 市场主导（回测: 市场是最强单源 0.6339）
-    fusion_cfg.setdefault("djyy_weight", 0.30)    # DJYY第三方模型权重（条件融合后才生效）
+    fusion_cfg.setdefault("model_weight", 0.80)
+    fusion_cfg.setdefault("market_weight", 0.20)
+    fusion_cfg.setdefault("djyy_weight", 0.0)
     fusion_cfg.setdefault("djyy_min_confidence", 0.50)  # DJYY模型置信门槛（2026-08-11 回测: <0.5 是负贡献）
     fusion_cfg.setdefault("djyy_disagree_penalty", 0.5)  # 与市场分歧时权重减半（回测: 分歧时市场 48.9% vs 模型 19.1%）
     fusion_cfg.setdefault("same_odds_max_adjust", 0.05)
@@ -375,24 +355,23 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
     _opt_cfg.setdefault("djyy_disagree_penalty", fusion_cfg.get("djyy_disagree_penalty", 0.5))
     _fusion_opt = FusionOptimizer(ROOT / "data" / "state" / "fusion_weights.json", _ledger, _opt_cfg)
     _champion = _fusion_opt.get_champion()
-    fusion_cfg["model_weight"] = _champion.model
-    fusion_cfg["market_weight"] = _champion.market
-    fusion_cfg["djyy_weight"] = _champion.djyy
-    print(f"  融合权重(优化器): model={_champion.model:.3f} market={_champion.market:.3f} djyy={_champion.djyy:.3f}")
+    # 用户明确指定本地实验版本使用模型 80% + 市场 20%；不让旧 champion
+    # （市场主导、历史上自动优化所得）悄悄覆盖这组实验权重。
+    fusion_cfg["model_weight"] = 0.80
+    fusion_cfg["market_weight"] = 0.20
+    fusion_cfg["djyy_weight"] = 0.0
+    print(f"  融合权重(用户实验): model={fusion_cfg['model_weight']:.2f} market={fusion_cfg['market_weight']:.2f} DJYY={fusion_cfg['djyy_weight']:.2f} · 历史 champion={_champion.model:.2f}/{_champion.market:.2f}/{_champion.djyy:.2f}")
 
     # 校准层自动启用状态（结算侧写 data/state/calibration_status.json）：
     # 洁净样本通过验证段显著性检验后自动放行 isotonic，无需人工改 config
     _cal_auto_enabled = False
-    _cal_auto_method = str(pred_cfg.get("calibration_auto", {}).get("method", "isotonic")).lower()
     try:
         _cal_status = json.loads((ROOT / "data" / "state" / "calibration_status.json").read_text(encoding="utf-8"))
         _cal_auto_enabled = bool(_cal_status.get("enabled", False))
-        if _cal_status.get("method"):
-            _cal_auto_method = str(_cal_status["method"]).lower()
     except Exception:
         _cal_auto_enabled = False
     if _cal_auto_enabled:
-        print(f"  校准层: {_cal_auto_method} 已由洁净样本验证自动启用")
+        print("  校准层: isotonic 已由洁净样本验证自动启用")
 
     predictions = []
     # 侧挂信号索引：整轮只建一次（446 场量级，比每场重读快照便宜得多）。
@@ -419,15 +398,60 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             elo_updater.refresh_rest_for(home_rating, _kickoff_date)
             elo_updater.refresh_rest_for(away_rating, _kickoff_date)
 
-        # DJYY form_xG 修正: 用真实近期xG替代默认ratings
+        # 两个来源严格分工：既有 xG 来源保留；懂球帝近况以最近多场比分/赛果
+        # 作为原模型的轻量状态输入，不读取懂球帝自己的赛果预测概率。
         djyy_pre = djyy_enrichment.get(fixture.match_id, {})
-        form_xg = djyy_pre.get("form_xg")
-        if form_xg:
-            base_goals = pred_cfg.get("prediction", {}).get("base_goals", 1.35)
-            if home_rating.attack == 1.0 and form_xg.get("home_avg"):
-                home_rating.attack = form_xg["home_avg"] / base_goals
-            if away_rating.attack == 1.0 and form_xg.get("away_avg"):
-                away_rating.attack = form_xg["away_avg"] / base_goals
+        dqd_pre = dongqiudi_enrichment.get(fixture.match_id, {})
+        form_xg = dqd_pre.get("form_xg") or djyy_pre.get("form_xg")
+        form_analysis = dqd_pre.get("form_analysis") or {}
+        _dqd_xg_blend = {}
+        base_goals = pred_cfg.get("prediction", {}).get("base_goals", 1.35)
+        for side, rating in (("home", home_rating), ("away", away_rating)):
+            xg_avg = (form_xg or {}).get(f"{side}_avg")
+            xg_n = int((form_xg or {}).get(f"{side}_n") or 0)
+            if xg_avg is not None and xg_n > 0 and base_goals:
+                # Blend DQD's last-five observed xG with the original model's
+                # own expected-goal estimate. The DQD share rises with sample
+                # coverage but is capped at 50%; final rating movement is capped.
+                model_xg = max(0.1, float(rating.attack) * float(base_goals))
+                dqd_weight = min(0.50, float(xg_n) / (float(xg_n) + 5.0))
+                blended_xg = (1.0 - dqd_weight) * model_xg + dqd_weight * float(xg_avg)
+                rating.attack *= max(0.92, min(1.08, blended_xg / model_xg))
+                _dqd_xg_blend[side] = {
+                    "model_xg": round(model_xg, 3), "dongqiudi_xg": round(float(xg_avg), 3),
+                    "dongqiudi_sample": xg_n, "dongqiudi_weight": round(dqd_weight, 3),
+                    "blended_xg_before_cap": round(blended_xg, 3),
+                }
+            recent = form_analysis.get(side) or {}
+            ppg = recent.get("points_per_game")
+            n_results = int(recent.get("results_count") or 0)
+            if ppg is not None and n_results > 0:
+                # Convert points per game to the same bounded form scale used by Elo.
+                form_signal = max(-1.0, min(1.0, (float(ppg) - 1.35) / 1.65))
+                # Half-time outcomes are a secondary component of the same
+                # recent-form signal, with a small share to limit short-run noise.
+                half_full = recent.get("half_full_time") or {}
+                half_counts = half_full.get("counts") or {}
+                half_n = sum(int(v or 0) for v in half_counts.values())
+                if half_n:
+                    half_points = sum((3 if key.startswith("W") else 1 if key.startswith("D") else 0) * int(v or 0)
+                                      for key, v in half_counts.items()) / half_n
+                    half_signal = max(-1.0, min(1.0, (half_points - 1.35) / 1.65))
+                    form_signal = 0.85 * form_signal + 0.15 * half_signal
+                reliability = n_results / (n_results + 8.0)
+                rating.form = 0.70 * rating.form + 0.30 * reliability * form_signal
+            # 进失球仅作为弱校准（每队最多±3%），避免短样本覆盖既有实力评级。
+            gf = recent.get("goals_for_per_game")
+            ga = recent.get("goals_against_per_game")
+            n_matches = int(recent.get("matches") or 0)
+            if n_matches and base_goals:
+                reliability = n_matches / (n_matches + 8.0)
+                if gf is not None:
+                    gap = max(-0.20, min(0.20, (float(gf) - base_goals) / base_goals))
+                    rating.attack *= max(0.97, min(1.03, 1.0 + 0.15 * reliability * gap))
+                if ga is not None:
+                    gap = max(-0.20, min(0.20, (float(ga) - base_goals) / base_goals))
+                    rating.defense *= max(0.97, min(1.03, 1.0 + 0.15 * reliability * gap))
 
         # MatchDB fallback: DJYY无数据时用历史积累xG
         base_goals = pred_cfg.get("prediction", {}).get("base_goals", 1.35)
@@ -451,6 +475,11 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
                     home_rating.attack *= factor
                     away_rating.attack *= factor
 
+        # 在赛程与伤停临时修正之前留存球队实力输入，供因素分布分别计算，
+        # 避免把同一因素既塞进实力项、又在因素融合里重复计算。
+        home_strength_rating = copy.deepcopy(home_rating)
+        away_strength_rating = copy.deepcopy(away_rating)
+
         # 赛程密度: 休息不足→疲劳惩罚 (attack下降)
         rest = djyy_pre.get("rest_days")
         if rest:
@@ -463,7 +492,7 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
                 away_rating.attack *= max(0.85, 1.0 - (3 - away_rest) * 0.05)
 
         # 伤停缺阵: 攻击型球员缺阵→下调attack
-        inj = djyy_pre.get("injuries")
+        inj = dqd_pre.get("injuries") or djyy_pre.get("injuries")
         if inj:
             home_miss = inj.get("home_attackers", 0)
             away_miss = inj.get("away_attackers", 0)
@@ -495,40 +524,37 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             if _po_vals and all(o > 1.0 for o in _po_vals):
                 market_odds = _po_vals
 
-        pred = model.predict(
-            home=home_rating,
-            away=away_rating,
-            market_odds=market_odds,
-            handicap=fixture.handicap,
+        _factor_context = (djyy_pre.get("context") or {}) if djyy_pre else {}
+        dqd_analysis = dqd_pre.get("analysis") or {}
+        h2h_summary = dqd_analysis.get("head_to_head_summary") or {}
+        motivation_signal = build_motivation_signal(
+            dqd_analysis, dqd_pre.get("match_context"), fixture.home_team, fixture.away_team
         )
-        if _shrinkage_dc is not None:
-            from engine.team_aliases import canon_csv_team as _canon_sdc_team
-            _sdc_home = _canon_sdc_team(home_rating.name)
-            _sdc_away = _canon_sdc_team(away_rating.name)
-            _sdc_teams = set(_shrinkage_dc.teams)
-            if _sdc_home in _sdc_teams and _sdc_away in _sdc_teams:
-                try:
-                    if hasattr(_shrinkage_dc, "league_params"):
-                        _sdc_probs = _shrinkage_dc.predict_probs(
-                            _sdc_home, _sdc_away,
-                            competition=_canon_league(fixture.competition),
-                        )
-                    else:
-                        _sdc_probs = _shrinkage_dc.predict_probs(_sdc_home, _sdc_away)
-                    _mc_sub = next((m for m in model.models if m.name == "monte_carlo"), None)
-                    _dc_w = float(dynamic_weights.get("dixon_coles", 0.6))
-                    _mc_w = float(dynamic_weights.get("monte_carlo", 0.4))
-                    if _mc_sub is not None:
-                        _mc_p = _mc_sub.predict(
-                            home=home_rating, away=away_rating,
-                            market_odds=market_odds, handicap=fixture.handicap,
-                        )
-                        _wsum = max(1e-8, _dc_w + _mc_w)
-                        pred.home_win_prob = round((_dc_w * _sdc_probs[0] + _mc_w * _mc_p.home_win_prob) / _wsum, 4)
-                        pred.draw_prob = round((_dc_w * _sdc_probs[1] + _mc_w * _mc_p.draw_prob) / _wsum, 4)
-                        pred.away_win_prob = round((_dc_w * _sdc_probs[2] + _mc_w * _mc_p.away_win_prob) / _wsum, 4)
-                except Exception:
-                    pass
+        dqd_lineups = dqd_pre.get("lineups") or {}
+        if dqd_lineups:
+            def _is_attacker(player):
+                pos = str(player.get("position") or "").lower()
+                return any(token in pos for token in ("forward", "attacker", "striker", "前锋", "前場", "fw"))
+            for side in ("home", "away"):
+                squad = dqd_lineups.get(side) or {}
+                starting = squad.get("starting") or []
+                _factor_context[f"{side}_starters"] = len(starting)
+                _factor_context[f"{side}_starting_attackers"] = sum(1 for player in starting if _is_attacker(player))
+            _factor_context["lineup_source"] = dqd_pre.get("lineup_source")
+            _factor_context["lineup_fallback"] = dqd_pre.get("lineup_fallback")
+        pred, factor_weights_used, factor_missing = predict_weighted_factors(
+            home_strength_rating,
+            away_strength_rating,
+            dc_cfg,
+            factor_weights=pred_cfg.get("factor_weights"),
+            injuries=inj,
+            lineups=_factor_context,
+            matchup_history=h2h_summary,
+            motivation=motivation_signal,
+            motivation_available=bool(motivation_signal.get("available")),
+            schedule_available=bool(rest or home_rating.last_match_date or away_rating.last_match_date),
+            matchup_available=bool(h2h_summary.get("matches")),
+        )
         pred.match_id = fixture.match_id
         # 联赛名归一化（2026-08-12）：瑞超→瑞典超、韩职→K1联赛，保证 R1/锚定/账本口径统一
         pred.competition = _canon_league(fixture.competition)
@@ -592,26 +618,6 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         # （训练用落盘的模型 xG，服务用 DJYY fixture xG）。这里只取一次、
         # 随预测落盘，训练侧原样回放，保证两端逐位同参。
         _lg_goals, _lg_home_win = league_stats(fixture.competition)
-        from engine.prediction.cross_market import _parse_pinnacle_1x2, extract_cross_market_features
-        _djyy_ctx = djyy_data.get("context") or {}
-        _pin_ref = djyy_data.get("pinnacle_odds")
-        if _parse_pinnacle_1x2(_pin_ref) is None and _djyy_ssr.get("home_odds_djyy"):
-            _pin_ref = (
-                _djyy_ssr.get("home_odds_djyy"),
-                _djyy_ssr.get("draw_odds_djyy"),
-                _djyy_ssr.get("away_odds_djyy"),
-            )
-        _lineup_ref = {
-            "home_starting_attackers": _djyy_ctx.get("home_starting_attackers"),
-            "away_starting_attackers": _djyy_ctx.get("away_starting_attackers"),
-            "injuries": djyy_data.get("injuries"),
-        }
-        _cross_market = extract_cross_market_features(
-            opening_movement=_djyy_ctx.get("opening_movement"),
-            pinnacle_odds=_pin_ref,
-            lineup_info=_lineup_ref,
-            rho=dc_cfg.rho,
-        )
         _lgbm_inputs = {
             "form_home": float(home_rating.form or 0.0),
             "form_away": float(away_rating.form or 0.0),
@@ -624,7 +630,6 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             # 与落盘的 home_xg/away_xg 同源（模型 xG），不再用 fixture 外部 xG
             "xg_home": pred.home_xg,
             "xg_away": pred.away_xg,
-            "cross_market": _cross_market,
         }
         lgbm_probs = None
         if lgbm_model.is_available:
@@ -646,7 +651,6 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
                 djyy_probs=djyy_probs,
                 include_market_odds=lgbm_cfg.use_odds_features,
                 side=_side_sig.to_features() if _side_sig else None,
-                cross_market=_lgbm_inputs["cross_market"],
             )
             _lgbm_pred = lgbm_model.predict_single(feature_dict)
             if _lgbm_pred:
@@ -681,10 +685,7 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         # 洁净样本通过显著性验证后由结算侧自动翻转 enabled，预测侧据此放行 isotonic。
         _pf_switches = dict(fusion_cfg.get("post_fusion", {}))
         if _cal_auto_enabled:
-            if _cal_auto_method == "temperature":
-                _pf_switches["temperature"] = True
-            else:
-                _pf_switches["isotonic"] = True
+            _pf_switches["isotonic"] = True
 
         _fusion_out = fuse_probabilities(FusionInput(
             model_probs=(pred.home_win_prob, pred.draw_prob, pred.away_win_prob),
@@ -705,7 +706,15 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             post_fusion=_pf_switches,
         ))
         final_h, final_d, final_a = _fusion_out.probs
-        fusion_trace = _fusion_out.trace
+        # DJYY model 1X2 probabilities are retained as source data for display,
+        # but are not mixed into the locally calculated factor model.
+        fusion_trace = [
+            {"step": "factor_model",
+             "after": [round(pred.home_win_prob, 4), round(pred.draw_prob, 4),
+                       round(pred.away_win_prob, 4)]},
+            {"step": "model_80_market_20" if calibrated_probs else "model_only_market_unavailable",
+             "after": [round(final_h, 4), round(final_d, 4), round(final_a, 4)]},
+        ]
         # 【2026-10-11】落盘**归一化后的有效权重**。config/champion 写的
         # model/market/djyy 是名义值，源缺失时 fusion.py 会重新归一化，
         # 实际比例与名义值不同（0.05/0.75/0.20 在 djyy 缺失时 →
@@ -896,13 +905,30 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
                 [round(same_odds_result.home_bias, 3), round(same_odds_result.draw_bias, 3), round(same_odds_result.away_bias, 3)]
                 if same_odds_result else None
             ),
-            # 比赛情境（2026-08-30, store-only）：动机/裁判/天气/教练/阵容/伤停/休息。
-            # 不参与预测，纯落盘——累积样本后用账本验证平局信号，数据说话再决定入模。
+            # 比赛情境与懂球帝来源数据，供计算解释、复核与回测。
             "context": {
                 **(djyy_data.get("context") or {}),
                 "rest_days": djyy_data.get("rest_days"),
-                "injuries": djyy_data.get("injuries"),
+                "injuries": inj,
+                "dongqiudi_analysis": dqd_pre.get("analysis"),
+                "dongqiudi_form": dqd_pre.get("form_analysis"),
+                "dongqiudi_weather": dqd_pre.get("weather"),
+                "dongqiudi_lineup_source": dqd_pre.get("lineup_source"),
+                "motivation": motivation_signal,
             } or None,
+            "dongqiudi_match_id": dqd_pre.get("match_id"),
+            "dongqiudi_match_url": dqd_pre.get("match_url"),
+            "dongqiudi_match_context": dqd_pre.get("match_context"),
+            "motivation": motivation_signal,
+            "injuries": inj,
+            "dongqiudi_lineups": dqd_pre.get("lineups"),
+            "dongqiudi_lineup_source": dqd_pre.get("lineup_source"),
+            "dongqiudi_lineup_fallback": dqd_pre.get("lineup_fallback"),
+            "dongqiudi_form_analysis": dqd_pre.get("form_analysis"),
+            "dongqiudi_xg_blend": _dqd_xg_blend,
+            "dongqiudi_analysis": dqd_pre.get("analysis"),
+            "dongqiudi_injury_news": (dqd_pre.get("analysis") or {}).get("injury_news"),
+            "dongqiudi_weather": dqd_pre.get("weather"),
             # 组合加分
             "combo_boost": combo_boost,
             # DJYY增强
@@ -924,6 +950,8 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             "attack_away": round(float(away_rating.attack), 4),
             "defense_away": round(float(away_rating.defense), 4),
             "form_away": round(float(away_rating.form), 4),
+            "factor_weights_used": factor_weights_used,
+            "factor_missing": list(factor_missing),
             # 平局预警
             "draw_alert": draw_alert,
             # 开赛时间（新浪有就用新浪的完整时间，否则用体彩 matchDate+matchTime）
@@ -1819,18 +1847,14 @@ def run_settlement(target_date: date):
 
     # 4) Elo 更新（只处理新增）
     print("\n[1/5] Elo 更新...")
-    from engine.prediction.league_stats import DEFAULT_AVG_GOALS as _DEF_AVG_GOALS, league_stats as _settle_league_stats
     elo_updater = EloUpdater(ROOT / "data" / "models" / "team_ratings.json")
     for n in new_items:
         r = n["r"]
-        _comp = getattr(r, "competition", "") or (n.get("pred") or {}).get("competition", "")
-        _lg_avg = _settle_league_stats(_comp)[0] if _comp else _DEF_AVG_GOALS
-        _lg_arg = _lg_avg if abs(_lg_avg - _DEF_AVG_GOALS) > 1e-6 else None
         # match_date 必须传：EloUpdater._refresh(advance=True) 靠它刷新双方
         # rest_days。不传则 rest_days 永远停在默认值 3，config 里的
         # rest_weight 是死旋钮（DEAD-FEATURES-REST-DAYS 探针报的问题）。
         elo_updater.update(r.home_team, r.away_team, r.home_score, r.away_score,
-                           match_date=r.match_date, league_avg_goals=_lg_arg)
+                           match_date=r.match_date)
         print(f"  {r.home_team} {r.home_score}-{r.away_score} {r.away_team} ✓")
     elo_updater.save()
     print(f"  ✓ Elo 已更新 ({len(new_items)} 场新增)")

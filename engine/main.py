@@ -549,11 +549,11 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
             factor_weights=pred_cfg.get("factor_weights"),
             injuries=inj,
             lineups=_factor_context,
-            matchup_history=h2h_summary,
+
             motivation=motivation_signal,
             motivation_available=bool(motivation_signal.get("available")),
             schedule_available=bool(rest or home_rating.last_match_date or away_rating.last_match_date),
-            matchup_available=bool(h2h_summary.get("matches")),
+
         )
         pred.match_id = fixture.match_id
         # 联赛名归一化（2026-08-12）：瑞超→瑞典超、韩职→K1联赛，保证 R1/锚定/账本口径统一

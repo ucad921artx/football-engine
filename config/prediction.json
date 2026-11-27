@@ -43,8 +43,7 @@
       ]
     ],
     "handicap_smoothing": 0.274,
-    "allow_odds_xg_fallback": false,
-    "use_shrinkage_dc": false
+    "allow_odds_xg_fallback": false
   },
   "ensemble": {
     "dixon_coles_weight": 0.6,

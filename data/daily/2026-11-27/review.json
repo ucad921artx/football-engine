@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-27",
+  "n_matches": 1,
+  "hit_rate": 1.0,
+  "hits": 1,
+  "source_brier": {
+    "model": 0.5249,
+    "market": 0.6827,
+    "djyy": 0.6013,
+    "final": 0.5538
+  },
+  "by_league": {
+    "澳超": {
+      "n": 1,
+      "hit_rate": 1.0,
+      "wilson_lower": 0.2065,
+      "avg_brier": 0.5538
+    }
+  },
+  "by_confidence_tier": {
+    "low": {
+      "n": 1,
+      "hit_rate": 1.0,
+      "wilson_lower": 0.2065,
+      "avg_brier": 0.5538
+    }
+  },
+  "by_odds_band": {
+    "L4 冷(2.2-3.0)": {
+      "n": 1,
+      "hit_rate": 1.0,
+      "wilson_lower": 0.2065,
+      "avg_brier": 0.5538
+    }
+  },
+  "score_stats": {
+    "top1": 0,
+    "top3": 0,
+    "top5": 0,
+    "top8": 1,
+    "any": 1
+  },
+  "score_rank_hist": {
+    "7": 1
+  },
+  "score_source_stats": {
+    "djyy": {
+      "n": 0,
+      "hits": 0
+    },
+    "mc": {
+      "n": 1,
+      "hits": 0
+    }
+  },
+  "market_signal_stats": {
+    "n": 1,
+    "hits": 1
+  },
+  "layered": {
+    "log_loss_final": 0.9334,
+    "rps_final": 0.2386,
+    "rps_market": 0.3077,
+    "goal_framework": {
+      "n": 1,
+      "hits": 1
+    },
+    "prob_bands": {
+      "<40%": {
+        "n": 1,
+        "hit_rate": 1.0
+      }
+    },
+    "freshness_groups": {
+      "watch": {
+        "n": 1,
+        "hit_rate": 1.0
+      }
+    }
+  },
+  "biases": [],
+  "total_pnl": 0,
+  "generated_at": "2026-11-27T16:17:44.692937",
+  "sha256": "f8d9fd2f901125b550deea14429b0f4c"
+}

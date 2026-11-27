@@ -1,8 +1,8 @@
 {
   "n_leagues": 45,
-  "n_matches": 1659,
+  "n_matches": 1660,
   "external_added": 29,
-  "generated_at": "2026-11-27T15:17:03.699765",
+  "generated_at": "2026-11-27T16:19:10.378887",
   "leagues": [
     {
       "league": "西甲",
@@ -499,20 +499,20 @@
     },
     {
       "league": "澳超",
-      "n": 14,
-      "hit_rate": 0.4286,
-      "avg_odds": 1.934,
-      "roi": -0.26,
-      "avg_confidence": 0.2042,
+      "n": 15,
+      "hit_rate": 0.4667,
+      "avg_odds": 1.981,
+      "roi": -0.1327,
+      "avg_confidence": 0.2013,
       "verdict": "谨慎",
       "recent_n": 5,
       "recent_hits": 3,
       "recent_hit_rate": 0.6,
-      "recent_roi": -0.066,
+      "recent_roi": 0.19,
       "recent10_n": 10,
-      "recent10_hits": 4,
-      "recent10_hit_rate": 0.4,
-      "recent10_roi": -0.33
+      "recent10_hits": 5,
+      "recent10_hit_rate": 0.5,
+      "recent10_roi": -0.065
     },
     {
       "league": "巴西杯",

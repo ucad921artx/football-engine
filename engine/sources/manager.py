@@ -149,7 +149,7 @@ def _opening_movement(comparison: dict | None) -> dict | None:
             if po and pc:
                 prob_shift = {k: round(pc[k] - po[k], 6) for k in po}
 
-        entry = {
+        out[key] = {
             "bookmaker": bm.get("name") or "",
             "opening": opening_ok,
             "current": current_ok,
@@ -157,14 +157,6 @@ def _opening_movement(comparison: dict | None) -> dict | None:
             "prob_shift": prob_shift,
             "legs": len(opening_ok),
         }
-        _mkt_line = _f(market.get("line"))
-        if _mkt_line is None:
-            _mkt_line = _f(bm.get("line"))
-        if _mkt_line is None:
-            _mkt_line = _f(market.get("handicap"))
-        if _mkt_line is not None:
-            entry["line"] = _mkt_line
-        out[key] = entry
     return out or None
 
 

@@ -2991,7 +2991,7 @@ def _tab_model(p, uid):
             "strength": "实力", "venue_environment": "主客场",
             "personnel": "人员", "recent_form": "近期状态",
             "motivation": "战意", "schedule_fitness": "赛程体能",
-            "matchup_history": "交锋",
+
         }
         factor_text = "、".join(
             f"{factor_names.get(k, k)} {v * 100:.0f}%" for k, v in factor_used.items()

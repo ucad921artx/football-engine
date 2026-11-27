@@ -416,7 +416,7 @@ class DongqiudiSource:
             return None
 
     def _goal_time_distribution(self, rows: list) -> dict:
-        ranges = ((1, 15), (16, 30), (31, 45), (46, 60), (61, 75), (76, 120))
+        ranges = ((1, 15), (16, 30), (31, 45), (46, 60), (61, 75), (76, 90))
         out = {f"{a}-{b}": {"scored": 0, "conceded": 0} for a, b in ranges}
         games = 0
         for row in rows:

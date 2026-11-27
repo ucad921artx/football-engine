@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-27T09:50:15.841419+00:00",
+  "generated_at": "2026-11-27T13:01:22.688305+00:00",
   "parlay": {
-    "n_tickets": 133,
-    "n_pending": 0,
+    "n_tickets": 138,
+    "n_pending": 5,
     "n_settled": 133,
     "n_won": 36,
     "hit_rate": 0.2707,
     "stake": 747.68,
-    "stake_committed": 747.68,
-    "stake_pending": 0,
+    "stake_committed": 769.68,
+    "stake_pending": 22.0,
     "return": 894.25,
     "roi": 0.196,
     "avg_odds": 6.8,
@@ -5289,6 +5289,206 @@
             "score": null,
             "odds": 2.18,
             "hit": true
+          }
+        ]
+      },
+      {
+        "date": "2026-11-27",
+        "type": "2串1",
+        "stake": 5.26,
+        "potential": 34.73,
+        "total_odds": 6.6,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-27_周五011",
+            "home": "哥伦布机员",
+            "away": "迈阿密国际",
+            "sel": "home",
+            "score": null,
+            "odds": 2.52,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五002",
+            "home": "海登海姆",
+            "away": "纽伦堡",
+            "sel": "away",
+            "score": null,
+            "odds": 2.62,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-27",
+        "type": "2串1",
+        "stake": 5.08,
+        "potential": 31.28,
+        "total_odds": 6.16,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-27_周五004",
+            "home": "芬洛",
+            "away": "瓦尔韦克",
+            "sel": "away",
+            "score": null,
+            "odds": 2.35,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五002",
+            "home": "海登海姆",
+            "away": "纽伦堡",
+            "sel": "away",
+            "score": null,
+            "odds": 2.62,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-27",
+        "type": "2串1",
+        "stake": 4.65,
+        "potential": 27.54,
+        "total_odds": 5.92,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-27_周五004",
+            "home": "芬洛",
+            "away": "瓦尔韦克",
+            "sel": "away",
+            "score": null,
+            "odds": 2.35,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五011",
+            "home": "哥伦布机员",
+            "away": "迈阿密国际",
+            "sel": "home",
+            "score": null,
+            "odds": 2.52,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-27",
+        "type": "3串1",
+        "stake": 2.98,
+        "potential": 46.24,
+        "total_odds": 15.52,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-27_周五004",
+            "home": "芬洛",
+            "away": "瓦尔韦克",
+            "sel": "away",
+            "score": null,
+            "odds": 2.35,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五011",
+            "home": "哥伦布机员",
+            "away": "迈阿密国际",
+            "sel": "home",
+            "score": null,
+            "odds": 2.52,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五002",
+            "home": "海登海姆",
+            "away": "纽伦堡",
+            "sel": "away",
+            "score": null,
+            "odds": 2.62,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-27",
+        "type": "3串4",
+        "stake": 4.03,
+        "potential": 34.45,
+        "total_odds": 8.55,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-27_周五004",
+            "home": "芬洛",
+            "away": "瓦尔韦克",
+            "sel": "away",
+            "score": null,
+            "odds": 2.35,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五011",
+            "home": "哥伦布机员",
+            "away": "迈阿密国际",
+            "sel": "home",
+            "score": null,
+            "odds": 2.52,
+            "hit": null
+          },
+          {
+            "match": "2026-11-27_周五002",
+            "home": "海登海姆",
+            "away": "纽伦堡",
+            "sel": "away",
+            "score": null,
+            "odds": 2.62,
+            "hit": null
           }
         ]
       }
@@ -35773,6 +35973,230 @@
             ]
           }
         ]
+      }
+    },
+    "2026-11-27": {
+      "parlay": {
+        "stats": {
+          "n_tickets": 5,
+          "n_pending": 5,
+          "n_settled": 0,
+          "n_won": 0,
+          "hit_rate": null,
+          "stake": 0,
+          "stake_committed": 22.0,
+          "stake_pending": 22.0,
+          "return": 0,
+          "roi": null,
+          "avg_odds": null,
+          "by_type": {}
+        },
+        "tickets": [
+          {
+            "date": "2026-11-27",
+            "type": "2串1",
+            "stake": 5.26,
+            "potential": 34.73,
+            "total_odds": 6.6,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-27_周五011",
+                "home": "哥伦布机员",
+                "away": "迈阿密国际",
+                "sel": "home",
+                "score": null,
+                "odds": 2.52,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五002",
+                "home": "海登海姆",
+                "away": "纽伦堡",
+                "sel": "away",
+                "score": null,
+                "odds": 2.62,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-27",
+            "type": "2串1",
+            "stake": 5.08,
+            "potential": 31.28,
+            "total_odds": 6.16,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-27_周五004",
+                "home": "芬洛",
+                "away": "瓦尔韦克",
+                "sel": "away",
+                "score": null,
+                "odds": 2.35,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五002",
+                "home": "海登海姆",
+                "away": "纽伦堡",
+                "sel": "away",
+                "score": null,
+                "odds": 2.62,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-27",
+            "type": "2串1",
+            "stake": 4.65,
+            "potential": 27.54,
+            "total_odds": 5.92,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-27_周五004",
+                "home": "芬洛",
+                "away": "瓦尔韦克",
+                "sel": "away",
+                "score": null,
+                "odds": 2.35,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五011",
+                "home": "哥伦布机员",
+                "away": "迈阿密国际",
+                "sel": "home",
+                "score": null,
+                "odds": 2.52,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-27",
+            "type": "3串1",
+            "stake": 2.98,
+            "potential": 46.24,
+            "total_odds": 15.52,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-27_周五004",
+                "home": "芬洛",
+                "away": "瓦尔韦克",
+                "sel": "away",
+                "score": null,
+                "odds": 2.35,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五011",
+                "home": "哥伦布机员",
+                "away": "迈阿密国际",
+                "sel": "home",
+                "score": null,
+                "odds": 2.52,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五002",
+                "home": "海登海姆",
+                "away": "纽伦堡",
+                "sel": "away",
+                "score": null,
+                "odds": 2.62,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-27",
+            "type": "3串4",
+            "stake": 4.03,
+            "potential": 34.45,
+            "total_odds": 8.55,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-27_周五004",
+                "home": "芬洛",
+                "away": "瓦尔韦克",
+                "sel": "away",
+                "score": null,
+                "odds": 2.35,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五011",
+                "home": "哥伦布机员",
+                "away": "迈阿密国际",
+                "sel": "home",
+                "score": null,
+                "odds": 2.52,
+                "hit": null
+              },
+              {
+                "match": "2026-11-27_周五002",
+                "home": "海登海姆",
+                "away": "纽伦堡",
+                "sel": "away",
+                "score": null,
+                "odds": 2.62,
+                "hit": null
+              }
+            ]
+          }
+        ]
+      },
+      "score_parlay": {
+        "stats": null,
+        "tickets": []
       }
     }
   }

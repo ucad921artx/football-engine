@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-11-27 17:50:09",
+ "generated_at": "2026-11-27 21:01:14",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 600,
- "matched_total": 19,
+ "total_scanned": 625,
+ "matched_total": 18,
  "limit": 120,
  "counts": {
   "injury": 2,
-  "other": 14,
-  "transfer": 3
+  "other": 12,
+  "transfer": 4
  },
  "items": [
   {
@@ -98,18 +98,6 @@
   },
   {
    "date": "2026-11-27",
-   "title": "澳超彩经：麦克阿瑟主场拿分",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c3cf817aanative.htm",
-   "teams": [
-    "麦克阿瑟"
-   ],
-   "match_ids": [
-    "2026-11-27_周五001"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-27",
    "title": "法甲彩经：布雷斯特捍卫主场",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b081aeb6a5b0native.htm",
    "teams": [
@@ -183,8 +171,8 @@
   },
   {
    "date": "2026-11-27",
-   "title": "切尔西11轮用了26人，英超第二多；森林仅用21人，第二少",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c40e85582native.htm",
+   "title": "从三连胜到14轮仅2胜，森林上一次连胜正是止于击败切尔西之后",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c50843adfnative.htm",
    "teams": [
     "切尔西"
    ],
@@ -195,15 +183,15 @@
   },
   {
    "date": "2026-11-27",
-   "title": "从三连胜到14轮仅2胜，森林上一次连胜正是止于击败切尔西之后",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c50843adfnative.htm",
+   "title": "卫报：切尔西疯狂引援很少有人长期留队，缺失了文化和身份认同感",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b095f322a8eanative.htm",
    "teams": [
     "切尔西"
    ],
    "match_ids": [
     "2026-11-27_周五008"
    ],
-   "kind": "other"
+   "kind": "transfer"
   },
   {
    "date": "2026-11-27",

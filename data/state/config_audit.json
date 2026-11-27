@@ -1,9 +1,22 @@
 {
-  "generated_at": "2026-11-27T09:50:07",
+  "generated_at": "2026-11-27T13:01:12",
   "config_keys": {
+    "motivation_formats.json": {
+      "total_leaf_keys": 39,
+      "referenced": 39,
+      "unreferenced": [],
+      "known_unwired": {},
+      "unexpected_unwired": [],
+      "dataclass_aware_blocks": [
+        "calibration",
+        "circuit_breaker",
+        "lgbm",
+        "prediction"
+      ]
+    },
     "prediction.json": {
-      "total_leaf_keys": 87,
-      "referenced": 87,
+      "total_leaf_keys": 93,
+      "referenced": 93,
       "unreferenced": [],
       "known_unwired": {},
       "unexpected_unwired": [],
@@ -60,8 +73,7 @@
         "market_blend_weight",
         "max_goals",
         "rest_weight",
-        "rho",
-        "use_shrinkage_dc"
+        "rho"
       ],
       "dataclass_fields_missing_from_config": [
         "home_advantage",
@@ -71,7 +83,7 @@
       "alias_risks": [
         {
           "config_key": "home_adv_weight",
-          "config_value": 1.0,
+          "config_value": 1,
           "dataclass_field": "home_advantage",
           "field_in_config": false,
           "note": "同名概念、两处命名；只调 config_key 会让两个模型分叉"

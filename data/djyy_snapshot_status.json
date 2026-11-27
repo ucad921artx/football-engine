@@ -1,11 +1,11 @@
 {
-  "at": "2026-11-27T09:48:46Z",
-  "at_epoch": 1795772926,
+  "at": "2026-11-27T12:54:07Z",
+  "at_epoch": 1795784047,
   "ok": true,
   "reason": "",
   "matches": 258,
   "with_odds": 258,
   "snapshot_age_h": 0.0,
-  "base": "https://sporttery-proxy.ztzt.workers.dev/api/djyy",
+  "base": "https://djyylive.com",
   "source": "ci"
 }

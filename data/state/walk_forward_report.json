@@ -1,55 +1,55 @@
 {
-  "total_matches": 1637,
+  "total_matches": 1640,
   "date_range": [
     "2026-07-19",
     "2026-11-27"
   ],
   "metrics": {
-    "brier": 0.5723,
-    "weighted_brier": 0.569,
-    "rps": 0.1971,
-    "weighted_rps": 0.1962,
-    "log_loss": 0.9644,
-    "hit_rate": 0.5522,
-    "ece": 0.0247
+    "brier": 0.5724,
+    "weighted_brier": 0.5692,
+    "rps": 0.1973,
+    "weighted_rps": 0.1964,
+    "log_loss": 0.9646,
+    "hit_rate": 0.5518,
+    "ece": 0.0246
   },
   "draw_analysis": {
     "actual_draws": 387,
-    "actual_draw_rate": 0.2364,
+    "actual_draw_rate": 0.236,
     "predicted_draws": 44,
-    "predicted_draw_rate": 0.0269,
+    "predicted_draw_rate": 0.0268,
     "max_draw_prob": 0.5081,
     "avg_draw_prob": 0.2456,
-    "draw_calibration_gap": 0.0092,
-    "avg_market_draw": 0.2333,
-    "market_high_draw_n": 269,
+    "draw_calibration_gap": 0.0096,
+    "avg_market_draw": 0.2334,
+    "market_high_draw_n": 270,
     "market_high_draw_actual": 89,
-    "market_high_draw_rate": 0.3309
+    "market_high_draw_rate": 0.3296
   },
   "strategy_comparison": {
     "model": {
-      "hit_rate": 0.5504,
-      "n": 1637
+      "hit_rate": 0.55,
+      "n": 1640
     },
     "market": {
-      "hit_rate": 0.5577,
-      "n": 1499
+      "hit_rate": 0.5566,
+      "n": 1502
     },
     "hybrid_v2": {
-      "hit_rate": 0.517,
-      "n": 1499
+      "hit_rate": 0.5166,
+      "n": 1502
     },
     "market_d28": {
-      "hit_rate": 0.5284,
-      "n": 1499
+      "hit_rate": 0.528,
+      "n": 1502
     }
   },
   "by_league": {
     "西甲": {
-      "n": 123,
-      "hit_rate": 0.5447,
-      "brier": 0.5597,
-      "rps": 0.1882
+      "n": 124,
+      "hit_rate": 0.5403,
+      "brier": 0.5604,
+      "rps": 0.189
     },
     "意甲": {
       "n": 119,
@@ -64,10 +64,10 @@
       "rps": 0.189
     },
     "英超": {
-      "n": 99,
-      "hit_rate": 0.4747,
-      "brier": 0.623,
-      "rps": 0.206
+      "n": 100,
+      "hit_rate": 0.48,
+      "brier": 0.6227,
+      "rps": 0.2066
     },
     "欧国联": {
       "n": 92,
@@ -136,10 +136,10 @@
       "rps": 0.1945
     },
     "英冠": {
-      "n": 50,
-      "hit_rate": 0.48,
-      "brier": 0.6144,
-      "rps": 0.1899
+      "n": 51,
+      "hit_rate": 0.4706,
+      "brier": 0.6152,
+      "rps": 0.1919
     },
     "芬超": {
       "n": 40,

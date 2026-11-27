@@ -1134,13 +1134,13 @@
     "last_match_date": "2026-11-15"
   },
   "切尔西": {
-    "elo": 1737.4,
-    "attack": 1.039,
-    "defense": 1.1201,
-    "form": -0.3695,
+    "elo": 1724.4,
+    "attack": 1.0581,
+    "defense": 1.1664,
+    "form": -0.5586,
     "injury": 0.0,
-    "rest_days": 13,
-    "last_match_date": "2026-11-21"
+    "rest_days": 6,
+    "last_match_date": "2026-11-27"
   },
   "布拉干蒂诺RB": {
     "elo": 1632.2,
@@ -2538,13 +2538,13 @@
     "last_match_date": "2026-11-26"
   },
   "莱万特": {
-    "elo": 1573.5,
-    "attack": 0.9728,
-    "defense": 1.0745,
-    "form": -0.2142,
+    "elo": 1532.4,
+    "attack": 0.9631,
+    "defense": 1.1253,
+    "form": -0.4499,
     "injury": 0.0,
-    "rest_days": 14,
-    "last_match_date": "2026-11-23"
+    "rest_days": 4,
+    "last_match_date": "2026-11-27"
   },
   "巴列卡诺": {
     "elo": 1604.0,
@@ -2574,13 +2574,13 @@
     "last_match_date": "2026-11-21"
   },
   "诺丁汉森林": {
-    "elo": 1737.4,
-    "attack": 0.8796,
-    "defense": 1.007,
-    "form": -0.3859,
+    "elo": 1750.4,
+    "attack": 0.9494,
+    "defense": 1.0292,
+    "form": 0.0299,
     "injury": 0.0,
-    "rest_days": 14,
-    "last_match_date": "2026-11-21"
+    "rest_days": 6,
+    "last_match_date": "2026-11-27"
   },
   "挪威": {
     "elo": 1924.2,
@@ -3393,13 +3393,13 @@
     "last_match_date": "2014-12-12"
   },
   "米德尔斯堡": {
-    "elo": 1536.9,
-    "attack": 1.1321,
-    "defense": 1.1004,
-    "form": 0.7048,
+    "elo": 1514.0,
+    "attack": 1.0717,
+    "defense": 1.1135,
+    "form": 0.1934,
     "injury": 0.0,
-    "rest_days": 14,
-    "last_match_date": "2026-11-26"
+    "rest_days": 1,
+    "last_match_date": "2026-11-27"
   },
   "罗达JC": {
     "elo": 1350.6,
@@ -11520,13 +11520,13 @@
     "last_match_date": "2026-11-26"
   },
   "桑坦德竞技": {
-    "elo": 1479.8,
-    "attack": 1.0878,
-    "defense": 1.2533,
-    "form": 0.4735,
+    "elo": 1520.9,
+    "attack": 1.1373,
+    "defense": 1.2163,
+    "form": 0.6314,
     "injury": 0.0,
-    "rest_days": 14,
-    "last_match_date": "2026-11-22"
+    "rest_days": 5,
+    "last_match_date": "2026-11-27"
   },
   "比利亚": {
     "elo": 1514.7,
@@ -11853,13 +11853,13 @@
     "last_match_date": "2026-11-04"
   },
   "南安普顿": {
-    "elo": 1543.9,
-    "attack": 1.0152,
-    "defense": 0.8857,
-    "form": 0.657,
+    "elo": 1566.8,
+    "attack": 1.0366,
+    "defense": 0.8493,
+    "form": 0.7599,
     "injury": 0.0,
-    "rest_days": 3,
-    "last_match_date": "2026-10-14"
+    "rest_days": 14,
+    "last_match_date": "2026-11-27"
   },
   "布城": {
     "elo": 1514.6,

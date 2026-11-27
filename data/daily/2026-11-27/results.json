@@ -52,5 +52,32 @@
     "away_team": "巴黎FC",
     "half_home_score": 1,
     "half_away_score": 0
+  },
+  {
+    "match_id": "2026-11-27_周五008",
+    "home_score": 3,
+    "away_score": 2,
+    "home_team": "诺丁汉森林",
+    "away_team": "切尔西",
+    "half_home_score": 1,
+    "half_away_score": 0
+  },
+  {
+    "match_id": "2026-11-27_周五009",
+    "home_score": 2,
+    "away_score": 0,
+    "home_team": "南安普顿",
+    "away_team": "米德尔斯堡",
+    "half_home_score": 0,
+    "half_away_score": 0
+  },
+  {
+    "match_id": "2026-11-27_周五010",
+    "home_score": 1,
+    "away_score": 3,
+    "home_team": "莱万特",
+    "away_team": "桑坦德竞技",
+    "half_home_score": 1,
+    "half_away_score": 0
   }
 ]

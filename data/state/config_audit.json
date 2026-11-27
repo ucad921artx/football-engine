@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T14:11:21",
+  "generated_at": "2026-11-27T15:16:55",
   "config_keys": {
     "motivation_formats.json": {
       "total_leaf_keys": 39,
@@ -15,8 +15,8 @@
       ]
     },
     "prediction.json": {
-      "total_leaf_keys": 93,
-      "referenced": 93,
+      "total_leaf_keys": 92,
+      "referenced": 92,
       "unreferenced": [],
       "known_unwired": {},
       "unexpected_unwired": [],

@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-27 22:11:23",
+ "generated_at": "2026-11-27 23:16:56",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 631,
- "matched_total": 18,
+ "total_scanned": 636,
+ "matched_total": 19,
  "limit": 120,
  "counts": {
   "injury": 3,
-  "other": 11,
+  "other": 12,
   "transfer": 4
  },
  "items": [
@@ -110,6 +110,30 @@
   },
   {
    "date": "2026-11-27",
+   "title": "罗马诺：切尔西签下17岁布基纳法索中场宗戈，球员18岁后直接加盟",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b0994900c685native.htm",
+   "teams": [
+    "切尔西"
+   ],
+   "match_ids": [
+    "2026-11-27_周五008"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-27",
+   "title": "特里：切尔西应围绕帕尔默打造打法，其他人要替他承担防守工作",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b09851a93bb8native.htm",
+   "teams": [
+    "切尔西"
+   ],
+   "match_ids": [
+    "2026-11-27_周五008"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-27",
    "title": "法甲彩经：布雷斯特捍卫主场",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b081aeb6a5b0native.htm",
    "teams": [
@@ -136,18 +160,6 @@
    "date": "2026-11-27",
    "title": "德甲彩经：门兴客场全身而退",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b07c7e29776dnative.htm",
-   "teams": [
-    "门兴格拉德巴赫"
-   ],
-   "match_ids": [
-    "2026-11-27_周五005"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-27",
-   "title": "德甲垫底！图片报：门兴若降级将面临大洗牌 高层受质疑+主力流失",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b093ddd5db7fnative.htm",
    "teams": [
     "门兴格拉德巴赫"
    ],

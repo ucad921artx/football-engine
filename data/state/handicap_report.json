@@ -1,8 +1,8 @@
 {
-  "n_matches": 1516,
-  "hits": 560,
-  "hit_rate": 0.3694,
-  "roi": -0.0917,
+  "n_matches": 1515,
+  "hits": 559,
+  "hit_rate": 0.369,
+  "roi": -0.092,
   "rows": [
     {
       "date": "2026-08-05",
@@ -18183,18 +18183,6 @@
       "hit": false,
       "odds": 2.55,
       "pnl": -1.0
-    },
-    {
-      "date": "2026-11-27",
-      "match_id": "2026-11-27_周五001",
-      "league": "澳超",
-      "handicap": 1.0,
-      "best_sel": "home",
-      "best_edge": -0.4174,
-      "actual": "home",
-      "hit": true,
-      "odds": 1.48,
-      "pnl": 0.48
     }
   ]
 }

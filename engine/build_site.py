@@ -2318,7 +2318,120 @@ def _odds_series_chip(p):
     parts = [f"水位监控 {pts}次"]
     for side, key in (("主", "recent_home"), ("客", "recent_away")):
         v = ser.get(key)
-        if v is not …1538 tokens truncated…  if hcap is None:
+        if v is not None and abs(v) >= 0.5:
+            arrow = "↓" if v < 0 else "↑"
+            parts.append(f"{side}{arrow}{abs(v):.1f}%")
+    span = ser.get("span_min")
+    if span:
+        parts.append(f"跨{span:.0f}min")
+    return f'<span class="info-chip" style="color:var(--teal, #14b8a6)">{" · ".join(parts)}</span>'
+
+
+def _divergence_chip(p):
+    """模型 vs 市场分歧信号：分歧大 = 模型独立判断（高信息量），分歧小 = 跟随市场"""
+    model = p.get("model_raw") or {}
+    market = p.get("market_fair")
+    # 市场分歧候选（2026-08-05）：非模型方向但有显著正 EV 的赔率，被方向纪律拦下
+    md = p.get("market_disagreement") or {}
+    md_chips = []
+    for sel, info in md.items():
+        md_chips.append(f'{sel[0].upper()}+EV <b>{info["ev"]:.0%}</b>')
+    md_html = ""
+    if md_chips:
+        _chips = " ".join(md_chips)
+        md_html = f'<span class="info-chip" style="color:var(--amber)">市场分歧 {_chips}（纪律拦下）</span>'
+    if not model or not market or len(market) < 3:
+        return md_html
+    _probs = [model.get("home", 0), model.get("draw", 0), model.get("away", 0)]
+    div = max(abs(_probs[i] - market[i]) for i in range(3))
+    if div > 0.15:
+        return md_html + f'<span class="info-chip" style="color:var(--red)">模型vs市场分歧 <b>{div:.0%}</b></span>'
+    if div > 0.08:
+        return md_html + f'<span class="info-chip" style="color:var(--amber)">分歧 <b>{div:.0%}</b></span>'
+    return md_html
+
+
+def _context_chip(p):
+    """比赛情境 chips（2026-08-30）：动机/裁判/伤停——有数据才显示，无数据零噪音。"""
+    ctx = p.get("context") or {}
+    parts = []
+    st = ctx.get("stakes")
+    if st:
+        if isinstance(st, dict):
+            a = str(st.get("home") or st.get("主") or "")[:6]
+            b = str(st.get("away") or st.get("客") or "")[:6]
+            if a or b:
+                parts.append(f"动机 {a}|{b}")
+        else:
+            parts.append("动机 " + str(st)[:12])
+    if ctx.get("referee"):
+        parts.append("裁判 " + str(ctx["referee"])[:8])
+    inj = ctx.get("injuries") or {}
+    if inj.get("home_attackers") or inj.get("away_attackers"):
+        parts.append(f"伤停 {inj.get('home_attackers', 0)}+{inj.get('away_attackers', 0)}")
+    if not parts:
+        return ""
+    return f'<span class="info-chip" style="color:var(--dim)">{" · ".join(parts)}</span>'
+
+
+def _fusion_trace_row(p):
+    """融合归因链（2026-08-30）：本步 fusion_trace 落盘的可视化——哪几步动了概率。"""
+    tr = p.get("fusion_trace") or []
+    if not tr:
+        return ""
+    steps = " &rarr; ".join(str(t.get("step", "")) for t in tr)
+    last = tr[-1].get("after") if tr else None
+    _tail = ""
+    if isinstance(last, (list, tuple)) and len(last) == 3:
+        _tail = f'<span style="margin-left:8px">末态 H{last[0]:.3f} D{last[1]:.3f} A{last[2]:.3f}</span>'
+    return (f'<div style="font-size:0.68rem;color:var(--dim);margin:0 0 6px;padding:6px 8px;'
+            f'background:var(--surface2);border-radius:6px">'
+            f'<b style="color:var(--text-secondary)">融合归因链</b> {steps}{_tail}</div>')
+
+
+def _pred_pick(p):
+    """生成明确的预测结论。
+
+    优先用 direction 字段（含 R1 平局改判），与结算/串关口径一致；
+    否则回退 argmax。避免卡片显示"主胜"而数据里 direction=draw 的矛盾。
+
+    2026-10-13（issue #1）：合成赔率场次加「不可投注」标记。
+    外部用户报"竞彩未开盘但生成胜平负推荐"——下注层其实早就拦住合成赔率
+    （engine/main.py:1016，曾因此对 8 笔共 ¥67,353 押在模拟赔率上），
+    selfcheck 也有告警，但**卡片上看不出差别**：读者只看到"预测 主胜 75%"，
+    以为能照着买。合成赔率是 1/(final*1.05) 反推的，去水后≈模型自己的输出，
+    把它佯装成市场结论才是问题所在。
+    """
+    d = p.get("direction") or ""
+    if d in ("home", "draw", "away"):
+        prob = p.get(f"{'home_win_prob' if d == 'home' else ('draw_prob' if d == 'draw' else 'away_win_prob')}") or 0
+        cls = "home" if d == "home" else ("draw" if d == "draw" else "away")
+        label = {"home": "主胜", "draw": "平局", "away": "客胜"}[d]
+        base = f'<span class="pick-label">预测</span> <span class="pick-val {cls}">{label} {prob:.0%}</span>'
+    else:
+        ph = p.get("home_win_prob") or 0
+        pd = p.get("draw_prob") or 0
+        pa = p.get("away_win_prob") or 0
+        if ph >= pd and ph >= pa:
+            base = f'<span class="pick-label">预测</span> <span class="pick-val home">主胜 {ph:.0%}</span>'
+        elif pd >= ph and pd >= pa:
+            base = f'<span class="pick-label">预测</span> <span class="pick-val draw">平局 {pd:.0%}</span>'
+        else:
+            base = f'<span class="pick-label">预测</span> <span class="pick-val away">客胜 {pa:.0%}</span>'
+
+    # 合成赔率（无真实盘口）：明确标注不可投注，避免被当成可执行建议
+    if p.get("odds_synthetic"):
+        base += (' <span class="pick-val" style="font-size:.75em;border-color:#e6a23c;color:#e6a23c"'
+                 ' title="该场无真实盘口，赔率由模型概率反推（1/(p×1.05)）。'
+                 '数学上必然负 EV，系统不会对其下注；此概率仅供算法参考，不构成投注建议">'
+                 '⚠ 无盘口·不可投注</span>')
+    return base
+
+
+def _handicap_pick(p):
+    """让球玩法预测结论（竞彩 hhad）"""
+    hcap = p.get("handicap")
+    if hcap is None:
         return ""
     hhp, hdp, hap = (p.get("handicap_home_prob") or 0, p.get("handicap_draw_prob") or 0, p.get("handicap_away_prob") or 0)
     if not (hhp or hdp or hap):

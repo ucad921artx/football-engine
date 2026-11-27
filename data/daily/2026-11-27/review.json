@@ -1,13 +1,13 @@
 {
   "date": "2026-11-27",
-  "n_matches": 1,
-  "hit_rate": 1.0,
+  "n_matches": 2,
+  "hit_rate": 0.5,
   "hits": 1,
   "source_brier": {
-    "model": 0.5249,
-    "market": 0.6827,
-    "djyy": 0.6013,
-    "final": 0.5538
+    "model": 0.6148,
+    "market": 0.5832,
+    "djyy": 0.5534,
+    "final": 0.6055
   },
   "by_league": {
     "澳超": {
@@ -15,6 +15,12 @@
       "hit_rate": 1.0,
       "wilson_lower": 0.2065,
       "avg_brier": 0.5538
+    },
+    "德乙": {
+      "n": 1,
+      "hit_rate": 0.0,
+      "wilson_lower": 0.0,
+      "avg_brier": 0.6571
     }
   },
   "by_confidence_tier": {
@@ -23,14 +29,20 @@
       "hit_rate": 1.0,
       "wilson_lower": 0.2065,
       "avg_brier": 0.5538
+    },
+    "mid": {
+      "n": 1,
+      "hit_rate": 0.0,
+      "wilson_lower": 0.0,
+      "avg_brier": 0.6571
     }
   },
   "by_odds_band": {
     "L4 冷(2.2-3.0)": {
-      "n": 1,
-      "hit_rate": 1.0,
-      "wilson_lower": 0.2065,
-      "avg_brier": 0.5538
+      "n": 2,
+      "hit_rate": 0.5,
+      "wilson_lower": 0.0945,
+      "avg_brier": 0.6055
     }
   },
   "score_stats": {
@@ -54,18 +66,22 @@
     }
   },
   "market_signal_stats": {
-    "n": 1,
+    "n": 2,
     "hits": 1
   },
   "layered": {
-    "log_loss_final": 0.9334,
-    "rps_final": 0.2386,
-    "rps_market": 0.3077,
+    "log_loss_final": 1.0004,
+    "rps_final": 0.2677,
+    "rps_market": 0.2616,
     "goal_framework": {
-      "n": 1,
-      "hits": 1
+      "n": 2,
+      "hits": 2
     },
     "prob_bands": {
+      "40-50%": {
+        "n": 1,
+        "hit_rate": 0.0
+      },
       "<40%": {
         "n": 1,
         "hit_rate": 1.0
@@ -73,13 +89,13 @@
     },
     "freshness_groups": {
       "watch": {
-        "n": 1,
-        "hit_rate": 1.0
+        "n": 2,
+        "hit_rate": 0.5
       }
     }
   },
   "biases": [],
-  "total_pnl": 0,
-  "generated_at": "2026-11-27T18:33:47.302620",
-  "sha256": "fab1cdb27e4dca4367825e2ba67e76c9"
+  "total_pnl": 0.0,
+  "generated_at": "2026-11-27T19:44:15.186304",
+  "sha256": "6878137c790b04d4e35bfbee4c5198b4"
 }

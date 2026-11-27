@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T18:35:19.107776+00:00",
+  "generated_at": "2026-11-27T19:45:45.502391+00:00",
   "parlay": {
     "n_tickets": 138,
     "n_pending": 5,
@@ -5304,7 +5304,7 @@
         "pending": true,
         "leg_results": [
           null,
-          null
+          false
         ],
         "return": 0.0,
         "legs": [
@@ -5324,7 +5324,7 @@
             "sel": "away",
             "score": null,
             "odds": 2.62,
-            "hit": null
+            "hit": false
           }
         ]
       },
@@ -5340,7 +5340,7 @@
         "pending": true,
         "leg_results": [
           null,
-          null
+          false
         ],
         "return": 0.0,
         "legs": [
@@ -5360,7 +5360,7 @@
             "sel": "away",
             "score": null,
             "odds": 2.62,
-            "hit": null
+            "hit": false
           }
         ]
       },
@@ -5413,7 +5413,7 @@
         "leg_results": [
           null,
           null,
-          null
+          false
         ],
         "return": 0.0,
         "legs": [
@@ -5442,7 +5442,7 @@
             "sel": "away",
             "score": null,
             "odds": 2.62,
-            "hit": null
+            "hit": false
           }
         ]
       },
@@ -5459,7 +5459,7 @@
         "leg_results": [
           null,
           null,
-          null
+          false
         ],
         "return": 0.0,
         "legs": [
@@ -5488,7 +5488,7 @@
             "sel": "away",
             "score": null,
             "odds": 2.62,
-            "hit": null
+            "hit": false
           }
         ]
       }
@@ -36004,7 +36004,7 @@
             "pending": true,
             "leg_results": [
               null,
-              null
+              false
             ],
             "return": 0.0,
             "legs": [
@@ -36024,7 +36024,7 @@
                 "sel": "away",
                 "score": null,
                 "odds": 2.62,
-                "hit": null
+                "hit": false
               }
             ]
           },
@@ -36040,7 +36040,7 @@
             "pending": true,
             "leg_results": [
               null,
-              null
+              false
             ],
             "return": 0.0,
             "legs": [
@@ -36060,7 +36060,7 @@
                 "sel": "away",
                 "score": null,
                 "odds": 2.62,
-                "hit": null
+                "hit": false
               }
             ]
           },
@@ -36113,7 +36113,7 @@
             "leg_results": [
               null,
               null,
-              null
+              false
             ],
             "return": 0.0,
             "legs": [
@@ -36142,7 +36142,7 @@
                 "sel": "away",
                 "score": null,
                 "odds": 2.62,
-                "hit": null
+                "hit": false
               }
             ]
           },
@@ -36159,7 +36159,7 @@
             "leg_results": [
               null,
               null,
-              null
+              false
             ],
             "return": 0.0,
             "legs": [
@@ -36188,7 +36188,7 @@
                 "sel": "away",
                 "score": null,
                 "odds": 2.62,
-                "hit": null
+                "hit": false
               }
             ]
           }

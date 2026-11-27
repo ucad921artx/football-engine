@@ -1,9 +1,9 @@
 {
   "enabled": false,
   "method": "temperature",
-  "clean_n": 1185,
-  "val_delta_brier": -0.00183,
-  "t": -0.93,
-  "reason": "验证段无显著改善 (Δ=-0.0018, t=-0.93) → 维持关闭",
-  "decided_at": "2026-11-27T14:09:12"
+  "clean_n": 1187,
+  "val_delta_brier": -0.00153,
+  "t": -0.82,
+  "reason": "验证段无显著改善 (Δ=-0.0015, t=-0.82) → 维持关闭",
+  "decided_at": "2026-11-27T19:44:15"
 }

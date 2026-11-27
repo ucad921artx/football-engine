@@ -5274,13 +5274,13 @@
     "last_match_date": "2025-05-25"
   },
   "纽伦堡": {
-    "elo": 1518.0,
-    "attack": 0.9835,
-    "defense": 1.0305,
-    "form": 0.2637,
+    "elo": 1489.3,
+    "attack": 0.9728,
+    "defense": 1.0856,
+    "form": -0.1154,
     "injury": 0.0,
     "rest_days": 14,
-    "last_match_date": "2026-10-16"
+    "last_match_date": "2026-11-27"
   },
   "杜塞多夫": {
     "elo": 1447.2,
@@ -6633,13 +6633,13 @@
     "last_match_date": "2026-11-23"
   },
   "海登海姆": {
-    "elo": 1454.1,
-    "attack": 0.9947,
-    "defense": 1.18,
-    "form": -0.2386,
+    "elo": 1482.8,
+    "attack": 1.0533,
+    "defense": 1.1501,
+    "form": 0.133,
     "injury": 0.0,
     "rest_days": 14,
-    "last_match_date": "2026-10-09"
+    "last_match_date": "2026-11-27"
   },
   "雷克维京": {
     "elo": 1439.6,

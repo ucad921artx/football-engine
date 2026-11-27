@@ -17,7 +17,7 @@ DEFAULT_FACTOR_WEIGHTS = {
     "venue_environment": 0.12,
     "personnel": 0.10,
     "recent_form": 0.08,
-    "motivation": 0.08,
+    "motivation": 0.11,
     "schedule_fitness": 0.04,
 }
 

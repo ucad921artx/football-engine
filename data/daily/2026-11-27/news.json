@@ -1,16 +1,28 @@
 {
- "generated_at": "2026-11-27 21:01:14",
+ "generated_at": "2026-11-27 22:11:23",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 625,
+ "total_scanned": 631,
  "matched_total": 18,
  "limit": 120,
  "counts": {
-  "injury": 2,
-  "other": 12,
+  "injury": 3,
+  "other": 11,
   "transfer": 4
  },
  "items": [
+  {
+   "date": "2026-11-27",
+   "title": "标晚：维拉替补席有位置也不给加纳乔坐着，切尔西这下头疼了",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b098a99c10d4native.htm",
+   "teams": [
+    "切尔西"
+   ],
+   "match_ids": [
+    "2026-11-27_周五008"
+   ],
+   "kind": "injury"
+  },
   {
    "date": "2026-11-27",
    "title": "标晚预测切尔西首发：凯塞多回归与拉维亚搭档，佩德罗伤缺",
@@ -37,18 +49,6 @@
   },
   {
    "date": "2026-11-27",
-   "title": "阿隆索：若昂·佩德罗不会出战诺丁汉森林，拉克鲁瓦也赶不上",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c7cfd9c3bnative.htm",
-   "teams": [
-    "诺丁汉森林"
-   ],
-   "match_ids": [
-    "2026-11-27_周五008"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-27",
    "title": "队报：巴黎FC排名法甲第二位，已成为欧战资格竞争者",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b091483a0a15native.htm",
    "teams": [
@@ -68,6 +68,18 @@
    ],
    "match_ids": [
     "2026-11-27_周五005"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-27",
+   "title": "詹俊评切尔西：中轴线一旦没了全队好像散了架，阵型不停摇摆",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b097e5505848native.htm",
+   "teams": [
+    "切尔西"
+   ],
+   "match_ids": [
+    "2026-11-27_周五008"
    ],
    "kind": "other"
   },
@@ -162,18 +174,6 @@
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b09513d67bc0native.htm",
    "teams": [
     "诺丁汉森林",
-    "切尔西"
-   ],
-   "match_ids": [
-    "2026-11-27_周五008"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-27",
-   "title": "从三连胜到14轮仅2胜，森林上一次连胜正是止于击败切尔西之后",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b08c50843adfnative.htm",
-   "teams": [
     "切尔西"
    ],
    "match_ids": [

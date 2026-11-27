@@ -1928,10 +1928,10 @@
     },
     "kelly_edge": -0.1392,
     "pnl": 0.0,
-    "actual_result": "2-0",
+    "actual_result": "2-2",
     "actual_home_score": 2,
-    "actual_away_score": 0,
-    "direction_correct": true,
+    "actual_away_score": 2,
+    "direction_correct": false,
     "predicted_score": "0-1",
     "score_correct": false,
     "score_rank": 0,
@@ -1941,7 +1941,7 @@
     "djyy_score_rank": 0,
     "mc_score_rank": 0,
     "market_signal_dir": "home",
-    "market_signal_hit": true
+    "market_signal_hit": false
   },
   {
     "match_id": "2026-11-11_周三005",

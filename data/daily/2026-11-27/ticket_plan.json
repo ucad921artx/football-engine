@@ -5,14 +5,14 @@
     {
       "match": "2026-11-27_周五006",
       "sel": "away",
-      "odds": 1.92,
+      "odds": 1.9,
       "stake": 50.0,
-      "prob": 0.549,
+      "prob": 0.55,
       "downgrade_reason": "prob_5060"
     }
   ],
   "total_stake": 50.0,
-  "expected_roi": 0.0543,
+  "expected_roi": 0.0452,
   "bankroll": 3666.3059000000003,
   "breaker_multiplier": 1.0,
   "parlay": [

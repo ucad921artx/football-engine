@@ -19,7 +19,6 @@ DEFAULT_FACTOR_WEIGHTS = {
     "recent_form": 0.08,
     "motivation": 0.08,
     "schedule_fitness": 0.04,
-    "matchup_history": 0.03,
 }
 
 
@@ -93,17 +92,6 @@ def predict_weighted_factors(
         h_motivation = replace(baseline_home, attack=1.0 + 0.025 * h_urgency)
         a_motivation = replace(baseline_away, attack=1.0 + 0.025 * a_urgency)
         matrices["motivation"] = _matrix(model, h_motivation, a_motivation, neutral=True)
-    h2h = matchup_history or {}
-    h2h_n = max(0, int(h2h.get("matches") or 0))
-    h2h_home_ppg = h2h.get("home_points_per_game")
-    h2h_away_ppg = h2h.get("away_points_per_game")
-    if matchup_available and h2h_n and h2h_home_ppg is not None and h2h_away_ppg is not None:
-        shrink = h2h_n / (h2h_n + 8.0)
-        h_home_form = max(-1.0, min(1.0, (float(h2h_home_ppg) - 1.35) / 1.65)) * shrink
-        h_away_form = max(-1.0, min(1.0, (float(h2h_away_ppg) - 1.35) / 1.65)) * shrink
-        h_h2h = replace(baseline_home, form=h_home_form)
-        a_h2h = replace(baseline_away, form=h_away_form)
-        matrices["matchup_history"] = _matrix(model, h_h2h, a_h2h, neutral=True)
 
     total = sum(max(0.0, float(weights.get(key, 0.0))) for key in matrices)
     if total <= 0:

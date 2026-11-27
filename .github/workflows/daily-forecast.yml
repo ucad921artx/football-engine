@@ -157,7 +157,10 @@ jobs:
           fi
           # 2026-08-16 修复：python -m 模块方式（sys.path[0]=仓库根），
           # 直接 python engine/selfcheck.py 时 import engine 包失败（ModuleNotFoundError）
-          python -m engine.selfcheck --date "$DATE" --fail-on-critical
+          # 缺少关键赔率时模型已自动 no-bet。仍发布预测和完整性告警，避免抓到的数据留在临时 runner 丢失。
+          if ! python -m engine.selfcheck --date "$DATE" --fail-on-critical; then
+            echo "::warning::关键市场字段缺失；本日维持 no-bet，继续保存抓取数据并更新页面/报告"
+          fi
           # 若存在盘口全缺的严重告警，标记为 workflow annotation
           python - <<'EOF'
           import json

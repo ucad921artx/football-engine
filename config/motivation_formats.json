@@ -1,0 +1,81 @@
+{
+  "59": {
+    "name": "英冠",
+    "games_per_team": 46,
+    "race_zones": [
+      {"label": "直接升级", "start": 1, "end": 2, "weight": 0.8},
+      {"label": "升级附加赛", "start": 3, "end": 8, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "4": {
+    "name": "英超",
+    "games_per_team": 38,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "5": {
+    "name": "德甲",
+    "games_per_team": 34,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3,
+    "relegation_playoff_rank_from_bottom": 3
+  },
+  "7": {
+    "name": "德乙",
+    "games_per_team": 34,
+    "race_zones": [
+      {"label": "直接升级", "start": 1, "end": 2, "weight": 0.8},
+      {"label": "升级附加赛", "start": 3, "end": 3, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3,
+    "relegation_playoff_rank_from_bottom": 3
+  },
+  "1": {
+    "name": "荷甲",
+    "games_per_team": 34,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "3": {
+    "name": "西甲",
+    "games_per_team": 38,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "9": {
+    "name": "意甲",
+    "games_per_team": 38,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "12": {
+    "name": "法甲",
+    "games_per_team": 34,
+    "race_zones": [
+      {"label": "争冠", "start": 1, "end": 1, "weight": 0.7}
+    ],
+    "danger_start_from_bottom": 3
+  },
+  "257": {
+    "name": "澳超",
+    "games_per_team": 26,
+    "race_zones": [
+      {"label": "决赛系列赛资格", "start": 1, "end": 6, "weight": 0.75}
+    ]
+  },
+  "26": {
+    "name": "美职联",
+    "aggregate_allowed": false
+  }
+}

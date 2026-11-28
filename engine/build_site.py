@@ -2787,7 +2787,6 @@ def _tab_model(p, uid):
     """模型 tab: model_raw vs market_fair vs djyy vs final, Elo, Wilson, + DJYY xG/ injuries."""
     model_raw = p.get("model_raw") or {}
     market_fair = p.get("market_fair")
-    djyy = p.get("djyy_model_prob")
     final_h = p.get("home_win_prob") or 0
     final_d = p.get("draw_prob") or 0
     final_a = p.get("away_win_prob") or 0

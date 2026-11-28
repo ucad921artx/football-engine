@@ -13,12 +13,12 @@ from .base import MatchPrediction, TeamRating
 from .dixon_coles import DixonColesConfig, DixonColesModel
 
 DEFAULT_FACTOR_WEIGHTS = {
-    "strength": 0.55,
-    "venue_environment": 0.12,
-    "personnel": 0.10,
-    "recent_form": 0.08,
-    "motivation": 0.11,
-    "schedule_fitness": 0.04,
+    "strength": 0.45,
+    "personnel": 0.18,
+    "motivation": 0.10,
+    "recent_form": 0.12,
+    "schedule_fitness": 0.10,
+    "venue_environment": 0.05,
 }
 
 
@@ -34,6 +34,8 @@ def predict_weighted_factors(
     motivation: dict | None = None,
     djyy_probs: dict | None = None,
     schedule_available: bool = False,
+    schedule_context: dict | None = None,
+    recent_form_xg_adjustments: dict[str, float] | None = None,
     motivation_available: bool = False,
     matchup_available: bool = False,
 ) -> tuple[MatchPrediction, dict[str, float], tuple[str, ...]]:
@@ -52,9 +54,12 @@ def predict_weighted_factors(
     baseline_away = TeamRating(name=away.name)
     matrices["venue_environment"] = _matrix(model, baseline_home, baseline_away, neutral=False)
 
-    if home.form != 0 or away.form != 0:
-        h_form = replace(baseline_home, form=home.form)
-        a_form = replace(baseline_away, form=away.form)
+    xg_adjustments = recent_form_xg_adjustments or {}
+    if home.form != 0 or away.form != 0 or xg_adjustments:
+        h_scale = max(0.92, min(1.08, float(xg_adjustments.get("home", 1.0) or 1.0)))
+        a_scale = max(0.92, min(1.08, float(xg_adjustments.get("away", 1.0) or 1.0)))
+        h_form = replace(baseline_home, form=home.form, attack=h_scale)
+        a_form = replace(baseline_away, form=away.form, attack=a_scale)
         matrices["recent_form"] = _matrix(model, h_form, a_form, neutral=True)
 
     inj = injuries or {}
@@ -78,8 +83,22 @@ def predict_weighted_factors(
         matrices["personnel"] = _matrix(model, h_personnel, a_personnel, neutral=True)
 
     if schedule_available:
-        h_rest = replace(baseline_home, rest_days=max(0, home.rest_days))
-        a_rest = replace(baseline_away, rest_days=max(0, away.rest_days))
+        schedule = schedule_context or {}
+        def _effective_rest(side: str, fallback: int) -> float:
+            evidence = schedule.get(side) or {}
+            try:
+                rest = max(0.0, min(14.0, float(evidence.get("days_since_last_match"))))
+            except (TypeError, ValueError):
+                rest = max(0.0, float(fallback))
+            try:
+                games_14d = max(0.0, float(evidence.get("matches_last_14d") or 0))
+                away_14d = max(0.0, float(evidence.get("away_matches_last_14d") or 0))
+            except (TypeError, ValueError):
+                games_14d, away_14d = 0.0, 0.0
+            congestion = max(0.0, games_14d - 2.0) * 1.25 + away_14d * 0.5
+            return max(0.0, rest - congestion)
+        h_rest = replace(baseline_home, rest_days=_effective_rest("home", home.rest_days))
+        a_rest = replace(baseline_away, rest_days=_effective_rest("away", away.rest_days))
         matrices["schedule_fitness"] = _matrix(model, h_rest, a_rest, neutral=True)
 
     # E12: objective standings/competition pressure creates a small independent

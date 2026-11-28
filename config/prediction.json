@@ -146,11 +146,11 @@
     "min_z": 1.96
   },
   "factor_weights": {
-    "strength": 0.55,
-    "venue_environment": 0.12,
-    "personnel": 0.1,
-    "recent_form": 0.08,
-    "motivation": 0.11,
-    "schedule_fitness": 0.04
+    "strength": 0.45,
+    "personnel": 0.18,
+    "motivation": 0.1,
+    "recent_form": 0.12,
+    "schedule_fitness": 0.1,
+    "venue_environment": 0.05
   }
 }

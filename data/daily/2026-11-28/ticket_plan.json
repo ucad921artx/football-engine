@@ -1,0 +1,299 @@
+{
+  "stable": [],
+  "value": [],
+  "lottery": [
+    {
+      "match": "2026-11-28_周六017",
+      "sel": "away",
+      "odds": 1.83,
+      "stake": 35.27,
+      "prob": 0.564,
+      "downgrade_reason": "prob_5060"
+    },
+    {
+      "match": "2026-11-28_周六015",
+      "sel": "away",
+      "odds": 1.82,
+      "stake": 14.73,
+      "prob": 0.557,
+      "downgrade_reason": "prob_5060"
+    }
+  ],
+  "total_stake": 50.0,
+  "expected_roi": 0.0272,
+  "bankroll": 3616.3059000000003,
+  "breaker_multiplier": 0.5,
+  "parlay": [
+    {
+      "type": "2串1",
+      "legs": [
+        {
+          "match": "2026-11-28_周六011",
+          "home": "曼彻斯特联",
+          "away": "布伦特福德",
+          "league": "英超",
+          "sel": "away",
+          "odds": 3.1,
+          "prob": 0.47,
+          "cal_prob": 0.49,
+          "market_prob": 0.283,
+          "source": "fusion",
+          "hit_prob": 0.49
+        },
+        {
+          "match": "2026-11-28_周六001",
+          "home": "京都不死鸟",
+          "away": "大阪樱花",
+          "league": "日职",
+          "sel": "away",
+          "odds": 2.6,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.337,
+          "source": "fusion",
+          "hit_prob": 0.474
+        }
+      ],
+      "total_odds": 8.06,
+      "model_ev": 1.05,
+      "cal_ev": 5.0,
+      "cal_roi": 0.8724,
+      "market_ev": -0.46,
+      "market_roi": -0.2297,
+      "hit_prob_cal": 0.232,
+      "recommended": true,
+      "stake": 5.73,
+      "n_bets": 1,
+      "potential": 46.18,
+      "worst_win": 0.0,
+      "note": "两场全中才赢",
+      "source": "calibrated"
+    },
+    {
+      "type": "2串1",
+      "legs": [
+        {
+          "match": "2026-11-28_周六011",
+          "home": "曼彻斯特联",
+          "away": "布伦特福德",
+          "league": "英超",
+          "sel": "away",
+          "odds": 3.1,
+          "prob": 0.47,
+          "cal_prob": 0.49,
+          "market_prob": 0.283,
+          "source": "fusion",
+          "hit_prob": 0.49
+        },
+        {
+          "match": "2026-11-28_周六002",
+          "home": "柏太阳神",
+          "away": "广岛三箭",
+          "league": "日职",
+          "sel": "home",
+          "odds": 2.45,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.358,
+          "source": "fusion",
+          "hit_prob": 0.474
+        }
+      ],
+      "total_odds": 7.6,
+      "model_ev": 0.87,
+      "cal_ev": 4.1,
+      "cal_roi": 0.7644,
+      "market_ev": -0.46,
+      "market_roi": -0.2289,
+      "hit_prob_cal": 0.232,
+      "recommended": true,
+      "stake": 5.37,
+      "n_bets": 1,
+      "potential": 40.79,
+      "worst_win": 0.0,
+      "note": "两场全中才赢",
+      "source": "calibrated"
+    },
+    {
+      "type": "2串1",
+      "legs": [
+        {
+          "match": "2026-11-28_周六001",
+          "home": "京都不死鸟",
+          "away": "大阪樱花",
+          "league": "日职",
+          "sel": "away",
+          "odds": 2.6,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.337,
+          "source": "fusion",
+          "hit_prob": 0.474
+        },
+        {
+          "match": "2026-11-28_周六002",
+          "home": "柏太阳神",
+          "away": "广岛三箭",
+          "league": "日职",
+          "sel": "home",
+          "odds": 2.45,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.358,
+          "source": "fusion",
+          "hit_prob": 0.474
+        }
+      ],
+      "total_odds": 6.37,
+      "model_ev": 0.06,
+      "cal_ev": 1.6,
+      "cal_roi": 0.4306,
+      "market_ev": -0.46,
+      "market_roi": -0.2294,
+      "hit_prob_cal": 0.225,
+      "recommended": true,
+      "stake": 3.72,
+      "n_bets": 1,
+      "potential": 23.7,
+      "worst_win": 0.0,
+      "note": "两场全中才赢",
+      "source": "calibrated"
+    },
+    {
+      "type": "3串1",
+      "legs": [
+        {
+          "match": "2026-11-28_周六011",
+          "home": "曼彻斯特联",
+          "away": "布伦特福德",
+          "league": "英超",
+          "sel": "away",
+          "odds": 3.1,
+          "prob": 0.47,
+          "cal_prob": 0.49,
+          "market_prob": 0.283,
+          "source": "fusion",
+          "hit_prob": 0.49
+        },
+        {
+          "match": "2026-11-28_周六001",
+          "home": "京都不死鸟",
+          "away": "大阪樱花",
+          "league": "日职",
+          "sel": "away",
+          "odds": 2.6,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.337,
+          "source": "fusion",
+          "hit_prob": 0.474
+        },
+        {
+          "match": "2026-11-28_周六002",
+          "home": "柏太阳神",
+          "away": "广岛三箭",
+          "league": "日职",
+          "sel": "home",
+          "odds": 2.45,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.358,
+          "source": "fusion",
+          "hit_prob": 0.474
+        }
+      ],
+      "total_odds": 19.75,
+      "model_ev": 1.0,
+      "cal_ev": 3.4,
+      "cal_roi": 1.1739,
+      "market_ev": -0.65,
+      "market_roi": -0.3234,
+      "hit_prob_cal": 0.11,
+      "recommended": true,
+      "stake": 2.9,
+      "n_bets": 1,
+      "potential": 57.27,
+      "worst_win": 0.0,
+      "note": "三场全中才赢",
+      "source": "calibrated"
+    },
+    {
+      "type": "3串4",
+      "legs": [
+        {
+          "match": "2026-11-28_周六011",
+          "home": "曼彻斯特联",
+          "away": "布伦特福德",
+          "league": "英超",
+          "sel": "away",
+          "odds": 3.1,
+          "prob": 0.47,
+          "cal_prob": 0.49,
+          "market_prob": 0.283,
+          "source": "fusion",
+          "hit_prob": 0.49
+        },
+        {
+          "match": "2026-11-28_周六001",
+          "home": "京都不死鸟",
+          "away": "大阪樱花",
+          "league": "日职",
+          "sel": "away",
+          "odds": 2.6,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.337,
+          "source": "fusion",
+          "hit_prob": 0.474
+        },
+        {
+          "match": "2026-11-28_周六002",
+          "home": "柏太阳神",
+          "away": "广岛三箭",
+          "league": "日职",
+          "sel": "home",
+          "odds": 2.45,
+          "prob": 0.402,
+          "cal_prob": 0.474,
+          "market_prob": 0.358,
+          "source": "fusion",
+          "hit_prob": 0.474
+        }
+      ],
+      "total_odds": 10.44,
+      "model_ev": null,
+      "cal_ev": 3.23,
+      "cal_roi": 0.8103,
+      "market_ev": -2.02,
+      "market_roi": -0.2529,
+      "hit_prob_cal": 0.11,
+      "recommended": true,
+      "stake": 3.98,
+      "n_bets": 4,
+      "potential": 41.56,
+      "worst_win": 12.74,
+      "note": "容错：错 1 场仍中 1 注 2串1（回 ¥13），全中 ¥84",
+      "source": "calibrated"
+    }
+  ],
+  "parlay_pool_n": 5,
+  "score_parlay": [],
+  "parlay_stake": 21.7,
+  "total_exposure": 71.7,
+  "_stake_note": "total_stake = Kelly 分配池（stable/value/lottery）；total_exposure = total_stake + parlay_stake，才是真实投注额",
+  "parlay_calibration": {
+    "overall": 0.55,
+    "n": 1640,
+    "table": {
+      "0.35": 0.4252,
+      "0.4": 0.4739,
+      "0.45": 0.4902,
+      "0.5": 0.4848,
+      "0.55": 0.5238,
+      "0.6": 0.6573,
+      "0.65": 0.6947,
+      "0.7": 0.802
+    },
+    "note": "串关 EV 用账本校准命中率（模型概率高估，0.55-0.60 段仅 31.6% 命中）；推荐=校准EV>0"
+  }
+}

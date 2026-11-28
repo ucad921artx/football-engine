@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T00:37:12.210661+00:00",
+  "generated_at": "2026-11-28T02:08:35.512474+00:00",
   "parlay": {
-    "n_tickets": 138,
-    "n_pending": 5,
+    "n_tickets": 143,
+    "n_pending": 10,
     "n_settled": 133,
     "n_won": 36,
     "hit_rate": 0.2707,
     "stake": 747.68,
-    "stake_committed": 769.68,
-    "stake_pending": 22.0,
+    "stake_committed": 791.38,
+    "stake_pending": 43.7,
     "return": 894.25,
     "roi": 0.196,
     "avg_odds": 6.8,
@@ -5489,6 +5489,206 @@
             "score": null,
             "odds": 2.62,
             "hit": false
+          }
+        ]
+      },
+      {
+        "date": "2026-11-28",
+        "type": "2串1",
+        "stake": 5.73,
+        "potential": 46.18,
+        "total_odds": 8.06,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-28_周六011",
+            "home": "曼彻斯特联",
+            "away": "布伦特福德",
+            "sel": "away",
+            "score": null,
+            "odds": 3.1,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六001",
+            "home": "京都不死鸟",
+            "away": "大阪樱花",
+            "sel": "away",
+            "score": null,
+            "odds": 2.6,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-28",
+        "type": "2串1",
+        "stake": 5.37,
+        "potential": 40.79,
+        "total_odds": 7.6,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-28_周六011",
+            "home": "曼彻斯特联",
+            "away": "布伦特福德",
+            "sel": "away",
+            "score": null,
+            "odds": 3.1,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六002",
+            "home": "柏太阳神",
+            "away": "广岛三箭",
+            "sel": "home",
+            "score": null,
+            "odds": 2.45,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-28",
+        "type": "2串1",
+        "stake": 3.72,
+        "potential": 23.7,
+        "total_odds": 6.37,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-28_周六001",
+            "home": "京都不死鸟",
+            "away": "大阪樱花",
+            "sel": "away",
+            "score": null,
+            "odds": 2.6,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六002",
+            "home": "柏太阳神",
+            "away": "广岛三箭",
+            "sel": "home",
+            "score": null,
+            "odds": 2.45,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-28",
+        "type": "3串1",
+        "stake": 2.9,
+        "potential": 57.27,
+        "total_odds": 19.75,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-28_周六011",
+            "home": "曼彻斯特联",
+            "away": "布伦特福德",
+            "sel": "away",
+            "score": null,
+            "odds": 3.1,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六001",
+            "home": "京都不死鸟",
+            "away": "大阪樱花",
+            "sel": "away",
+            "score": null,
+            "odds": 2.6,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六002",
+            "home": "柏太阳神",
+            "away": "广岛三箭",
+            "sel": "home",
+            "score": null,
+            "odds": 2.45,
+            "hit": null
+          }
+        ]
+      },
+      {
+        "date": "2026-11-28",
+        "type": "3串4",
+        "stake": 3.98,
+        "potential": 41.56,
+        "total_odds": 10.44,
+        "odds_source": null,
+        "note": "待赛",
+        "won": false,
+        "pending": true,
+        "leg_results": [
+          null,
+          null,
+          null
+        ],
+        "return": 0.0,
+        "legs": [
+          {
+            "match": "2026-11-28_周六011",
+            "home": "曼彻斯特联",
+            "away": "布伦特福德",
+            "sel": "away",
+            "score": null,
+            "odds": 3.1,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六001",
+            "home": "京都不死鸟",
+            "away": "大阪樱花",
+            "sel": "away",
+            "score": null,
+            "odds": 2.6,
+            "hit": null
+          },
+          {
+            "match": "2026-11-28_周六002",
+            "home": "柏太阳神",
+            "away": "广岛三箭",
+            "sel": "home",
+            "score": null,
+            "odds": 2.45,
+            "hit": null
           }
         ]
       }
@@ -36189,6 +36389,230 @@
                 "score": null,
                 "odds": 2.62,
                 "hit": false
+              }
+            ]
+          }
+        ]
+      },
+      "score_parlay": {
+        "stats": null,
+        "tickets": []
+      }
+    },
+    "2026-11-28": {
+      "parlay": {
+        "stats": {
+          "n_tickets": 5,
+          "n_pending": 5,
+          "n_settled": 0,
+          "n_won": 0,
+          "hit_rate": null,
+          "stake": 0,
+          "stake_committed": 21.7,
+          "stake_pending": 21.7,
+          "return": 0,
+          "roi": null,
+          "avg_odds": null,
+          "by_type": {}
+        },
+        "tickets": [
+          {
+            "date": "2026-11-28",
+            "type": "2串1",
+            "stake": 5.73,
+            "potential": 46.18,
+            "total_odds": 8.06,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-28_周六011",
+                "home": "曼彻斯特联",
+                "away": "布伦特福德",
+                "sel": "away",
+                "score": null,
+                "odds": 3.1,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六001",
+                "home": "京都不死鸟",
+                "away": "大阪樱花",
+                "sel": "away",
+                "score": null,
+                "odds": 2.6,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-28",
+            "type": "2串1",
+            "stake": 5.37,
+            "potential": 40.79,
+            "total_odds": 7.6,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-28_周六011",
+                "home": "曼彻斯特联",
+                "away": "布伦特福德",
+                "sel": "away",
+                "score": null,
+                "odds": 3.1,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六002",
+                "home": "柏太阳神",
+                "away": "广岛三箭",
+                "sel": "home",
+                "score": null,
+                "odds": 2.45,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-28",
+            "type": "2串1",
+            "stake": 3.72,
+            "potential": 23.7,
+            "total_odds": 6.37,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-28_周六001",
+                "home": "京都不死鸟",
+                "away": "大阪樱花",
+                "sel": "away",
+                "score": null,
+                "odds": 2.6,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六002",
+                "home": "柏太阳神",
+                "away": "广岛三箭",
+                "sel": "home",
+                "score": null,
+                "odds": 2.45,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-28",
+            "type": "3串1",
+            "stake": 2.9,
+            "potential": 57.27,
+            "total_odds": 19.75,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-28_周六011",
+                "home": "曼彻斯特联",
+                "away": "布伦特福德",
+                "sel": "away",
+                "score": null,
+                "odds": 3.1,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六001",
+                "home": "京都不死鸟",
+                "away": "大阪樱花",
+                "sel": "away",
+                "score": null,
+                "odds": 2.6,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六002",
+                "home": "柏太阳神",
+                "away": "广岛三箭",
+                "sel": "home",
+                "score": null,
+                "odds": 2.45,
+                "hit": null
+              }
+            ]
+          },
+          {
+            "date": "2026-11-28",
+            "type": "3串4",
+            "stake": 3.98,
+            "potential": 41.56,
+            "total_odds": 10.44,
+            "odds_source": null,
+            "note": "待赛",
+            "won": false,
+            "pending": true,
+            "leg_results": [
+              null,
+              null,
+              null
+            ],
+            "return": 0.0,
+            "legs": [
+              {
+                "match": "2026-11-28_周六011",
+                "home": "曼彻斯特联",
+                "away": "布伦特福德",
+                "sel": "away",
+                "score": null,
+                "odds": 3.1,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六001",
+                "home": "京都不死鸟",
+                "away": "大阪樱花",
+                "sel": "away",
+                "score": null,
+                "odds": 2.6,
+                "hit": null
+              },
+              {
+                "match": "2026-11-28_周六002",
+                "home": "柏太阳神",
+                "away": "广岛三箭",
+                "sel": "home",
+                "score": null,
+                "odds": 2.45,
+                "hit": null
               }
             ]
           }

@@ -1,12 +1,12 @@
 {
   "date": "2026-11-28",
-  "generated_at": "2026-11-28T09:36:42",
+  "generated_at": "2026-11-28T10:29:41",
   "healthy": true,
-  "coverage": 0.6957,
+  "coverage": 0.8696,
   "enrich_success": 1.0,
-  "league_coverage": 0.6957,
-  "covered": 16,
-  "matched": 16,
+  "league_coverage": 0.8696,
+  "covered": 20,
+  "matched": 20,
   "failed": 0,
   "fixtures": 23,
   "budget_s": 552.0,
@@ -15,8 +15,8 @@
   "proxy_configured": false,
   "detail": {
     "fixtures": 258,
-    "matched": 16,
-    "enriched": 0,
+    "matched": 20,
+    "enriched": 4,
     "failed": 0,
     "cache_hit": 16,
     "budget_exhausted": false
@@ -25,7 +25,7 @@
   "snapshot_probs": 0,
   "snapshot_total": 23,
   "snapshot_age_h": 0.1,
-  "snapshot_updated_at": "2026-11-28T09:42:17",
+  "snapshot_updated_at": "2026-11-28T10:36:49",
   "live_channel_used": true,
   "fallback": "live"
 }

@@ -12,6 +12,8 @@
   --text:#0f172a; --text-secondary:#475569; --dim:#94a3b8;
   --blue:#2563eb; --red:#dc2626; --green:#16a34a; --amber:#d97706; --cyan:#0891b2;
   --purple:#7c3aed;
+  --blue-dim:#dbeafe; --red-dim:#fee2e2; --green-dim:#dcfce7;
+  --amber-dim:#fef3c7; --purple-dim:#ede9fe; --transition:all .2s ease;
   --radius:14px; --radius-sm:10px;
   --shadow:0 1px 2px rgba(15,23,42,.04), 0 2px 8px rgba(15,23,42,.05);
   --shadow-lift:0 4px 16px rgba(15,23,42,.08);
@@ -930,6 +932,7 @@ a { color:var(--blue); }
     <div class="bb-tickets">
       <div class="bb-ticket"><span class="bb-tag stable">稳胆60%</span><span class="bb-n">0 注</span></div><div class="bb-ticket"><span class="bb-tag value">搏冷30%</span><span class="bb-n">0 注</span></div><div class="bb-ticket"><span class="bb-tag lottery">彩票10%</span><span class="bb-n">0 注</span></div>
     </div>
+    <div class="note" style="margin-top:8px">实际总敞口 &yen;0 &middot; 单注 &yen;0 &middot; 串关 &yen;0 &middot; 已结算盈亏 <span style="color:var(--dim)">—</span></div>
   </div>
 
     <!-- MATCH PREDICTIONS -->
@@ -1043,8 +1046,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.91</td><td>3.22</td><td>3.40</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.91</td><td>3.22</td><td>3.40</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.91</td><td>3.22</td><td>3.40</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1061,6 +1065,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.8%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+2.3pp</td><td>-7.0%</td></tr><tr><td>平局</td><td>-0.9pp</td><td>-14.3%</td></tr><tr><td>客胜</td><td>-1.4pp</td><td>-16.2%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">48%</span></div>
@@ -1228,8 +1234,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.82</td><td>3.10</td><td>2.21</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.82</td><td>3.10</td><td>2.21</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.82</td><td>3.10</td><td>2.21</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1246,6 +1253,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-3.7%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-1.3pp</td><td>-15.1%</td></tr><tr><td>平局</td><td>-0.2pp</td><td>-12.1%</td></tr><tr><td>客胜</td><td>+1.5pp</td><td>-8.2%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">57%</span></div>
@@ -1413,8 +1422,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.51</td><td>4.00</td><td>4.60</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.51</td><td>4.00</td><td>4.60</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.51</td><td>4.00</td><td>4.60</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1431,6 +1441,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-2.6%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.4pp</td><td>-10.8%</td></tr><tr><td>平局</td><td>-0.4pp</td><td>-13.0%</td></tr><tr><td>客胜</td><td>-0.1pp</td><td>-11.8%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">38%</span></div>
@@ -1598,8 +1610,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>3.70</td><td>3.60</td><td>1.72</td></tr>
-        <tr><td class="src-label">Bet365</td><td>3.70</td><td>3.60</td><td>1.72</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>3.70</td><td>3.60</td><td>1.72</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1616,6 +1629,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-6.2%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.1pp</td><td>-11.1%</td></tr><tr><td>平局</td><td>-0.5pp</td><td>-13.3%</td></tr><tr><td>客胜</td><td>+0.4pp</td><td>-10.7%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">52%</span></div>
@@ -1783,8 +1798,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.47</td><td>3.35</td><td>2.35</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.47</td><td>3.35</td><td>2.35</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.47</td><td>3.35</td><td>2.35</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1801,6 +1817,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-2.1%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-1.9pp</td><td>-16.0%</td></tr><tr><td>平局</td><td>-0.9pp</td><td>-14.3%</td></tr><tr><td>客胜</td><td>+2.7pp</td><td>-5.0%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">58%</span></div>
@@ -1968,8 +1986,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.07</td><td>3.25</td><td>2.95</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.07</td><td>3.25</td><td>2.95</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.07</td><td>3.25</td><td>2.95</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -1986,6 +2005,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.1%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.8pp</td><td>-9.9%</td></tr><tr><td>平局</td><td>-0.6pp</td><td>-13.4%</td></tr><tr><td>客胜</td><td>-0.2pp</td><td>-12.0%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">52%</span></div>
@@ -2153,8 +2174,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.52</td><td>4.08</td><td>4.42</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.52</td><td>4.08</td><td>4.42</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.52</td><td>4.08</td><td>4.42</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -2171,6 +2193,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-3.4%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+1.6pp</td><td>-9.0%</td></tr><tr><td>平局</td><td>-0.8pp</td><td>-14.7%</td></tr><tr><td>客胜</td><td>-0.8pp</td><td>-15.1%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">38%</span></div>
@@ -2338,8 +2362,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.61</td><td>4.10</td><td>3.80</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.61</td><td>4.10</td><td>3.80</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.61</td><td>4.10</td><td>3.80</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -2356,6 +2381,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.2%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+1.9pp</td><td>-8.2%</td></tr><tr><td>平局</td><td>-0.8pp</td><td>-14.4%</td></tr><tr><td>客胜</td><td>-1.2pp</td><td>-15.9%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">41%</span></div>
@@ -2523,8 +2550,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.14</td><td>6.55</td><td>10.00</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.14</td><td>6.55</td><td>10.00</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.14</td><td>6.55</td><td>10.00</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -2541,6 +2569,8 @@ a { color:var(--blue); }
           <td class="">-1.0%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-0.7pp</td><td>-12.3%</td></tr><tr><td>平局</td><td>+0.6pp</td><td>-7.9%</td></tr><tr><td>客胜</td><td>+0.1pp</td><td>-10.1%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">21%</span></div>
@@ -2708,8 +2738,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>3.35</td><td>3.95</td><td>1.73</td></tr>
-        <tr><td class="src-label">Bet365</td><td>3.35</td><td>3.95</td><td>1.73</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>3.35</td><td>3.95</td><td>1.73</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -2726,6 +2757,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-6.1%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.0pp</td><td>-11.5%</td></tr><tr><td>平局</td><td>-0.6pp</td><td>-13.7%</td></tr><tr><td>客胜</td><td>+0.6pp</td><td>-10.5%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">52%</span></div>
@@ -2893,8 +2926,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.03</td><td>3.75</td><td>2.70</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.03</td><td>3.75</td><td>2.70</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.03</td><td>3.75</td><td>2.70</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -2911,6 +2945,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-3.5%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.3pp</td><td>-10.9%</td></tr><tr><td>平局</td><td>-1.0pp</td><td>-15.1%</td></tr><tr><td>客胜</td><td>+0.7pp</td><td>-9.5%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">53%</span></div>
@@ -3078,8 +3114,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.10</td><td>6.85</td><td>13.50</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.10</td><td>6.85</td><td>13.50</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.10</td><td>6.85</td><td>13.50</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -3096,6 +3133,8 @@ a { color:var(--blue); }
           <td class="">-0.9%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.0pp</td><td>-11.4%</td></tr><tr><td>平局</td><td>+0.0pp</td><td>-11.4%</td></tr><tr><td>客胜</td><td>-0.0pp</td><td>-11.6%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">19%</span></div>
@@ -3263,8 +3302,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.24</td><td>3.42</td><td>2.56</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.24</td><td>3.42</td><td>2.56</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.24</td><td>3.42</td><td>2.56</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -3281,6 +3321,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-6.1%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+2.3pp</td><td>-6.3%</td></tr><tr><td>平局</td><td>-0.7pp</td><td>-14.0%</td></tr><tr><td>客胜</td><td>-1.6pp</td><td>-15.5%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">56%</span></div>
@@ -3448,8 +3490,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.02</td><td>3.15</td><td>3.16</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.02</td><td>3.15</td><td>3.16</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.02</td><td>3.15</td><td>3.16</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -3466,6 +3509,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-5.0%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+2.5pp</td><td>-6.4%</td></tr><tr><td>平局</td><td>-1.1pp</td><td>-15.0%</td></tr><tr><td>客胜</td><td>-1.3pp</td><td>-15.7%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">51%</span></div>
@@ -3633,8 +3678,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.81</td><td>3.35</td><td>3.60</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.81</td><td>3.35</td><td>3.60</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.81</td><td>3.35</td><td>3.60</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -3651,6 +3697,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.6%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+2.3pp</td><td>-7.2%</td></tr><tr><td>平局</td><td>-0.9pp</td><td>-14.5%</td></tr><tr><td>客胜</td><td>-1.4pp</td><td>-16.5%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">46%</span></div>
@@ -3818,8 +3866,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.37</td><td>4.50</td><td>5.70</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.37</td><td>4.50</td><td>5.70</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.37</td><td>4.50</td><td>5.70</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -3836,6 +3885,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-2.5%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.8pp</td><td>-10.3%</td></tr><tr><td>平局</td><td>-0.2pp</td><td>-12.2%</td></tr><tr><td>客胜</td><td>-0.5pp</td><td>-14.4%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">33%</span></div>
@@ -4003,8 +4054,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.12</td><td>2.78</td><td>3.35</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.12</td><td>2.78</td><td>3.35</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.12</td><td>2.78</td><td>3.35</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4021,6 +4073,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.2%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+1.6pp</td><td>-8.1%</td></tr><tr><td>平局</td><td>-0.9pp</td><td>-13.9%</td></tr><tr><td>客胜</td><td>-0.7pp</td><td>-13.9%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">54%</span></div>
@@ -4188,8 +4242,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>3.12</td><td>3.70</td><td>1.86</td></tr>
-        <tr><td class="src-label">Bet365</td><td>3.12</td><td>3.70</td><td>1.86</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>3.12</td><td>3.70</td><td>1.86</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4206,6 +4261,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-3.9%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-1.4pp</td><td>-15.7%</td></tr><tr><td>平局</td><td>-0.8pp</td><td>-14.4%</td></tr><tr><td>客胜</td><td>+2.2pp</td><td>-7.2%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">54%</span></div>
@@ -4373,8 +4430,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>9.40</td><td>5.95</td><td>1.17</td></tr>
-        <tr><td class="src-label">Bet365</td><td>9.40</td><td>5.95</td><td>1.17</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>9.40</td><td>5.95</td><td>1.17</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4391,6 +4449,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-10.4%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.7pp</td><td>-4.5%</td></tr><tr><td>平局</td><td>-0.1pp</td><td>-12.0%</td></tr><tr><td>客胜</td><td>-0.6pp</td><td>-12.2%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">43%</span></div>
@@ -4558,8 +4618,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>3.45</td><td>2.95</td><td>2.00</td></tr>
-        <tr><td class="src-label">Bet365</td><td>3.45</td><td>2.95</td><td>2.00</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>3.45</td><td>2.95</td><td>2.00</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4576,6 +4637,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-5.1%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.2pp</td><td>-10.7%</td></tr><tr><td>平局</td><td>-0.8pp</td><td>-13.7%</td></tr><tr><td>客胜</td><td>+0.6pp</td><td>-10.3%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">57%</span></div>
@@ -4743,8 +4806,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.54</td><td>4.00</td><td>4.35</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.54</td><td>4.00</td><td>4.35</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.54</td><td>4.00</td><td>4.35</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4761,6 +4825,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-2.9%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.7pp</td><td>-10.3%</td></tr><tr><td>平局</td><td>-0.4pp</td><td>-13.1%</td></tr><tr><td>客胜</td><td>-0.3pp</td><td>-12.7%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">39%</span></div>
@@ -4928,8 +4994,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.82</td><td>3.40</td><td>3.50</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.82</td><td>3.40</td><td>3.50</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.82</td><td>3.40</td><td>3.50</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -4946,6 +5013,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-3.7%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+1.1pp</td><td>-9.4%</td></tr><tr><td>平局</td><td>-0.6pp</td><td>-13.6%</td></tr><tr><td>客胜</td><td>-0.5pp</td><td>-13.1%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">46%</span></div>
@@ -5113,8 +5182,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.89</td><td>3.56</td><td>3.13</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.89</td><td>3.56</td><td>3.13</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.89</td><td>3.56</td><td>3.13</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -5131,6 +5201,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.0%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+1.0pp</td><td>-9.5%</td></tr><tr><td>平局</td><td>-0.7pp</td><td>-13.8%</td></tr><tr><td>客胜</td><td>-0.4pp</td><td>-12.6%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">48%</span></div>
@@ -5298,8 +5370,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.29</td><td>4.65</td><td>7.25</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.29</td><td>4.65</td><td>7.25</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.29</td><td>4.65</td><td>7.25</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -5316,6 +5389,8 @@ a { color:var(--blue); }
           <td class="">-1.9%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.8pp</td><td>-10.3%</td></tr><tr><td>平局</td><td>-0.4pp</td><td>-13.4%</td></tr><tr><td>客胜</td><td>-0.4pp</td><td>-14.0%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">30%</span></div>
@@ -5483,8 +5558,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>14.00</td><td>5.80</td><td>1.13</td></tr>
-        <tr><td class="src-label">Bet365</td><td>14.00</td><td>5.80</td><td>1.13</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>14.00</td><td>5.80</td><td>1.13</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -5501,6 +5577,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-17.3%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-0.6pp</td><td>-20.2%</td></tr><tr><td>平局</td><td>+7.9pp</td><td>+34.2%</td></tr><tr><td>客胜</td><td>-7.2pp</td><td>-19.6%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">43%</span></div>
@@ -5668,8 +5746,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>7.10</td><td>5.30</td><td>1.25</td></tr>
-        <tr><td class="src-label">Bet365</td><td>7.10</td><td>5.30</td><td>1.25</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>7.10</td><td>5.30</td><td>1.25</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -5686,6 +5765,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-9.6%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.4pp</td><td>-8.6%</td></tr><tr><td>平局</td><td>+0.0pp</td><td>-11.3%</td></tr><tr><td>客胜</td><td>-0.5pp</td><td>-12.0%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">45%</span></div>
@@ -5853,8 +5934,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>1.50</td><td>3.75</td><td>5.10</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.50</td><td>3.75</td><td>5.10</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.50</td><td>3.75</td><td>5.10</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -5871,6 +5953,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-2.4%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+0.4pp</td><td>-10.9%</td></tr><tr><td>平局</td><td>-0.3pp</td><td>-12.5%</td></tr><tr><td>客胜</td><td>-0.1pp</td><td>-12.1%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">38%</span></div>
@@ -6038,8 +6122,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>2.63</td><td>3.15</td><td>2.32</td></tr>
-        <tr><td class="src-label">Bet365</td><td>2.63</td><td>3.15</td><td>2.32</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>2.63</td><td>3.15</td><td>2.32</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -6056,6 +6141,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-4.0%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-0.0pp</td><td>-11.4%</td></tr><tr><td>平局</td><td>-1.0pp</td><td>-14.4%</td></tr><tr><td>客胜</td><td>+1.0pp</td><td>-9.2%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">58%</span></div>
@@ -6223,8 +6310,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">体彩官方</td><td>6.50</td><td>4.00</td><td>1.38</td></tr>
-        <tr><td class="src-label">Bet365</td><td>6.50</td><td>4.00</td><td>1.38</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>6.50</td><td>4.00</td><td>1.38</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -6241,6 +6329,8 @@ a { color:var(--blue); }
           <td class="edge-neg">-7.3%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>-0.5pp</td><td>-14.7%</td></tr><tr><td>平局</td><td>-0.5pp</td><td>-13.3%</td></tr><tr><td>客胜</td><td>+1.0pp</td><td>-10.0%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--red); font-weight:700;">49%</span></div>
@@ -6402,8 +6492,9 @@ a { color:var(--blue); }
       <table class="edge-table" style="margin-top: 16px;">
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">模型合成</td><td>1.46</td><td>4.91</td><td>6.25</td></tr>
-        <tr><td class="src-label">Bet365</td><td>1.46</td><td>4.91</td><td>6.25</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>1.46</td><td>4.91</td><td>6.25</td></tr>
+        <tr><td class="src-label">Bet365</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>-</td><td>-</td><td>-</td></tr>
       </table>
       <table class="edge-table">
         <tr><th>结果</th><th>隐含概率</th><th>Shin公平</th><th>模型</th><th>边际</th></tr>
@@ -6420,6 +6511,8 @@ a { color:var(--blue); }
           <td class="">-0.8%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr><tr><td>主胜</td><td>+65.4pp</td><td>-4.6%</td></tr><tr><td>平局</td><td>+19.4pp</td><td>-4.8%</td></tr><tr><td>客胜</td><td>+15.2pp</td><td>-4.7%</td></tr></table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:var(--text); font-weight:700;">0%</span></div>
@@ -7041,7 +7134,7 @@ a { color:var(--blue); }
     <!-- SYSTEM STATUS（2026-08-30 重塑：从页尾上移，资金/决策链是复盘的一部分） -->
     
   <div class="section-title">系统状态</div>
-  <div class="sys-grid">
+  <div class="sys-grid" id="system-panel">
     <div class="sys-card">
       <h4>熔断器</h4>
       <div class="sys-row"><span class="k">状态</span><span class="tier-indicator safe">T1 · Shadow &middot; x1.00</span></div>
@@ -7075,7 +7168,7 @@ a { color:var(--blue); }
   <div class="evo-grid"><div class="evo-card"><div class="evo-title">升级效果（Q1·vs 旧链，不代表有 edge）</div><div class="evo-verdict" style="color:var(--green)">修复生效</div><div class="evo-detail">洁净组 n=1195 · Brier 0.5558 / 命中 56.9% · 基线 0.5576<br><span style='color:var(--amber)'>vs 市场 与市场持平</span>（Δ-0.0011 · t=-1.16 · n=1119）<br><span style='color:var(--dim)'>有效权重 model 6.2% / market 93.8% / djyy 0%</span></div></div><div class="evo-card"><div class="evo-title">EV 校准体检（价值幻觉监控）</div><div class="evo-detail">实际ROI代理 vs 声称edge: <span class="evo-chip">[0.00,0.02): <b style="color:var(--green)">+9%</b><i>(n=6)</i></span><span class="evo-chip">[0.02,0.05): <b style="color:var(--red)">-39%</b><i>(n=17)</i></span><span class="evo-chip">[0.05,0.10): <b style="color:var(--red)">-7%</b><i>(n=20)</i></span><span class="evo-chip">[0.10,10.00): <b style="color:var(--red)">-15%</b><i>(n=77)</i></span></div></div><div class="evo-card"><div class="evo-title">校准层自进化</div><div class="evo-verdict" style="color:var(--dim)">待样本</div><div class="evo-detail">洁净样本 1195 · 验证段无显著改善 (Δ=-0.0010, t=-0.62) → 维持关闭</div></div><div class="evo-card"><div class="evo-title">LGBM 影子</div><div class="evo-verdict" style="color:var(--dim)">已训练·未达标</div><div class="evo-detail">可用 1610 / 500 · 影子验证未双基线显著 → 保持关闭: vs融合v2 Δ=-0.0287(n=483) | vs市场 Δ=-0.0279(</div></div></div>
 
     <!-- LEAGUE MATRIX（2026-08-14 从页首移入复盘页：参考数据不进"今日决策"） -->
-    <div class="section-title" onclick="document.getElementById('league-matrix').classList.toggle('collapsed')" style="cursor:pointer">联赛矩阵 &middot; 35 联赛/杯赛 &middot; 2026-08-13 <span style="font-size:0.65rem;color:var(--dim)">&#9654; 点击展开</span></div><div style="display:flex;align-items:center;gap:8px;padding:10px 14px;margin:0 0 2px;background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(6,182,212,0.08));border:1px solid rgba(34,197,94,0.25);border-radius:var(--radius-sm);font-size:0.78rem"><span style="display:inline-flex;align-items:center;gap:4px;font-weight:800;color:var(--green)"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite"></span>今日赛事</span><span style="color:var(--text-secondary)">11 个联赛有比赛</span><span style="font-size:0.62rem;color:var(--dim);margin-left:auto">数据源: DJYY 每日更新</span></div><div id="league-matrix" class="collapsed"><div class="lm-wrap"><table class="lm-table"><thead><tr><th>级别</th><th>联赛</th><th>场次</th><th>场均进球</th><th>场均xG</th><th>BTTS</th><th>主胜</th><th>平局</th><th>客胜</th><th>零封</th><th>角球</th><th>黄牌</th></tr></thead><tbody><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">克甲</td><td class="lm-num">9</td><td class="lm-num">3.9</td><td class="lm-num">3.13</td><td class="lm-pct">78%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-num">9.9</td><td class="lm-num">3.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">瑞超</td><td class="lm-num">18</td><td class="lm-num">3.8</td><td class="lm-num">3.39</td><td class="lm-pct">72%</td><td class="lm-pct">50%</td><td class="lm-pct">17%</td><td class="lm-pct">33%</td><td class="lm-pct">14%</td><td class="lm-num">10.2</td><td class="lm-num">4.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">日职联</td><td class="lm-num">10</td><td class="lm-num">3.6</td><td class="lm-num">2.83</td><td class="lm-pct">70%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">15%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">德乙</td><td class="lm-num">9</td><td class="lm-num">3.4</td><td class="lm-num">3.39</td><td class="lm-pct">67%</td><td class="lm-pct">44%</td><td class="lm-pct">33%</td><td class="lm-pct">22%</td><td class="lm-pct">22%</td><td class="lm-num">10.1</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">比甲</td><td class="lm-num">9</td><td class="lm-num">3.3</td><td class="lm-num">3.47</td><td class="lm-pct">78%</td><td class="lm-pct">67%</td><td class="lm-pct">22%</td><td class="lm-pct">11%</td><td class="lm-pct">11%</td><td class="lm-num">9.2</td><td class="lm-num">0.0</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">德甲</td><td class="lm-num">306</td><td class="lm-num">3.2</td><td class="lm-num">3.15</td><td class="lm-pct">62%</td><td class="lm-pct">44%</td><td class="lm-pct">24%</td><td class="lm-pct">32%</td><td class="lm-pct">21%</td><td class="lm-num">9.8</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">美职联</td><td class="lm-num">269</td><td class="lm-num">3.2</td><td class="lm-num">3.04</td><td class="lm-pct">61%</td><td class="lm-pct">49%</td><td class="lm-pct">23%</td><td class="lm-pct">28%</td><td class="lm-pct">22%</td><td class="lm-num">10.0</td><td class="lm-num">4.2</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">瑞典超</td><td class="lm-num">127</td><td class="lm-num">3.1</td><td class="lm-num">3.09</td><td class="lm-pct">58%</td><td class="lm-pct">39%</td><td class="lm-pct">26%</td><td class="lm-pct">35%</td><td class="lm-pct">22%</td><td class="lm-num">10.1</td><td class="lm-num">3.6</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">中超</td><td class="lm-num">171</td><td class="lm-num">3.0</td><td class="lm-num">2.80</td><td class="lm-pct">63%</td><td class="lm-pct">48%</td><td class="lm-pct">25%</td><td class="lm-pct">27%</td><td class="lm-pct">20%</td><td class="lm-num">10.2</td><td class="lm-num">4.2</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">挪超</td><td class="lm-num">129</td><td class="lm-num">3.0</td><td class="lm-num">3.36</td><td class="lm-pct">55%</td><td class="lm-pct">50%</td><td class="lm-pct">19%</td><td class="lm-pct">31%</td><td class="lm-pct">24%</td><td class="lm-num">10.8</td><td class="lm-num">3.5</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">沙特联</td><td class="lm-num">306</td><td class="lm-num">3.0</td><td class="lm-num">2.85</td><td class="lm-pct">58%</td><td class="lm-pct">44%</td><td class="lm-pct">23%</td><td class="lm-pct">33%</td><td class="lm-pct">23%</td><td class="lm-num">10.1</td><td class="lm-num">4.3</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">墨西哥联</td><td class="lm-num">27</td><td class="lm-num">2.9</td><td class="lm-num">2.85</td><td class="lm-pct">59%</td><td class="lm-pct">41%</td><td class="lm-pct">15%</td><td class="lm-pct">44%</td><td class="lm-pct">22%</td><td class="lm-num">10.4</td><td class="lm-num">3.9</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">法甲</td><td class="lm-num">305</td><td class="lm-num">2.8</td><td class="lm-num">2.83</td><td class="lm-pct">51%</td><td class="lm-pct">46%</td><td class="lm-pct">24%</td><td class="lm-pct">30%</td><td class="lm-pct">28%</td><td class="lm-num">9.6</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">苏超</td><td class="lm-num">12</td><td class="lm-num">2.8</td><td class="lm-num">3.68</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">17%</td><td class="lm-pct">33%</td><td class="lm-pct">29%</td><td class="lm-num">10.2</td><td class="lm-num">3.3</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">荷甲</td><td class="lm-num">9</td><td class="lm-num">2.8</td><td class="lm-num">3.50</td><td class="lm-pct">44%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-pct">44%</td><td class="lm-pct">28%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">英超</td><td class="lm-num">380</td><td class="lm-num">2.8</td><td class="lm-num">2.95</td><td class="lm-pct">56%</td><td class="lm-pct">43%</td><td class="lm-pct">27%</td><td class="lm-pct">30%</td><td class="lm-pct">26%</td><td class="lm-num">10.0</td><td class="lm-num">3.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">西甲</td><td class="lm-num">380</td><td class="lm-num">2.7</td><td class="lm-num">2.73</td><td class="lm-pct">57%</td><td class="lm-pct">49%</td><td class="lm-pct">24%</td><td class="lm-pct">27%</td><td class="lm-pct">24%</td><td class="lm-num">9.7</td><td class="lm-num">4.5</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">波超</td><td class="lm-num">24</td><td class="lm-num">2.7</td><td class="lm-num">3.23</td><td class="lm-pct">62%</td><td class="lm-pct">50%</td><td class="lm-pct">21%</td><td class="lm-pct">29%</td><td class="lm-pct">25%</td><td class="lm-num">10.1</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">土超</td><td class="lm-num">306</td><td class="lm-num">2.6</td><td class="lm-num">2.62</td><td class="lm-pct">55%</td><td class="lm-pct">42%</td><td class="lm-pct">29%</td><td class="lm-pct">29%</td><td class="lm-pct">27%</td><td class="lm-num">9.4</td><td class="lm-num">4.7</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">西乙</td><td class="lm-num">468</td><td class="lm-num">2.6</td><td class="lm-num">2.73</td><td class="lm-pct">56%</td><td class="lm-pct">45%</td><td class="lm-pct">25%</td><td class="lm-pct">30%</td><td class="lm-pct">26%</td><td class="lm-num">9.4</td><td class="lm-num">5.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">英甲</td><td class="lm-num">557</td><td class="lm-num">2.6</td><td class="lm-num">2.64</td><td class="lm-pct">52%</td><td class="lm-pct">46%</td><td class="lm-pct">25%</td><td class="lm-pct">29%</td><td class="lm-pct">27%</td><td class="lm-num">10.0</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">英冠</td><td class="lm-num">557</td><td class="lm-num">2.6</td><td class="lm-num">2.73</td><td class="lm-pct">57%</td><td class="lm-pct">42%</td><td class="lm-pct">26%</td><td class="lm-pct">32%</td><td class="lm-pct">25%</td><td class="lm-num">10.3</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">乌超</td><td class="lm-num">14</td><td class="lm-num">2.6</td><td class="lm-num">0.00</td><td class="lm-pct">43%</td><td class="lm-pct">43%</td><td class="lm-pct">21%</td><td class="lm-pct">36%</td><td class="lm-pct">39%</td><td class="lm-num">8.6</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">巴西甲</td><td class="lm-num">215</td><td class="lm-num">2.6</td><td class="lm-num">2.46</td><td class="lm-pct">57%</td><td class="lm-pct">46%</td><td class="lm-pct">29%</td><td class="lm-pct">25%</td><td class="lm-pct">24%</td><td class="lm-num">10.0</td><td class="lm-num">4.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">葡超</td><td class="lm-num">9</td><td class="lm-num">2.6</td><td class="lm-num">2.70</td><td class="lm-pct">56%</td><td class="lm-pct">33%</td><td class="lm-pct">56%</td><td class="lm-pct">11%</td><td class="lm-pct">22%</td><td class="lm-num">9.6</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">意乙</td><td class="lm-num">390</td><td class="lm-num">2.5</td><td class="lm-num">2.76</td><td class="lm-pct">53%</td><td class="lm-pct">45%</td><td class="lm-pct">31%</td><td class="lm-pct">24%</td><td class="lm-pct">27%</td><td class="lm-num">9.5</td><td class="lm-num">4.5</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">意甲</td><td class="lm-num">380</td><td class="lm-num">2.4</td><td class="lm-num">2.60</td><td class="lm-pct">45%</td><td class="lm-pct">39%</td><td class="lm-pct">26%</td><td class="lm-pct">35%</td><td class="lm-pct">32%</td><td class="lm-num">8.8</td><td class="lm-num">3.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">韩K联</td><td class="lm-num">131</td><td class="lm-num">2.3</td><td class="lm-num">2.03</td><td class="lm-pct">51%</td><td class="lm-pct">27%</td><td class="lm-pct">33%</td><td class="lm-pct">40%</td><td class="lm-pct">30%</td><td class="lm-num">8.6</td><td class="lm-num">4.2</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">奥甲</td><td class="lm-num">12</td><td class="lm-num">2.3</td><td class="lm-num">2.91</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">25%</td><td class="lm-pct">25%</td><td class="lm-pct">25%</td><td class="lm-num">10.8</td><td class="lm-num">2.9</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">丹超</td><td class="lm-num">16</td><td class="lm-num">2.2</td><td class="lm-num">2.90</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">31%</td><td class="lm-pct">19%</td><td class="lm-pct">28%</td><td class="lm-num">11.9</td><td class="lm-num">3.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">法乙</td><td class="lm-num">9</td><td class="lm-num">2.2</td><td class="lm-num">2.48</td><td class="lm-pct">44%</td><td class="lm-pct">33%</td><td class="lm-pct">33%</td><td class="lm-pct">33%</td><td class="lm-pct">39%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">阿根廷联</td><td class="lm-num">315</td><td class="lm-num">2.1</td><td class="lm-num">2.25</td><td class="lm-pct">44%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">35%</td><td class="lm-num">8.6</td><td class="lm-num">5.1</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">埃及超</td><td class="lm-num">322</td><td class="lm-num">2.0</td><td class="lm-num">2.20</td><td class="lm-pct">47%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">35%</td><td class="lm-num">9.1</td><td class="lm-num">4.3</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-cup">杯赛</span></td><td class="lm-name">日职</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-cup">杯赛</span></td><td class="lm-name">沙职</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td></tr></tbody></table></div><div style="padding:8px 12px;font-size:0.62rem;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap"><span>数据来源: <a href="https://djyylive.com" style="color:var(--blue)">DJYY</a></span><span>&#x25cf; <span style="color:var(--green)">高亮行</span> = 当天有预测的联赛</span><span>BTTS = 双方进球率</span><span>⚡ 数据更新于 DJYY 每日流水线</span></div></div>
+    <div class="section-title" onclick="document.getElementById('league-matrix').classList.toggle('collapsed')" style="cursor:pointer">联赛矩阵 &middot; 35 联赛/杯赛 &middot; 2026-08-13 <span style="font-size:0.65rem;color:var(--dim)">&#9654; 点击展开</span></div><div style="display:flex;align-items:center;gap:8px;padding:10px 14px;margin:0 0 2px;background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(6,182,212,0.08));border:1px solid rgba(34,197,94,0.25);border-radius:var(--radius-sm);font-size:0.78rem"><span style="display:inline-flex;align-items:center;gap:4px;font-weight:800;color:var(--green)"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite"></span>今日赛事</span><span style="color:var(--text-secondary)">11 个联赛有比赛</span><span style="font-size:0.62rem;color:var(--dim);margin-left:auto">数据源: DJYY</span></div><div id="league-matrix" class="collapsed"><div class="lm-wrap"><table class="lm-table"><thead><tr><th>级别</th><th>联赛</th><th>场次</th><th>场均进球</th><th>场均xG</th><th>BTTS</th><th>主胜</th><th>平局</th><th>客胜</th><th>零封</th><th>角球</th><th>黄牌</th></tr></thead><tbody><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">克甲</td><td class="lm-num">9</td><td class="lm-num">3.9</td><td class="lm-num">3.13</td><td class="lm-pct">78%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-num">9.9</td><td class="lm-num">3.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">瑞超</td><td class="lm-num">18</td><td class="lm-num">3.8</td><td class="lm-num">3.39</td><td class="lm-pct">72%</td><td class="lm-pct">50%</td><td class="lm-pct">17%</td><td class="lm-pct">33%</td><td class="lm-pct">14%</td><td class="lm-num">10.2</td><td class="lm-num">4.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">日职联</td><td class="lm-num">10</td><td class="lm-num">3.6</td><td class="lm-num">2.83</td><td class="lm-pct">70%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">15%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">德乙</td><td class="lm-num">9</td><td class="lm-num">3.4</td><td class="lm-num">3.39</td><td class="lm-pct">67%</td><td class="lm-pct">44%</td><td class="lm-pct">33%</td><td class="lm-pct">22%</td><td class="lm-pct">22%</td><td class="lm-num">10.1</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">比甲</td><td class="lm-num">9</td><td class="lm-num">3.3</td><td class="lm-num">3.47</td><td class="lm-pct">78%</td><td class="lm-pct">67%</td><td class="lm-pct">22%</td><td class="lm-pct">11%</td><td class="lm-pct">11%</td><td class="lm-num">9.2</td><td class="lm-num">0.0</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">德甲</td><td class="lm-num">306</td><td class="lm-num">3.2</td><td class="lm-num">3.15</td><td class="lm-pct">62%</td><td class="lm-pct">44%</td><td class="lm-pct">24%</td><td class="lm-pct">32%</td><td class="lm-pct">21%</td><td class="lm-num">9.8</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">美职联</td><td class="lm-num">269</td><td class="lm-num">3.2</td><td class="lm-num">3.04</td><td class="lm-pct">61%</td><td class="lm-pct">49%</td><td class="lm-pct">23%</td><td class="lm-pct">28%</td><td class="lm-pct">22%</td><td class="lm-num">10.0</td><td class="lm-num">4.2</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">瑞典超</td><td class="lm-num">127</td><td class="lm-num">3.1</td><td class="lm-num">3.09</td><td class="lm-pct">58%</td><td class="lm-pct">39%</td><td class="lm-pct">26%</td><td class="lm-pct">35%</td><td class="lm-pct">22%</td><td class="lm-num">10.1</td><td class="lm-num">3.6</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">中超</td><td class="lm-num">171</td><td class="lm-num">3.0</td><td class="lm-num">2.80</td><td class="lm-pct">63%</td><td class="lm-pct">48%</td><td class="lm-pct">25%</td><td class="lm-pct">27%</td><td class="lm-pct">20%</td><td class="lm-num">10.2</td><td class="lm-num">4.2</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">挪超</td><td class="lm-num">129</td><td class="lm-num">3.0</td><td class="lm-num">3.36</td><td class="lm-pct">55%</td><td class="lm-pct">50%</td><td class="lm-pct">19%</td><td class="lm-pct">31%</td><td class="lm-pct">24%</td><td class="lm-num">10.8</td><td class="lm-num">3.5</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">沙特联</td><td class="lm-num">306</td><td class="lm-num">3.0</td><td class="lm-num">2.85</td><td class="lm-pct">58%</td><td class="lm-pct">44%</td><td class="lm-pct">23%</td><td class="lm-pct">33%</td><td class="lm-pct">23%</td><td class="lm-num">10.1</td><td class="lm-num">4.3</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">墨西哥联</td><td class="lm-num">27</td><td class="lm-num">2.9</td><td class="lm-num">2.85</td><td class="lm-pct">59%</td><td class="lm-pct">41%</td><td class="lm-pct">15%</td><td class="lm-pct">44%</td><td class="lm-pct">22%</td><td class="lm-num">10.4</td><td class="lm-num">3.9</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">法甲</td><td class="lm-num">305</td><td class="lm-num">2.8</td><td class="lm-num">2.83</td><td class="lm-pct">51%</td><td class="lm-pct">46%</td><td class="lm-pct">24%</td><td class="lm-pct">30%</td><td class="lm-pct">28%</td><td class="lm-num">9.6</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">苏超</td><td class="lm-num">12</td><td class="lm-num">2.8</td><td class="lm-num">3.68</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">17%</td><td class="lm-pct">33%</td><td class="lm-pct">29%</td><td class="lm-num">10.2</td><td class="lm-num">3.3</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">荷甲</td><td class="lm-num">9</td><td class="lm-num">2.8</td><td class="lm-num">3.50</td><td class="lm-pct">44%</td><td class="lm-pct">44%</td><td class="lm-pct">11%</td><td class="lm-pct">44%</td><td class="lm-pct">28%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">英超</td><td class="lm-num">380</td><td class="lm-num">2.8</td><td class="lm-num">2.95</td><td class="lm-pct">56%</td><td class="lm-pct">43%</td><td class="lm-pct">27%</td><td class="lm-pct">30%</td><td class="lm-pct">26%</td><td class="lm-num">10.0</td><td class="lm-num">3.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">西甲</td><td class="lm-num">380</td><td class="lm-num">2.7</td><td class="lm-num">2.73</td><td class="lm-pct">57%</td><td class="lm-pct">49%</td><td class="lm-pct">24%</td><td class="lm-pct">27%</td><td class="lm-pct">24%</td><td class="lm-num">9.7</td><td class="lm-num">4.5</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">波超</td><td class="lm-num">24</td><td class="lm-num">2.7</td><td class="lm-num">3.23</td><td class="lm-pct">62%</td><td class="lm-pct">50%</td><td class="lm-pct">21%</td><td class="lm-pct">29%</td><td class="lm-pct">25%</td><td class="lm-num">10.1</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">土超</td><td class="lm-num">306</td><td class="lm-num">2.6</td><td class="lm-num">2.62</td><td class="lm-pct">55%</td><td class="lm-pct">42%</td><td class="lm-pct">29%</td><td class="lm-pct">29%</td><td class="lm-pct">27%</td><td class="lm-num">9.4</td><td class="lm-num">4.7</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">西乙</td><td class="lm-num">468</td><td class="lm-num">2.6</td><td class="lm-num">2.73</td><td class="lm-pct">56%</td><td class="lm-pct">45%</td><td class="lm-pct">25%</td><td class="lm-pct">30%</td><td class="lm-pct">26%</td><td class="lm-num">9.4</td><td class="lm-num">5.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">英甲</td><td class="lm-num">557</td><td class="lm-num">2.6</td><td class="lm-num">2.64</td><td class="lm-pct">52%</td><td class="lm-pct">46%</td><td class="lm-pct">25%</td><td class="lm-pct">29%</td><td class="lm-pct">27%</td><td class="lm-num">10.0</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">英冠</td><td class="lm-num">557</td><td class="lm-num">2.6</td><td class="lm-num">2.73</td><td class="lm-pct">57%</td><td class="lm-pct">42%</td><td class="lm-pct">26%</td><td class="lm-pct">32%</td><td class="lm-pct">25%</td><td class="lm-num">10.3</td><td class="lm-num">3.8</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">乌超</td><td class="lm-num">14</td><td class="lm-num">2.6</td><td class="lm-num">0.00</td><td class="lm-pct">43%</td><td class="lm-pct">43%</td><td class="lm-pct">21%</td><td class="lm-pct">36%</td><td class="lm-pct">39%</td><td class="lm-num">8.6</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">巴西甲</td><td class="lm-num">215</td><td class="lm-num">2.6</td><td class="lm-num">2.46</td><td class="lm-pct">57%</td><td class="lm-pct">46%</td><td class="lm-pct">29%</td><td class="lm-pct">25%</td><td class="lm-pct">24%</td><td class="lm-num">10.0</td><td class="lm-num">4.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">葡超</td><td class="lm-num">9</td><td class="lm-num">2.6</td><td class="lm-num">2.70</td><td class="lm-pct">56%</td><td class="lm-pct">33%</td><td class="lm-pct">56%</td><td class="lm-pct">11%</td><td class="lm-pct">22%</td><td class="lm-num">9.6</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">意乙</td><td class="lm-num">390</td><td class="lm-num">2.5</td><td class="lm-num">2.76</td><td class="lm-pct">53%</td><td class="lm-pct">45%</td><td class="lm-pct">31%</td><td class="lm-pct">24%</td><td class="lm-pct">27%</td><td class="lm-num">9.5</td><td class="lm-num">4.5</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-tier1">顶级</span></td><td class="lm-name">意甲</td><td class="lm-num">380</td><td class="lm-num">2.4</td><td class="lm-num">2.60</td><td class="lm-pct">45%</td><td class="lm-pct">39%</td><td class="lm-pct">26%</td><td class="lm-pct">35%</td><td class="lm-pct">32%</td><td class="lm-num">8.8</td><td class="lm-num">3.8</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">韩K联</td><td class="lm-num">131</td><td class="lm-num">2.3</td><td class="lm-num">2.03</td><td class="lm-pct">51%</td><td class="lm-pct">27%</td><td class="lm-pct">33%</td><td class="lm-pct">40%</td><td class="lm-pct">30%</td><td class="lm-num">8.6</td><td class="lm-num">4.2</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">奥甲</td><td class="lm-num">12</td><td class="lm-num">2.3</td><td class="lm-num">2.91</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">25%</td><td class="lm-pct">25%</td><td class="lm-pct">25%</td><td class="lm-num">10.8</td><td class="lm-num">2.9</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-other">其他</span></td><td class="lm-name">丹超</td><td class="lm-num">16</td><td class="lm-num">2.2</td><td class="lm-num">2.90</td><td class="lm-pct">50%</td><td class="lm-pct">50%</td><td class="lm-pct">31%</td><td class="lm-pct">19%</td><td class="lm-pct">28%</td><td class="lm-num">11.9</td><td class="lm-num">3.4</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-tier2">次级</span></td><td class="lm-name">法乙</td><td class="lm-num">9</td><td class="lm-num">2.2</td><td class="lm-num">2.48</td><td class="lm-pct">44%</td><td class="lm-pct">33%</td><td class="lm-pct">33%</td><td class="lm-pct">33%</td><td class="lm-pct">39%</td><td class="lm-num">0.0</td><td class="lm-num">0.0</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">阿根廷联</td><td class="lm-num">315</td><td class="lm-num">2.1</td><td class="lm-num">2.25</td><td class="lm-pct">44%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">35%</td><td class="lm-num">8.6</td><td class="lm-num">5.1</td></tr><tr class="lm-row "><td><span class="lm-cat lm-cat-world">全球</span></td><td class="lm-name">埃及超</td><td class="lm-num">322</td><td class="lm-num">2.0</td><td class="lm-num">2.20</td><td class="lm-pct">47%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">0%</td><td class="lm-pct">35%</td><td class="lm-num">9.1</td><td class="lm-num">4.3</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-cup">杯赛</span></td><td class="lm-name">日职</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td></tr><tr class="lm-row active"><td><span class="lm-cat lm-cat-cup">杯赛</span></td><td class="lm-name">沙职</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-pct" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td><td class="lm-num" style="color:var(--dim)">—</td></tr></tbody></table></div><div style="padding:8px 12px;font-size:0.62rem;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap"><span>数据来源: <a href="https://djyylive.com" style="color:var(--blue)">DJYY</a></span><span>&#x25cf; <span style="color:var(--green)">高亮行</span> = 当天有预测的联赛</span><span>BTTS = 双方进球率</span><span>⚡ 数据更新于 DJYY 每日流水线</span></div></div>
 
     <!-- LEAGUE LAYERS -->
     
@@ -7167,7 +7260,7 @@ a { color:var(--blue); }
 
     <details class="deep-fold">
       <summary>
-        <span class="deep-fold-title">预测时点分桶 · Dixon-Coles 挑战者</span>
+        <span class="deep-fold-title">提前量分析 · Dixon-Coles 挑战者</span>
         <span class="deep-fold-meta">提前多久预测最准 · 分层收缩模型 vs 生产模型</span>
         <span class="deep-fold-hint">点击折叠 ▾</span>
       </summary>
@@ -7197,8 +7290,6 @@ a { color:var(--blue); }
   </table></div>
       </div>
     </details>
-
-    </div>
 
     <!-- FOOTER -->
     <div class="footer">

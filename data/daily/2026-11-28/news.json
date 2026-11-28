@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-28 17:44:36",
+ "generated_at": "2026-11-28 18:38:57",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 629,
- "matched_total": 64,
+ "total_scanned": 628,
+ "matched_total": 62,
  "limit": 120,
  "counts": {
   "injury": 11,
-  "other": 42,
+  "other": 40,
   "transfer": 11
  },
  "items": [
@@ -288,18 +288,6 @@
   },
   {
    "date": "2026-11-28",
-   "title": "留住未来！曼联官方：和18岁边后卫赫拉夫签下首份职业合同",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b09aa930d588native.htm",
-   "teams": [
-    "曼彻斯特联"
-   ],
-   "match_ids": [
-    "2026-11-28_周六011"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-28",
    "title": "澳超彩经：奥克兰FC客场取胜",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a1a35cf31dnative.htm",
    "teams": [
@@ -523,19 +511,6 @@
    ],
    "match_ids": [
     "2026-11-28_周六020"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-28",
-   "title": "主场迎战布伦特福德，曼联官推发布预热海报：阿玛德单人出镜",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a83dfcd112native.htm",
-   "teams": [
-    "曼彻斯特联",
-    "布伦特福德"
-   ],
-   "match_ids": [
-    "2026-11-28_周六011"
    ],
    "kind": "other"
   },

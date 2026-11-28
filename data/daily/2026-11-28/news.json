@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-28 20:47:47",
+ "generated_at": "2026-11-28 21:00:15",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
  "total_scanned": 631,
- "matched_total": 69,
+ "matched_total": 70,
  "limit": 120,
  "counts": {
   "injury": 9,
-  "other": 45,
+  "other": 46,
   "transfer": 15
  },
  "items": [
@@ -438,6 +438,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六017"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "巨人陨落！白俄罗斯豪门鲍里索夫降级，曾豪取13连冠+欧冠胜拜仁",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0acbc276e70native.htm",
+   "teams": [
+    "拜仁慕尼黑"
+   ],
+   "match_ids": [
+    "2026-11-28_周六009"
    ],
    "kind": "other"
   },

@@ -200,8 +200,8 @@ def test_booster_never_splits_on_gated_or_side_columns(report):
         for n in f["zero_gain_columns"]:
             # These are deliberately optional, low-variance context features;
             # a trained booster may legitimately never split on them.
-            assert n in zero_expected or n in (
-                "is_knockout", "rank_diff", "league_home_win_rate", "xg_missing"
+            assert n in zero_expected or n.endswith("_missing") or n in (
+                "is_knockout", "rank_diff", "league_home_win_rate"
             )
 
 

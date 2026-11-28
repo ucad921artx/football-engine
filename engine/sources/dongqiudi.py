@@ -212,7 +212,18 @@ class DongqiudiSource:
         lineup_info = lineup or {}
         base = lineup_info.get("base") or {}
         current_lineups = self._parse_pc_lineups(lineup_info.get("persons") or {})
-        lineup_source = "matchday" if current_lineups and base.get("new_lineup") else None
+        # base.new_lineup is a change/update flag, not a reliable publication
+        # flag: the endpoint can return the confirmed XI with new_lineup=0.
+        # Prefer a complete matchday XI from persons; forecasts remain the
+        # fallback when either side has fewer than 11 starters.
+        has_confirmed_xi = bool(
+            current_lineups
+            and all(
+                len((current_lineups.get(side) or {}).get("starting") or []) >= 11
+                for side in ("home", "away")
+            )
+        )
+        lineup_source = "matchday" if has_confirmed_xi else None
         if not lineup_source and base.get("forecast_lineup"):
             current_lineups = self._parse_pc_lineups(lineup_info.get("forecasts") or {})
             if current_lineups:

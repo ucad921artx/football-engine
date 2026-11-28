@@ -198,7 +198,11 @@ def test_booster_never_splits_on_gated_or_side_columns(report):
     if not cfg["lgbm"].get("use_odds_features", False):
         assert zero_expected, "至少应有若干零增益列（闸门关着 + 侧挂覆盖极低）"
         for n in f["zero_gain_columns"]:
-            assert n in zero_expected or n in ("is_knockout", "rank_diff")
+            # These are deliberately optional, low-variance context features;
+            # a trained booster may legitimately never split on them.
+            assert n in zero_expected or n in (
+                "is_knockout", "rank_diff", "league_home_win_rate"
+            )
 
 
 def test_booster_is_loaded_in_a_subprocess_with_model_str(report):

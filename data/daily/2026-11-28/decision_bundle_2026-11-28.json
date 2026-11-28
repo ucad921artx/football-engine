@@ -1,14 +1,14 @@
 {
   "version": 1,
   "date": "2026-11-28",
-  "created_at": "2026-11-28T11:42:19Z",
+  "created_at": "2026-11-28T12:45:05Z",
   "inputs": {
     "import_manifest": {
       "import_date": "2026-11-28",
       "source": "merged(sina+500wan)",
       "fixture_count": 52,
       "sha256": "9e718801c9f5af88c1498b49ac1668231e63f12c6e11d878d74b213471c6374c",
-      "timestamp": "2026-11-28T11:34:10.491552",
+      "timestamp": "2026-11-28T12:36:51.564116",
       "fallback_used": true
     },
     "config_prediction": "71b672b50204f57a9d2f288e6d1a9e158abed3967217ac86da7591925db1d2ce",
@@ -23,10 +23,10 @@
     }
   },
   "outputs": {
-    "predictions_hash": "6f5bd43fe4c0735d5fcfd6f960776e852c1c3a1cec56e28c1e33fa2237128786",
+    "predictions_hash": "6dabbf06cce426b7400ad23be34895faf33472ebcc92e44568811866f2d8f764",
     "predictions_count": 23,
-    "betting_plan_hash": "f1dbdf376dd97b28cba31f3ac6c99b844fcd11b2e7781ab8cee06b6b0d094851",
+    "betting_plan_hash": "b43b3e1a372ff09bd83f62200ca5e9696343cff927fde8b7225c4e6f3617a878",
     "total_stake": 500.0
   },
-  "bundle_sha256": "5655f2c78f9fdba00b118e2063d219ff4a43e04d0c1ab71a2f97cd3e589b8b7d"
+  "bundle_sha256": "a6ab9d3a49011e28e1488799ff9232f0bd33252d69ce92a312d37439e182a928"
 }

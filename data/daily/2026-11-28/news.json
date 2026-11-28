@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-11-28 19:44:48",
+ "generated_at": "2026-11-28 20:47:47",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 628,
- "matched_total": 65,
+ "total_scanned": 631,
+ "matched_total": 69,
  "limit": 120,
  "counts": {
   "injury": 9,
-  "other": 43,
-  "transfer": 13
+  "other": 45,
+  "transfer": 15
  },
  "items": [
   {
@@ -529,6 +529,32 @@
   },
   {
    "date": "2026-11-28",
+   "title": "世体：马竞近4次踢埃尔切仅在国王杯取得1胜，联赛1平2负",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0abff0a6e3anative.htm",
+   "teams": [
+    "埃尔切",
+    "马德里竞技"
+   ],
+   "match_ids": [
+    "2026-11-28_周六019"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "⚔埃尔切VS马竞🔥阿尔瓦雷斯状态回暖，马竞能否客场继续取胜？",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0941d995d5bnative.htm",
+   "teams": [
+    "埃尔切",
+    "马德里竞技"
+   ],
+   "match_ids": [
+    "2026-11-28_周六019"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
    "title": "talkSPORT记者：曼联应该尝试截胡托尼，他是解决锋线问题的答案",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a9af97ee69native.htm",
    "teams": [
@@ -665,6 +691,18 @@
   },
   {
    "date": "2026-11-28",
+   "title": "记者：曼联激活B费续约选项明智且必然，但后者必须在明夏离队",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0abe0aaf560native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
+   ],
+   "kind": "transfer"
+  },
+  {
+   "date": "2026-11-28",
    "title": "记者：曼联愿意在冬窗外租海文，不接受永久转会方案",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b09fe0d83825native.htm",
    "teams": [
@@ -732,6 +770,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六011"
+   ],
+   "kind": "transfer"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "罗体总监：国际米兰有意罗马后卫埃尔莫索，他合同即将到期",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0abf0f8196dnative.htm",
+   "teams": [
+    "国际米兰"
+   ],
+   "match_ids": [
+    "2026-11-28_周六020"
    ],
    "kind": "transfer"
   },

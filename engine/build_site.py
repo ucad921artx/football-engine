@@ -3012,8 +3012,7 @@ def _tab_model(p, uid):
                  f'战意信号已进入因素模型：{_esc("；".join(motivation_details))}。'
                  f'此项只微调进攻意图，调整上限 +2.5% xG。</div>')
     elif "motivation" in factor_missing:
-        rows += (f'<div style="font-size:.72rem;color:var(--dim);padding:6px 10px">'
-                 f'战意数据不足：本场未启用战意权重。</div>')
+        rows += '<div style="font-size:.72rem;color:var(--dim);padding:6px 10px">战意数据不足：本场未启用战意权重。</div>'
 
     # Show only the two final inputs: model and market. Shin is the market's
     # de-vig method; DJYY is already internal to the model and is not a third row.

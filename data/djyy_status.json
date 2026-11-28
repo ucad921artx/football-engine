@@ -1,6 +1,6 @@
 {
   "date": "2026-11-28",
-  "generated_at": "2026-11-28T08:37:39",
+  "generated_at": "2026-11-28T09:36:42",
   "healthy": true,
   "coverage": 0.6957,
   "enrich_success": 1.0,
@@ -25,7 +25,7 @@
   "snapshot_probs": 0,
   "snapshot_total": 23,
   "snapshot_age_h": 0.1,
-  "snapshot_updated_at": "2026-11-28T08:42:49",
+  "snapshot_updated_at": "2026-11-28T09:42:17",
   "live_channel_used": true,
   "fallback": "live"
 }

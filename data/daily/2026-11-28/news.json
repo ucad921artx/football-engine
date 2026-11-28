@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-28 16:44:33",
+ "generated_at": "2026-11-28 17:44:36",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 633,
- "matched_total": 59,
+ "total_scanned": 629,
+ "matched_total": 64,
  "limit": 120,
  "counts": {
-  "injury": 10,
-  "other": 38,
+  "injury": 11,
+  "other": 42,
   "transfer": 11
  },
  "items": [
@@ -69,6 +69,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六020"
+   ],
+   "kind": "injury"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "标晚预测曼联今晚首发：B费、库尼亚、姆伯莫先发 马奎尔替补",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a97f6ad594native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
    ],
    "kind": "injury"
   },
@@ -195,6 +207,18 @@
    "match_ids": [
     "2026-11-28_周六005",
     "2026-11-28_周六019"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "英超现存最长连续不胜场次：曼联9场居首，曼城4场，切尔西3场",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a9b3a27f02native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
    ],
    "kind": "other"
   },
@@ -430,6 +454,18 @@
   },
   {
    "date": "2026-11-28",
+   "title": "太阳报：拉门斯重蹈奥纳纳覆辙，曼联门将屡现失误不利于职业生涯",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a98c3bbbdbnative.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
    "title": "太阳报：小安切洛蒂带领里尔击败拜仁，走出了父亲的光环",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a32d541b54native.htm",
    "teams": [
@@ -451,6 +487,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六020"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "图片报：穆西亚拉天价合同折射足坛病态，拜仁内部氛围已支离破碎",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0aa0f60f048native.htm",
+   "teams": [
+    "拜仁慕尼黑"
+   ],
+   "match_ids": [
+    "2026-11-28_周六009"
    ],
    "kind": "other"
   },
@@ -493,6 +541,18 @@
   },
   {
    "date": "2026-11-28",
+   "title": "talkSPORT记者：曼联应该尝试截胡托尼，他是解决锋线问题的答案",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a9af97ee69native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
    "title": "J联赛：埃利亚斯上演帽子戏法，京都不死鸟4-1大阪樱花",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/match2064314date2026vnative.htm",
    "teams": [
@@ -501,6 +561,19 @@
    ],
    "match_ids": [
     "2026-11-28_周六001"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "J联赛：上半场4分钟连入两球上演逆转，柏太阳神 3-1 广岛三箭！",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/match2064298date2026vnative.htm",
+   "teams": [
+    "柏太阳神",
+    "广岛三箭"
+   ],
+   "match_ids": [
+    "2026-11-28_周六002"
    ],
    "kind": "other"
   },
@@ -582,18 +655,6 @@
    "date": "2026-11-27",
    "title": "天空预测本轮英超：阿森纳2-1曼城！曼联近10轮首胜，蓝军三连败",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b092c62a1382native.htm",
-   "teams": [
-    "曼彻斯特联"
-   ],
-   "match_ids": [
-    "2026-11-28_周六011"
-   ],
-   "kind": "other"
-  },
-  {
-   "date": "2026-11-27",
-   "title": "前车之鉴！TA：降级对曼联并非世界末日，1974年曾借此完成重建",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b09a7bb47e1anative.htm",
    "teams": [
     "曼彻斯特联"
    ],

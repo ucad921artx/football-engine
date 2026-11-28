@@ -538,7 +538,6 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
 
         _factor_context = (djyy_pre.get("context") or {}) if djyy_pre else {}
         dqd_analysis = dqd_pre.get("analysis") or {}
-        h2h_summary = dqd_analysis.get("head_to_head_summary") or {}
         motivation_signal = build_motivation_signal(
             dqd_analysis, dqd_pre.get("match_context"), fixture.home_team, fixture.away_team,
             news_items=_news_by_match_id.get(str(fixture.match_id), []),

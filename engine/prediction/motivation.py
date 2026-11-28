@@ -11,6 +11,7 @@ def build_motivation_signal(
     match_context: dict | None,
     home_team: str,
     away_team: str,
+    news_items: list[dict] | None = None,
 ) -> dict:
     """Return bounded urgency scores only when table or match stakes are explicit."""
     analysis = analysis or {}
@@ -80,6 +81,41 @@ def build_motivation_signal(
             result["home_reasons"].append(f"赛事阶段：{label}")
             result["away_reasons"].append(f"赛事阶段：{label}")
             result["source"].append("懂球帝赛事阶段")
+
+    # The daily Zhibo8 news feed is a secondary source only. Use it when
+    # the headline explicitly describes match stakes, and only when it names
+    # exactly one side; generic previews and ambiguous two-team headlines do
+    # not manufacture motivation.
+    explicit_stakes = (
+        ("必须取胜", 0.78), ("必须赢", 0.78), ("非胜不可", 0.78),
+        ("输不起", 0.72), ("必须拿下", 0.72),
+        ("保级生死战", 0.82), ("保级关键战", 0.72),
+        ("争冠关键战", 0.72), ("出线生死战", 0.82),
+        ("赢球即可晋级", 0.78), ("取胜即可晋级", 0.78),
+        ("赢球即可夺冠", 0.82),
+    )
+    for item in news_items or []:
+        if not isinstance(item, dict):
+            continue
+        headline = str(item.get("title") or "").strip()
+        if not headline:
+            continue
+        sides = set()
+        for mentioned in item.get("teams") or []:
+            if match_team(str(mentioned), home_team):
+                sides.add("home")
+            if match_team(str(mentioned), away_team):
+                sides.add("away")
+        if len(sides) != 1:
+            continue
+        side = next(iter(sides))
+        urgency = next((score for phrase, score in explicit_stakes if phrase in headline), None)
+        if urgency is None:
+            continue
+        result[f"{side}_urgency"] = max(result[f"{side}_urgency"], urgency)
+        result[f"{side}_reasons"].append(f"新闻线索：{headline[:72]}")
+        if "直播吧赛前新闻" not in result["source"]:
+            result["source"].append("直播吧赛前新闻")
 
     result["home_urgency"] = round(min(1.0, result["home_urgency"]), 3)
     result["away_urgency"] = round(min(1.0, result["away_urgency"]), 3)

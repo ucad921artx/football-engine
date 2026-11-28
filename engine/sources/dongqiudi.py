@@ -193,7 +193,7 @@ class DongqiudiSource:
                 return row
         return None
 
-    def match_data(self, match_id: int) -> dict | None:
+    def match_data(self, match_id: int, target_date: date) -> dict | None:
         if match_id in self._match_cache:
             return self._match_cache[match_id]
         mobile_analysis = self._get(f"/mobile/match/analysis/{match_id}")
@@ -304,7 +304,7 @@ class DongqiudiSource:
             # row may already be valid, so retry that exact match before
             # treating it as unmatched.
             for attempt in range(3):
-                data = self.match_data(match_id)
+                data = self.match_data(match_id, target_date)
                 if data:
                     break
                 if attempt < 2:
@@ -512,7 +512,6 @@ class DongqiudiSource:
     @staticmethod
     def _summarize_h2h(data: dict) -> dict:
         side_a = data.get("team_A") or {}
-        side_b = data.get("team_B") or {}
         wins = int(side_a.get("win") or 0)
         draws = int(side_a.get("draw") or 0)
         losses = int(side_a.get("lose") or 0)

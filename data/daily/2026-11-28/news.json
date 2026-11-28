@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-28 10:08:22",
+ "generated_at": "2026-11-28 11:05:47",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 637,
- "matched_total": 45,
+ "total_scanned": 633,
+ "matched_total": 47,
  "limit": 120,
  "counts": {
   "injury": 8,
-  "other": 26,
+  "other": 28,
   "transfer": 11
  },
  "items": [
@@ -222,6 +222,19 @@
   },
   {
    "date": "2026-11-28",
+   "title": "波帅主场首秀，曼联近10次对阵布伦特福德6胜1平3负占据优势",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a3929e9cb5native.htm",
+   "teams": [
+    "曼彻斯特联",
+    "布伦特福德"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
    "title": "斯图加特后卫沙博特：我曾为国青队效力多年，希望未来入选成年队",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a1ba3a768fnative.htm",
    "teams": [
@@ -327,6 +340,19 @@
    ],
    "match_ids": [
     "2026-11-28_周六002"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "11胜3平！国米对阵热那亚连续14场不败，上次输球是2018年",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a3ba6ac21dnative.htm",
+   "teams": [
+    "国际米兰",
+    "热那亚"
+   ],
+   "match_ids": [
+    "2026-11-28_周六020"
    ],
    "kind": "other"
   },

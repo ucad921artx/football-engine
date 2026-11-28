@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-28T02:08:20",
+  "generated_at": "2026-11-28T03:05:44",
   "config_keys": {
     "motivation_formats.json": {
-      "total_leaf_keys": 39,
-      "referenced": 39,
+      "total_leaf_keys": 50,
+      "referenced": 50,
       "unreferenced": [],
       "known_unwired": {},
       "unexpected_unwired": [],

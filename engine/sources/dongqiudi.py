@@ -249,6 +249,10 @@ class DongqiudiSource:
                 "recent_xg": {
                     "home": self._recent_xg(recent_a), "away": self._recent_xg(recent_b),
                 },
+                "schedule_fitness": {
+                    "home": self._schedule_summary(recent_a, target_date),
+                    "away": self._schedule_summary(recent_b, target_date),
+                },
                 "goal_time_distribution": {
                     "home": self._goal_time_distribution(recent_a[:20]),
                     "away": self._goal_time_distribution(recent_b[:20]),
@@ -288,6 +292,7 @@ class DongqiudiSource:
         for fixture in fixtures:
             row = self.find_match(fixture.home_team, fixture.away_team, target_date)
             if not row:
+                print(f"    [懂球帝] 赛程未匹配：{fixture.home_team} vs {fixture.away_team}")
                 continue
             try:
                 match_id = int(row.get("match_id") or row.get("relate_id"))
@@ -305,7 +310,7 @@ class DongqiudiSource:
                 if attempt < 2:
                     time.sleep(0.6 * (attempt + 1))
             if not data:
-                print(f"    [懂球帝] 比赛 {match_id} 已匹配，但详情接口连续失败")
+                print(f"    [懂球帝] 比赛 {match_id} 已匹配，但详情接口连续失败：{fixture.home_team} vs {fixture.away_team}")
                 continue
             competition_id = str(row.get("competition_id") or "")
             competition_rules = self._motivation_formats.get(competition_id)
@@ -355,6 +360,31 @@ class DongqiudiSource:
             return int(value)
         except (TypeError, ValueError):
             return None
+
+    @staticmethod
+    def _schedule_summary(rows: list, target_date: date) -> dict:
+        """Summarize the club's recent 14-day match load from DQD match dates."""
+        dated: list[tuple[date, dict]] = []
+        for row in rows:
+            raw_day = str(row.get("date") or "").strip()
+            raw_year = str(row.get("year") or target_date.year)
+            try:
+                match_day = date.fromisoformat(raw_day) if len(raw_day) == 10 else date.fromisoformat(f"{raw_year}-{raw_day}")
+            except ValueError:
+                continue
+            days_ago = (target_date - match_day).days
+            if 0 <= days_ago <= 14:
+                dated.append((match_day, row))
+        last_day = max((day for day, _ in dated), default=None)
+        own_away = sum(1 for _, row in dated if str(row.get("main_team") or "") == "team_B")
+        return {
+            "available": bool(dated),
+            "sample_matches": len(rows),
+            "matches_last_14d": len(dated),
+            "days_since_last_match": (target_date - last_day).days if last_day else None,
+            "away_matches_last_14d": own_away,
+            "source": "懂球帝近况赛程",
+        }
 
     @staticmethod
     def _summarize_recent(rows: list) -> dict:

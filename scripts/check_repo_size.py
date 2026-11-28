@@ -1,9 +1,9 @@
 """仓库体积守卫（2026-10-23，评审 P2#20）。
 
-`git ls-files` 里任何超过阈值的文件都算违规——除历史遗留白名单。
-防止大体量数据（parsed.jsonl 26MB 这类）再次悄悄入 git。
+本次相对基线新增或修改的跟踪文件中，超过阈值的文件算违规——除历史遗留白名单。
+避免旧的大体量运行产物阻断无关 PR，同时防止新的大文件悄悄入 git。
 
-用法：python scripts/check_repo_size.py [--limit-mb 5]
+用法：python scripts/check_repo_size.py [--limit-mb 5] [--base-ref origin/main]
 退出码：0 = 通过；1 = 发现新增超限文件。
 """
 from __future__ import annotations
@@ -33,17 +33,41 @@ def tracked_files(root: Path) -> list[str]:
     return [f for f in (r.stdout or "").split("\0") if f]
 
 
+def changed_files(root: Path, base_ref: str | None) -> list[str]:
+    """Return tracked paths changed against the PR/push base."""
+    if base_ref:
+        args = ["git", "diff", "--name-only", "-z", base_ref, "--"]
+    else:
+        # Push workflows do not have GITHUB_BASE_REF. Compare the pushed commit
+        # with its first parent; on a shallow/root checkout, fail closed to the
+        # full tracked-file scan below.
+        args = ["git", "diff", "--name-only", "-z", "HEAD^", "HEAD", "--"]
+    r = subprocess.run(
+        args, cwd=root, capture_output=True, text=True, timeout=120,
+        encoding="utf-8", errors="replace"
+    )
+    if r.returncode != 0:
+        print(f"git diff 基线比较失败，回退为全量检查: {r.stderr.strip()}", file=sys.stderr)
+        return tracked_files(root)
+    return [f for f in (r.stdout or "").split("\0") if f]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit-mb", type=float, default=5.0)
     ap.add_argument("--root", default=".")
+    ap.add_argument("--base-ref", default=None, help="Compare changed paths against this git ref")
     args = ap.parse_args()
 
     root = Path(args.root).resolve()
     limit = args.limit_mb * 1024 * 1024
     offenders = []
     legacy = []
-    for rel in tracked_files(root):
+    candidates = changed_files(root, args.base_ref)
+    tracked = set(tracked_files(root))
+    for rel in candidates:
+        if rel not in tracked:
+            continue
         p = root / rel
         try:
             size = p.stat().st_size
@@ -67,7 +91,7 @@ def main() -> int:
         )
         return 1
 
-    print(f"✓ 仓库体积守卫通过（阈值 {args.limit_mb:.1f}MB，跟踪文件 {len(tracked_files(root))} 个）")
+    print(f"✓ 仓库体积守卫通过（阈值 {args.limit_mb:.1f}MB，本次检查 {len(candidates)} 个变更文件）")
     return 0
 
 

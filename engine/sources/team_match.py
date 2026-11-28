@@ -27,6 +27,14 @@ import unicodedata
 # ---------------------------------------------------------------------------
 TEAM_ALIASES: dict[str, str] = {
     # Dongqiudi vs Sporttery fixture-name variants observed on 2026-11-28.
+    # 2026-11-28 Sporttery short-name variants seen in the daily DQD scrape logs.
+    "弗洛西诺": "弗罗西诺内",
+    "谢菲联": "谢菲尔德联",
+    "伊普斯": "伊普斯维奇",
+    "维拉": "阿斯顿维拉",
+    "马竞": "马德里竞技",
+    "鹿斯巴达": "鹿特丹斯巴达",
+    "帕梅拉斯": "帕尔梅拉斯",
     "中央海岸": "中央海岸水手",
     "弗洛西诺尼": "弗罗西诺内",
     "埃沃斯堡": "埃尔沃斯贝格",

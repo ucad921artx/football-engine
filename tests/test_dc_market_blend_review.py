@@ -181,10 +181,21 @@ def test_production_model_input_is_fixture_odds_with_pinnacle_fallback():
     assert any("pinnacle_odds" in _string_constants(v) for v in closure), (
         "兜底来源必须能追到 DJYY 的 pinnacle_odds（reference 市场）")
 
-    fed = [c for c in _predict_calls(tree)
-           if any(k.arg == "market_odds" and isinstance(k.value, ast.Name)
-                  and k.value.id == "market_odds" for k in c.keywords)]
-    assert fed, "同一个 market_odds 变量必须被喂进 model.predict"
+    # Production now predicts through predict_weighted_factors and applies the
+    # market as a separately devigged fusion input. Keep the source contract
+    # pinned to the actual path rather than requiring an obsolete model.predict
+    # call that would bypass the factor ensemble.
+    devig_calls = [n for n in ast.walk(tree)
+                   if isinstance(n, ast.Call)
+                   and isinstance(n.func, ast.Name)
+                   and n.func.id == "select_devig_method"
+                   and n.args and isinstance(n.args[0], ast.Call)
+                   and isinstance(n.args[0].func, ast.Name)
+                   and n.args[0].func.id == "list"
+                   and n.args[0].args
+                   and isinstance(n.args[0].args[0], ast.Name)
+                   and n.args[0].args[0].id == "market_odds"]
+    assert devig_calls, "同一个 market_odds 必须先去水，再进入模型/市场融合"
 
 
 def test_merged_fixture_prefers_sporttery_over_bet365():

@@ -43,9 +43,19 @@ def _write(tmp_path: Path, preds: list[dict]) -> None:
     )
 
 
+def _configure_check(monkeypatch, tmp_path: Path, djyy_weight: float = 0.20) -> None:
+    config_dir = tmp_path / "config"
+    config_dir.mkdir(exist_ok=True)
+    (config_dir / "prediction.json").write_text(
+        json.dumps({"fusion": {"djyy_weight": djyy_weight}}), encoding="utf-8"
+    )
+    monkeypatch.setattr(selfcheck, "ROOT", tmp_path)
+    monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+
+
 class TestFusionWeightAlerts:
     def test_dead_djyy_source_raises_alert(self, tmp_path, monkeypatch):
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         # DJYY 全场缺失：走两路融合，djyy 实际贡献 0
         _write(tmp_path, _mk_preds(
             20, {"model": 0.0625, "market": 0.9375, "djyy": 0.0}, "fuse_two_way"
@@ -56,7 +66,7 @@ class TestFusionWeightAlerts:
         assert any("DJYY 是死源" in a for a in alerts)
 
     def test_live_djyy_source_no_dead_alert(self, tmp_path, monkeypatch):
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         _write(tmp_path, _mk_preds(
             20, {"model": 0.05, "market": 0.75, "djyy": 0.20}, "fuse_three_way"
         ))
@@ -66,7 +76,7 @@ class TestFusionWeightAlerts:
         assert not any("死源" in a for a in alerts)
 
     def test_missing_field_raises_audit_alert(self, tmp_path, monkeypatch):
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         preds = _mk_preds(5, {}, "fuse_two_way")
         for p in preds:
             p.pop("fusion_effective_weights")
@@ -78,7 +88,7 @@ class TestFusionWeightAlerts:
 
     def test_low_model_weight_is_visible(self, tmp_path, monkeypatch):
         """模型有效权重 6.25% → 提醒"系统实质接近纯市场基准"。"""
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         _write(tmp_path, _mk_preds(
             20, {"model": 0.0625, "market": 0.9375, "djyy": 0.0}, "fuse_two_way"
         ))
@@ -89,7 +99,7 @@ class TestFusionWeightAlerts:
 
     def test_partial_source_coverage_flagged(self, tmp_path, monkeypatch):
         """DJYY 只在少数场次生效 → 覆盖率告警而非"死源"。"""
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         preds = _mk_preds(
             10, {"model": 0.0625, "market": 0.9375, "djyy": 0.0}, "fuse_two_way"
         )
@@ -106,7 +116,7 @@ class TestFusionWeightAlerts:
 
     def test_healthy_full_stack_has_no_weight_alerts(self, tmp_path, monkeypatch):
         """三路全活 + 模型权重不低 → 不产生任何权重类告警。"""
-        monkeypatch.setattr(selfcheck, "DAILY", tmp_path / "daily")
+        _configure_check(monkeypatch, tmp_path)
         _write(tmp_path, _mk_preds(
             20, {"model": 0.30, "market": 0.50, "djyy": 0.20}, "fuse_three_way"
         ))

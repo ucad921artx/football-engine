@@ -192,10 +192,28 @@ def fuse_probabilities(inp: FusionInput) -> FusionResult:
                 dw *= float(cfg.get("djyy_disagree_penalty", 0.5))
         total_w = mw + kw + dw
         mw, kw, dw = mw / total_w, kw / total_w, dw / total_w
-        h = mw * inp.model_probs[0] + kw * inp.market_probs[0] + dw * _num(inp.djyy_probs.get("home"))
-        d = mw * inp.model_probs[1] + kw * inp.market_probs[1] + dw * _num(inp.djyy_probs.get("draw"))
-        a = mw * inp.model_probs[2] + kw * inp.market_probs[2] + dw * _num(inp.djyy_probs.get("away"))
-        fused_step = "fuse_three_way"
+        channels = (inp.model_probs, inp.market_probs, tuple(
+            _num(inp.djyy_probs.get(k)) for k in ("home", "draw", "away")
+        ))
+        if str(cfg.get("fusion_mode", "linear")).lower() == "logit":
+            # Logit mode is a weighted geometric pool. Clamp zero-probability
+            # channels before taking logs, then normalize for a valid simplex.
+            import math
+            log_scores = [
+                sum(weight * math.log(max(float(channel[i]), 1e-12))
+                    for weight, channel in zip((mw, kw, dw), channels))
+                for i in range(3)
+            ]
+            peak = max(log_scores)
+            pooled = [math.exp(score - peak) for score in log_scores]
+            denom = sum(pooled) or 1.0
+            h, d, a = (v / denom for v in pooled)
+            fused_step = "fuse_three_way_logit"
+        else:
+            h = mw * channels[0][0] + kw * channels[1][0] + dw * channels[2][0]
+            d = mw * channels[0][1] + kw * channels[1][1] + dw * channels[2][1]
+            a = mw * channels[0][2] + kw * channels[1][2] + dw * channels[2][2]
+            fused_step = "fuse_three_way"
         eff_w = _eff(mw, kw, dw)
     elif inp.market_probs:
         total_w = mw + kw
@@ -224,6 +242,8 @@ def fuse_probabilities(inp: FusionInput) -> FusionResult:
             fused_step = "fuse_djyy_only"
             eff_w = _eff(_mw, 0.0, dw)
     _trace(trace, fused_step, inp.model_probs, (h, d, a))
+    if cfg.get("fusion_mode") == "logit" and trace:
+        trace[-1]["mode"] = "logit"
 
     # --- 2. 同赔偏差微调 ---
     if (

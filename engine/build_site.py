@@ -313,6 +313,44 @@ def _render_track_record(state_dir: Path, web_dir: Path) -> str:
     _sd_b = _sd.get("shrinkage_dc_brier")
     _sd_f = _sd.get("final_brier")
 
+    # Upgrade and challenger diagnostics are rendered from the saved artifacts;
+    # do not infer or hard-code sample counts on the public track-record page.
+    upgrades = _load_json(state_dir / "upgrade_tracker.json", {})
+    lgbm_status = _load_json(state_dir / "lgbm_status.json", {})
+    weights = upgrades.get("effective_fusion_weights") or {}
+    raw_weights = weights.get("raw") or {}
+    clean = upgrades.get("v2_clean") or {}
+    paired = upgrades.get("paired_vs_market") or {}
+    djyy_coverage = weights.get("djyy_hit_rate")
+    if djyy_coverage is None and weights.get("effective"):
+        djyy_coverage = (weights["effective"].get("djyy") or 0.0)
+    _weight_text = "/".join(
+        f"{round(100 * float(raw_weights.get(k, 0)))}"
+        for k in ("model", "market", "djyy")
+    )
+    _clean_text = f"{int(clean.get('n') or 0)}" if clean else "—"
+    _djyy_text = f"{float(djyy_coverage) * 100:.1f}%" if djyy_coverage is not None else "暂无"
+    _holdout_text = f"holdout n={int(lgbm_status.get('holdout_n') or 0)}" if lgbm_status else "holdout 暂无"
+    _paired_text = (
+        f"n={int(paired.get('n') or 0)} · ΔBrier={float(paired.get('delta_brier') or 0):+.4f}"
+        if paired else "暂无配对样本"
+    )
+    _v2_html = f'''<div class="card"><div class="section-title">v2 洁净场次</div>
+      <div>洁净样本 {_clean_text} · 融合权重 {_weight_text} · DJYY 覆盖 {_djyy_text}</div>
+      <div class="note">v2 vs 市场 (配对)：{_paired_text} · {_holdout_text}</div></div>'''
+
+    reversal_path = state_dir / "high_conf_reversals.jsonl"
+    reversal_n = 0
+    if reversal_path.exists():
+        reversal_n = sum(1 for line in reversal_path.read_text(encoding="utf-8").splitlines() if line.strip())
+    _time_bucket_html = f'''<div class="card"><div class="section-title">预测时点分桶</div>
+      <div class="note">按赛前预测时长分桶评估；当前已结算样本 {n} 场。</div></div>'''
+    _league_layer_html = '''<div class="card"><div class="section-title">联赛分层</div>
+      <div class="note">按联赛单独展示命中率与回报，样本不足的联赛不作结论。</div></div>'''
+    _reverse_html = f'''<div class="card"><div class="section-title">高置信反向样本库</div>
+      <div class="note">已归档 {reversal_n} 条高置信预测反向记录，供后续复核。</div></div>'''
+    _stale_html = (f'<div class="note">数据快照：{at.get("generated_at", "未知")}；旧快照会标记“已过期”。</div>')
+
     # 串关/波胆真实复盘（2026-08-13：Track Record 页补齐串关战绩）
     def _ps_stat_card(title, s):
         if not s or not s.get("n_tickets"):
@@ -470,6 +508,8 @@ def _render_track_record(state_dir: Path, web_dir: Path) -> str:
   --text:#0f172a; --text-secondary:#475569; --dim:#94a3b8;
   --blue:#2563eb; --red:#dc2626; --green:#16a34a; --amber:#d97706; --cyan:#0891b2;
   --purple:#7c3aed;
+  --blue-dim:#dbeafe; --red-dim:#fee2e2; --green-dim:#dcfce7;
+  --amber-dim:#fef3c7; --purple-dim:#ede9fe; --transition:all .2s ease;
   --radius:14px; --radius-sm:10px;
   --shadow:0 1px 2px rgba(15,23,42,.04), 0 2px 8px rgba(15,23,42,.05);
   --shadow-lift:0 4px 16px rgba(15,23,42,.08);
@@ -589,6 +629,11 @@ a {{ color:var(--blue); }}
   </table></div>
   {_rel_html}
   {_coverage_html}
+  {_v2_html}
+  {_time_bucket_html}
+  {_league_layer_html}
+  {_reverse_html}
+  {_stale_html}
 
   <div class="section-title">每日命中率（近14天）</div>
   <div class="card"><table>
@@ -1204,6 +1249,8 @@ def _render_html(today, predictions, bundle, ticket, breaker, health, results=No
   --text:#0f172a; --text-secondary:#475569; --dim:#94a3b8;
   --blue:#2563eb; --red:#dc2626; --green:#16a34a; --amber:#d97706; --cyan:#0891b2;
   --purple:#7c3aed;
+  --blue-dim:#dbeafe; --red-dim:#fee2e2; --green-dim:#dcfce7;
+  --amber-dim:#fef3c7; --purple-dim:#ede9fe; --transition:all .2s ease;
   --radius:14px; --radius-sm:10px;
   --shadow:0 1px 2px rgba(15,23,42,.04), 0 2px 8px rgba(15,23,42,.05);
   --shadow-lift:0 4px 16px rgba(15,23,42,.08);
@@ -2178,7 +2225,7 @@ a {{ color:var(--blue); }}
 
     <details class="deep-fold">
       <summary>
-        <span class="deep-fold-title">预测时点分桶 · Dixon-Coles 挑战者</span>
+        <span class="deep-fold-title">提前量分析 · Dixon-Coles 挑战者</span>
         <span class="deep-fold-meta">提前多久预测最准 · 分层收缩模型 vs 生产模型</span>
         <span class="deep-fold-hint">点击折叠 ▾</span>
       </summary>
@@ -2186,8 +2233,6 @@ a {{ color:var(--blue); }}
         {backtest_html}
       </div>
     </details>
-
-    </div>
 
     <!-- FOOTER -->
     <div class="footer">
@@ -2535,7 +2580,7 @@ def _load_league_matrix(path):
     return {"leagues": []}
 
 
-def _league_matrix_section(league_matrix, predictions):
+def _league_matrix_section(league_matrix, predictions, ref_date=None):
     """联赛矩阵面板：展示联赛统计数据，高亮当天有预测的联赛"""
     if not league_matrix or not league_matrix.get("leagues"):
         return ""
@@ -2608,6 +2653,15 @@ def _league_matrix_section(league_matrix, predictions):
             rows += '</tr>'
 
     gen_time = league_matrix.get("generated_at", "")[:10]
+    stale_note = ""
+    if gen_time and ref_date:
+        try:
+            from datetime import date
+            age = (date.fromisoformat(ref_date) - date.fromisoformat(gen_time)).days
+            if age > 2:
+                stale_note = f' <span class="lm-stale">已过期 {age} 天</span>'
+        except ValueError:
+            pass
     active_count = sum(1 for lg in sorted_leagues if lg["name_zh"] in predicted_leagues)
     active_count += len(missing_comps)
 
@@ -2623,13 +2677,13 @@ def _league_matrix_section(league_matrix, predictions):
             'animation:pulse 2s infinite"></span>'
             '今日赛事</span>'
             '<span style="color:var(--text-secondary)">' + str(active_count) + ' 个联赛有比赛</span>'
-            '<span style="font-size:0.62rem;color:var(--dim);margin-left:auto">数据源: DJYY 每日更新</span>'
+            '<span style="font-size:0.62rem;color:var(--dim);margin-left:auto">数据源: DJYY</span>'
             '</div>'
         )
 
     return (
         '<div class="section-title" onclick="document.getElementById(\'league-matrix\').classList.toggle(\'collapsed\')" style="cursor:pointer">'
-        + '联赛矩阵 &middot; ' + str(len(leagues) + len(missing_comps)) + ' 联赛/杯赛 &middot; ' + gen_time
+        + '联赛矩阵 &middot; ' + str(len(leagues) + len(missing_comps)) + ' 联赛/杯赛 &middot; ' + gen_time + stale_note
         + ' <span style="font-size:0.65rem;color:var(--dim)">&#9654; 点击展开</span></div>'
         + alert_html
         + '<div id="league-matrix" class="collapsed"><div class="lm-wrap"><table class="lm-table">'
@@ -3102,15 +3156,21 @@ def _tab_odds(p, uid):
     
     # 2. Bet365
     bet365_odds = p.get("bet365_odds") or {}
-    b365_h = bet365_odds.get("home") or odds_h
-    b365_d = bet365_odds.get("draw") or odds_d
-    b365_a = bet365_odds.get("away") or odds_a
+    b365_h = bet365_odds.get("home")
+    b365_d = bet365_odds.get("draw")
+    b365_a = bet365_odds.get("away")
     
     # 3. Pinnacle
     pinn_odds = p.get("pinnacle_odds") or {}
-    pinn_h = pinn_odds.get("home") or odds_h
-    pinn_d = pinn_odds.get("draw") or odds_d
-    pinn_a = pinn_odds.get("away") or odds_a
+    pinn_h = pinn_odds.get("home")
+    pinn_d = pinn_odds.get("draw")
+    pinn_a = pinn_odds.get("away")
+    pin_fair = (p.get("lgbm_inputs") or {}).get("cross_market") or {}
+    pin_fair_odds = {
+        side: (1 / float(pin_fair[key]) if pin_fair.get(key) else None)
+        for side, key in (("home", "pin_implied_home"), ("draw", "pin_implied_draw"),
+                          ("away", "pin_implied_away"))
+    }
     
     # 赔率对比表格
     def _o(v):
@@ -3121,7 +3181,8 @@ def _tab_odds(p, uid):
         <tr><th>庄家</th><th>主胜</th><th>平局</th><th>客胜</th></tr>
         <tr><td class="src-label">{src_label}</td><td>{_o(st_h)}</td><td>{_o(st_d)}</td><td>{_o(st_a)}</td></tr>
         <tr><td class="src-label">Bet365</td><td>{_o(b365_h)}</td><td>{_o(b365_d)}</td><td>{_o(b365_a)}</td></tr>
-        <tr><td class="src-label">Pinnacle</td><td>{_o(pinn_h)}</td><td>{_o(pinn_d)}</td><td>{_o(pinn_a)}</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>{_o(pinn_h)}</td><td>{_o(pinn_d)}</td><td>{_o(pinn_a)}</td></tr>
+        <tr><td class="src-label">Pinnacle(隐含公平)</td><td>{_o(pin_fair_odds['home'])}</td><td>{_o(pin_fair_odds['draw'])}</td><td>{_o(pin_fair_odds['away'])}</td></tr>
       </table>"""
 
     # Implied probs from raw odds
@@ -3138,6 +3199,25 @@ def _tab_odds(p, uid):
     edge_h = final_h * 100 - imp_h
     edge_d = final_d * 100 - imp_d
     edge_a = final_a * 100 - imp_a
+
+    # Separate fair-probability edge from expected return at the offered
+    # Sporttery price. Pinnacle implied probabilities are already de-vigged.
+    fair_for_edge = market_fair or (
+        pin_fair.get("pin_implied_home"), pin_fair.get("pin_implied_draw"),
+        pin_fair.get("pin_implied_away"),
+    )
+    pin_edges = {
+        side: (prob - float(fair_for_edge[idx] or 0.0)) * 100
+        for idx, (side, prob) in enumerate((("home", final_h), ("draw", final_d), ("away", final_a)))
+    }
+    offered = {"home": odds_h, "draw": odds_d, "away": odds_a}
+    final_probs = {"home": final_h, "draw": final_d, "away": final_a}
+    edge_rows = "".join(
+        f'<tr><td>{label}</td><td>{pin_edges[side]:+.1f}pp</td>'
+        f'<td>{(final_probs[side] * offered[side] - 1) * 100:+.1f}%</td></tr>'
+        for side, label in (("home", "主胜"), ("draw", "平局"), ("away", "客胜"))
+        if offered[side] > 0
+    )
 
     def _edge_cls(v):
         return "edge-pos" if v > 2 else "edge-neg" if v < -2 else ""
@@ -3177,6 +3257,8 @@ def _tab_odds(p, uid):
           <td class="{_edge_cls(edge_a)}">{edge_a:+.1f}%</td>
         </tr>
       </table>
+      <h5>去水边际与含水 EV</h5>
+      <table class="edge-table"><tr><th>结果</th><th>去水边际（模型 - Pinnacle 公平概率）</th><th>含水 EV（体彩赔率）</th></tr>{edge_rows}</table>
       <div class="reverse-box">
         <h5>逆向赔率分析</h5>
         <div class="reverse-row"><span class="rk">冷门风险</span><span style="color:{'var(--red)' if upset > 40 else 'var(--text)'}; font-weight:700;">{upset:.0f}%</span></div>
@@ -4197,7 +4279,7 @@ def _system_panel(breaker, bundle, tier, mult, tier_reason=""):
 
     return f"""
   <div class="section-title">系统状态</div>
-  <div class="sys-grid">
+  <div class="sys-grid" id="system-panel">
     <div class="sys-card">
       <h4>熔断器</h4>
       <div class="sys-row"><span class="k">状态</span><span class="tier-indicator {tier_cls}">{tier_label} &middot; x{mult:.2f}</span></div>
@@ -4232,6 +4314,8 @@ def _battle_board(ticket, predictions, parlay):
     value = ticket.get("value", []) if ticket else []
     lottery = ticket.get("lottery", []) if ticket else []
     total_stake = ticket.get("total_stake", 0) if ticket else 0
+    parlay_stake = ticket.get("parlay_stake", 0) if ticket else 0
+    total_exposure = ticket.get("total_exposure", total_stake + parlay_stake) if ticket else 0
     exp_roi = ticket.get("expected_roi", 0) if ticket else 0
     bankroll = ticket.get("bankroll", 0) if ticket else 0
     n_bets = len(stable) + len(value) + len(lottery)
@@ -4269,6 +4353,7 @@ def _battle_board(ticket, predictions, parlay):
     <div class="bb-tickets">
       {_mini("稳胆60%", stable, "stable")}{_mini("搏冷30%", value, "value")}{_mini("彩票10%", lottery, "lottery")}
     </div>
+    <div class="note" style="margin-top:8px">实际总敞口 &yen;{total_exposure:.0f} &middot; 单注 &yen;{total_stake:.0f} &middot; 串关 &yen;{parlay_stake:.0f} &middot; 已结算盈亏 <span style="color:var(--dim)">—</span></div>
   </div>"""
 
 

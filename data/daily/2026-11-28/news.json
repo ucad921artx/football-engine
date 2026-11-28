@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-11-28 18:52:24",
+ "generated_at": "2026-11-28 19:44:48",
  "source": "直播吧足球频道",
  "source_url": "https://news.zhibo8.com/zuqiu/",
- "total_scanned": 626,
- "matched_total": 63,
+ "total_scanned": 628,
+ "matched_total": 65,
  "limit": 120,
  "counts": {
-  "injury": 10,
-  "other": 41,
-  "transfer": 12
+  "injury": 9,
+  "other": 43,
+  "transfer": 13
  },
  "items": [
   {
@@ -123,18 +123,6 @@
    "kind": "injury"
   },
   {
-   "date": "2026-11-27",
-   "title": "拜仁官方：穆西亚拉右大腿肌肉受伤，缺阵时间未定，待进一步通知",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-27/6b0994536b046native.htm",
-   "teams": [
-    "拜仁慕尼黑"
-   ],
-   "match_ids": [
-    "2026-11-28_周六009"
-   ],
-   "kind": "injury"
-  },
-  {
    "date": "2026-11-28",
    "title": "阿迪推出拜仁2026-27赛季复古球衣，致敬球队70年代经典主场战袍",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a7db7086abnative.htm",
@@ -174,13 +162,14 @@
   },
   {
    "date": "2026-11-28",
-   "title": "詹俊：三连败了............现在的切尔西和曼联，谁更惨一些？",
-   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a0146895b9native.htm",
+   "title": "记者：拜仁小将阿索莫将进入对汉堡的名单，俱乐部非常看好他",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0abc976890bnative.htm",
    "teams": [
-    "曼彻斯特联"
+    "汉堡",
+    "拜仁慕尼黑"
    ],
    "match_ids": [
-    "2026-11-28_周六011"
+    "2026-11-28_周六009"
    ],
    "kind": "other"
   },
@@ -295,6 +284,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六003"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "波帅能否首胜？曼联英超9轮不胜，波切蒂诺联赛面对小蜜蜂1平1负",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0ab1c7579f4native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
    ],
    "kind": "other"
   },
@@ -437,6 +438,18 @@
    ],
    "match_ids": [
     "2026-11-28_周六017"
+   ],
+   "kind": "other"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "小蜜蜂主帅：这依然是曼联依然是老特拉福德 很清楚对手极具实力",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0ab2a145725native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
    ],
    "kind": "other"
   },
@@ -726,6 +739,18 @@
    "date": "2026-11-28",
    "title": "小雷：曼联续约B费是在保护自己的资产，他们不会降级",
    "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0a77863b4f4native.htm",
+   "teams": [
+    "曼彻斯特联"
+   ],
+   "match_ids": [
+    "2026-11-28_周六011"
+   ],
+   "kind": "transfer"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "TA：曼联冬窗防线需引援，富勒姆“带刀侍卫”巴锡完美契合需求",
+   "url": "https://news.zhibo8.com/zuqiu/2026-11-28/6b0abc9ef14f8native.htm",
    "teams": [
     "曼彻斯特联"
    ],

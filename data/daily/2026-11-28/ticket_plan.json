@@ -38,7 +38,7 @@
         }
       ],
       "total_odds": 7.5,
-      "model_ev": 1.31,
+      "model_ev": 1.32,
       "cal_ev": 5.16,
       "cal_roi": 0.8033,
       "market_ev": -0.46,
@@ -186,7 +186,7 @@
         }
       ],
       "total_odds": 19.89,
-      "model_ev": 1.39,
+      "model_ev": 1.4,
       "cal_ev": 2.93,
       "cal_roi": 1.0319,
       "market_ev": -0.65,

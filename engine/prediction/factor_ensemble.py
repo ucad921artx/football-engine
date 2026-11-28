@@ -89,7 +89,10 @@ def predict_weighted_factors(
             try:
                 rest = max(0.0, min(14.0, float(evidence.get("days_since_last_match"))))
             except (TypeError, ValueError):
-                rest = max(0.0, float(fallback))
+                try:
+                    rest = max(0.0, float(fallback if fallback is not None else 3.0))
+                except (TypeError, ValueError):
+                    rest = 3.0
             try:
                 games_14d = max(0.0, float(evidence.get("matches_last_14d") or 0))
                 away_14d = max(0.0, float(evidence.get("away_matches_last_14d") or 0))

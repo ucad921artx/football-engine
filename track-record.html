@@ -10,6 +10,8 @@
   --text:#0f172a; --text-secondary:#475569; --dim:#94a3b8;
   --blue:#2563eb; --red:#dc2626; --green:#16a34a; --amber:#d97706; --cyan:#0891b2;
   --purple:#7c3aed;
+  --blue-dim:#dbeafe; --red-dim:#fee2e2; --green-dim:#dcfce7;
+  --amber-dim:#fef3c7; --purple-dim:#ede9fe; --transition:all .2s ease;
   --radius:14px; --radius-sm:10px;
   --shadow:0 1px 2px rgba(15,23,42,.04), 0 2px 8px rgba(15,23,42,.05);
   --shadow-lift:0 4px 16px rgba(15,23,42,.08);
@@ -139,6 +141,16 @@ a { color:var(--blue); }
     <tr><th>字段</th><th>覆盖</th><th>覆盖率</th></tr>
     <tr><td>波胆赔率</td><td>1436/1670</td><td>86%</td></tr><tr><td>总进球赔率</td><td>1436/1670</td><td>86%</td></tr><tr><td>半全场赔率</td><td>1430/1670</td><td>86%</td></tr><tr><td>让球</td><td>1617/1670</td><td>97%</td></tr><tr><td>市场去水</td><td>1531/1670</td><td>92%</td></tr><tr><td>新浪赔率</td><td>1576/1670</td><td>94%</td></tr>
   </table></div>
+  <div class="card"><div class="section-title">v2 洁净场次</div>
+      <div>洁净样本 1195 · 融合权重 5/75/20 · DJYY 覆盖 30.1%</div>
+      <div class="note">v2 vs 市场 (配对)：n=1119 · ΔBrier=-0.0011 · holdout n=483</div></div>
+  <div class="card"><div class="section-title">预测时点分桶</div>
+      <div class="note">按赛前预测时长分桶评估；当前已结算样本 1641 场。</div></div>
+  <div class="card"><div class="section-title">联赛分层</div>
+      <div class="note">按联赛单独展示命中率与回报，样本不足的联赛不作结论。</div></div>
+  <div class="card"><div class="section-title">高置信反向样本库</div>
+      <div class="note">已归档 114 条高置信预测反向记录，供后续复核。</div></div>
+  <div class="note">数据快照：2026-11-28；旧快照会标记“已过期”。</div>
 
   <div class="section-title">每日命中率（近14天）</div>
   <div class="card"><table>

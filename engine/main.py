@@ -384,6 +384,17 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         _side_mod, _side_index = None, {}
     # 融合分支命中计数（2026-10-11）：用于每日运行日志暴露"实际走了哪条分支"。
     # 死源（如 DJYY 断供）此前无任何运行时信号，只体现在账本的空字段里。
+    _news_by_match_id: dict[str, list[dict]] = {}
+    _news_path = ROOT / "data" / "daily" / target_date.isoformat() / "news.json"
+    if _news_path.exists():
+        try:
+            _news_payload = json.loads(_news_path.read_text(encoding="utf-8"))
+            for _item in (_news_payload.get("items") or []):
+                for _mid in (_item.get("match_ids") or []):
+                    _news_by_match_id.setdefault(str(_mid), []).append(_item)
+        except (OSError, ValueError, AttributeError):
+            _news_by_match_id = {}
+
     _fused_source_counts: dict[str, int] = {}
     for fixture in fixtures:
         home_rating = elo_updater.get_rating(fixture.home_team)
@@ -405,6 +416,7 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         form_xg = dqd_pre.get("form_xg") or djyy_pre.get("form_xg")
         form_analysis = dqd_pre.get("form_analysis") or {}
         _dqd_xg_blend = {}
+        _dqd_xg_adjust: dict[str, float] = {}
         base_goals = pred_cfg.get("prediction", {}).get("base_goals", 1.35)
         for side, rating in (("home", home_rating), ("away", away_rating)):
             xg_avg = (form_xg or {}).get(f"{side}_avg")
@@ -416,7 +428,7 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
                 model_xg = max(0.1, float(rating.attack) * float(base_goals))
                 dqd_weight = min(0.50, float(xg_n) / (float(xg_n) + 5.0))
                 blended_xg = (1.0 - dqd_weight) * model_xg + dqd_weight * float(xg_avg)
-                rating.attack *= max(0.92, min(1.08, blended_xg / model_xg))
+                _dqd_xg_adjust[side] = max(0.92, min(1.08, blended_xg / model_xg))
                 _dqd_xg_blend[side] = {
                     "model_xg": round(model_xg, 3), "dongqiudi_xg": round(float(xg_avg), 3),
                     "dongqiudi_sample": xg_n, "dongqiudi_weight": round(dqd_weight, 3),
@@ -528,7 +540,12 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
         dqd_analysis = dqd_pre.get("analysis") or {}
         h2h_summary = dqd_analysis.get("head_to_head_summary") or {}
         motivation_signal = build_motivation_signal(
-            dqd_analysis, dqd_pre.get("match_context"), fixture.home_team, fixture.away_team
+            dqd_analysis, dqd_pre.get("match_context"), fixture.home_team, fixture.away_team,
+            news_items=_news_by_match_id.get(str(fixture.match_id), []),
+        )
+        _dqd_schedule = dqd_analysis.get("schedule_fitness") or {}
+        _dqd_schedule_available = any(
+            bool((_dqd_schedule.get(side) or {}).get("available")) for side in ("home", "away")
         )
         dqd_lineups = dqd_pre.get("lineups") or {}
         if dqd_lineups:
@@ -552,7 +569,9 @@ def run_daily_pipeline(target_date: date, predict_only: bool = False):
 
             motivation=motivation_signal,
             motivation_available=bool(motivation_signal.get("available")),
-            schedule_available=bool(rest or home_rating.last_match_date or away_rating.last_match_date),
+            schedule_available=bool(rest or home_rating.last_match_date or away_rating.last_match_date or _dqd_schedule_available),
+            schedule_context=_dqd_schedule,
+            recent_form_xg_adjustments=_dqd_xg_adjust,
 
         )
         pred.match_id = fixture.match_id
